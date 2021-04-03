@@ -3,17 +3,13 @@ package components.UMLObjects;
 import java.awt.*;
 import java.awt.event.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public abstract class BaseUMLObject extends JLabel {
-	private static final long serialVersionUID = 2259886535991683392L;
+    private static final long serialVersionUID = 2259886535991683392L;
 
-	protected static int itemCounter = 0;
+    protected static int itemCounter = 0;
     protected int zAxisDepth = 0;
-
-    protected ImageIcon imageIcon;
 
     protected int originalX;
     protected int originalY;
@@ -37,10 +33,11 @@ public abstract class BaseUMLObject extends JLabel {
 
     public BaseUMLObject() {
         zAxisDepth = itemCounter++;
+    }
 
-        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-        this.setOpaque(true);
-        this.setBackground(Color.LIGHT_GRAY);
+    @Override
+    protected void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
     }
 
     protected void onPressed(int x, int y) {
@@ -58,10 +55,7 @@ public abstract class BaseUMLObject extends JLabel {
         this.setLocation(x + (int) labelLocation.getX() - originalX, y + (int) labelLocation.getY() - originalY);
     }
 
-    protected void onReleased() {}
-
-    protected void setImage(ImageIcon icon) {
-        this.setIcon(icon);
+    protected void onReleased() {
     }
 
     public int getZAxisDepth() {
@@ -69,7 +63,7 @@ public abstract class BaseUMLObject extends JLabel {
     }
 
     public void setDraggable(boolean isDraggable) {
-        if(isDraggable) {
+        if (isDraggable) {
             this.addMouseListener(this.mouseListener);
             this.addMouseMotionListener(this.mouseListener);
         } else {
