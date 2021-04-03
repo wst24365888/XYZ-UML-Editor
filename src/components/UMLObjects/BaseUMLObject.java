@@ -3,11 +3,12 @@ package components.UMLObjects;
 import java.awt.*;
 import java.awt.event.*;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public abstract class BaseUMLObject {
+    protected boolean CREATE_OBJECT_AT_CETNER = true;
+
     protected static int itemCounter = 0;
     protected int zAxisDepth = 0;
 
@@ -42,7 +43,7 @@ public abstract class BaseUMLObject {
     }
 
     protected void onPressed(int x, int y) {
-        System.out.printf("(%d, %d) - ", x, y);
+        // System.out.printf("(%d, %d)\n", x, y);
 
         this.originalX = x;
         this.originalY = y;
@@ -51,14 +52,18 @@ public abstract class BaseUMLObject {
     protected void onDragged(int x, int y) {
         Point labelLocation = this.label.getLocation();
 
-        System.out.printf("(%f, %f)\n", labelLocation.getX(), labelLocation.getY());
+        // System.out.printf("(%f, %f)\n", labelLocation.getX(), labelLocation.getY());
 
-        this.label.setLocation(x + (int) labelLocation.getX() - originalX, y + (int) labelLocation.getY() - originalY);
+        if(CREATE_OBJECT_AT_CETNER) {
+            this.label.setLocation(x + (int) labelLocation.getX() - originalX, y + (int) labelLocation.getY() - originalY);
+        } else {
+            this.label.setLocation(x + (int) labelLocation.getX(), y + (int) labelLocation.getY());
+        }
     }
 
     protected void onReleased() {}
 
-    protected void setImage(Icon icon) {
+    protected void setImage(ImageIcon icon) {
         this.label.setIcon(icon);
     }
 

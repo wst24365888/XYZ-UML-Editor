@@ -7,10 +7,15 @@ import javax.swing.*;
 import mode.*;
 
 public class ModeButton {
+    protected static int itemCounter = 0;
+    protected int index = 0;
+
     protected JButton button = new JButton();
     protected ICanvasBehavior canvasBehavior;
         
-    public ModeButton(ICanvasBehavior canvasBehavior) {        
+    public ModeButton(ICanvasBehavior canvasBehavior) {     
+        this.index = itemCounter++;
+        
         this.canvasBehavior = canvasBehavior;
 
         this.button.setBackground(Color.WHITE);
@@ -23,6 +28,7 @@ public class ModeButton {
     }
     
     protected void onClick() {
+        FunctionButtonPanel.resetPanel(this.index);
         Canvas.getInstance().setCanvasBehavior(this.canvasBehavior);
     }
 

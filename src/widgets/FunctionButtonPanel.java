@@ -12,20 +12,20 @@ import mode.SelectMode;
 
 public class FunctionButtonPanel {
     private static FunctionButtonPanel instance = null;
-    
-    private JPanel panel = new JPanel();
-    private ArrayList<JButton> functionButtons = new ArrayList<JButton>();
+
+    private static JPanel panel = new JPanel();
+    private static ArrayList<JButton> functionButtons = new ArrayList<JButton>();
 
     private FunctionButtonPanel() {
-        this.panel.setLayout(null);
-        this.panel.setBackground(Color.GRAY);
+        panel.setLayout(null);
+        panel.setBackground(Color.GRAY);
 
         loadButtons();
 
-        for (JButton functionButton : this.functionButtons) {
+        for (JButton functionButton : functionButtons) {
             functionButton.setBounds(Editor.BUTTON_PADDING,
                     Editor.BUTTON_PADDING + (Editor.BUTTON_SIDE_LENGTH + Editor.BUTTON_PADDING)
-                            * this.functionButtons.indexOf(functionButton),
+                            * functionButtons.indexOf(functionButton),
                     Editor.BUTTON_SIDE_LENGTH, Editor.BUTTON_SIDE_LENGTH);
             panel.add(functionButton);
         }
@@ -39,17 +39,25 @@ public class FunctionButtonPanel {
         return instance;
     }
 
-    private void loadButtons() {
-        this.functionButtons.add((new ModeButton(new SelectMode())).getButton());
-        this.functionButtons.add((new ModeButton(new AddUMLClassMode())).getButton());
-        this.functionButtons.add((new ModeButton(new AddUMLUseCaseMode())).getButton());
+    private static void loadButtons() {
+        functionButtons.add((new ModeButton(new SelectMode())).getButton());
+        functionButtons.add((new ModeButton(new AddUMLClassMode())).getButton());
+        functionButtons.add((new ModeButton(new AddUMLUseCaseMode())).getButton());
     }
 
-    public void setBounds(int x, int y, int width, int height) {
-        this.panel.setBounds(x, y, width, height);
+    public static void setBounds(int x, int y, int width, int height) {
+        panel.setBounds(x, y, width, height);
     }
 
-    public JPanel getPanel() {
-        return this.panel;
+    public static JPanel getPanel() {
+        return panel;
+    }
+
+    public static void resetPanel(int selectedIndex) {
+        for (JButton functionButton : functionButtons) {
+            functionButton.setBackground(Color.WHITE);
+        }
+
+        functionButtons.get(selectedIndex).setBackground(Color.DARK_GRAY);
     }
 }

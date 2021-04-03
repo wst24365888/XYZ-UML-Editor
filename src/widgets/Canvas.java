@@ -47,11 +47,11 @@ public class Canvas {
         return instance;
     }
 
-    public void setBounds(int x, int y, int width, int height) {
+    public static void setBounds(int x, int y, int width, int height) {
         layeredPane.setBounds(x, y, width, height);
     }
 
-    public JLayeredPane getCanvas() {
+    public static JLayeredPane getCanvas() {
         return layeredPane;
     }
 
