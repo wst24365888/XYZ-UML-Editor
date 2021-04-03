@@ -6,11 +6,15 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
-public abstract class BaseUMLObject extends JComponent {
+public class BaseUMLObject extends JComponent {
     private static final long serialVersionUID = 2259886535991683392L;
 
     protected static int itemCounter = 0;
-    protected int zAxisDepth = 0;
+    protected int zAxisHeight = 0;
+
+    protected int width;
+    protected int height;
+    protected int offset;
 
     protected int originalX;
     protected int originalY;
@@ -37,7 +41,7 @@ public abstract class BaseUMLObject extends JComponent {
     };
 
     public BaseUMLObject() {
-        zAxisDepth = itemCounter++;
+        zAxisHeight = itemCounter++;
     }
 
     @Override
@@ -53,6 +57,14 @@ public abstract class BaseUMLObject extends JComponent {
                 graphics2D.fillOval((int) point.getX(), (int) point.getY(), 10, 10);
             }
         }
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
     }
 
     protected void setPortVisible(boolean isVisible) {
@@ -78,8 +90,8 @@ public abstract class BaseUMLObject extends JComponent {
     protected void onReleased() {
     }
 
-    public int getZAxisDepth() {
-        return this.zAxisDepth;
+    public int getZAxisHeight() {
+        return this.zAxisHeight;
     }
 
     public void setDraggable(boolean isDraggable) {

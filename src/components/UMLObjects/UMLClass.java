@@ -10,9 +10,13 @@ public class UMLClass extends BaseUMLObject {
     public UMLClass() {
         super();
 
+        this.width = 130;
+        this.height = 150;
+        this.offset = 5;
+
         JLabel label = new JLabel("New Class");
         
-        label.setBounds(5, 5, 120, 50);
+        label.setBounds(this.offset, this.offset, this.width - 2 * this.offset, 50);
         label.setHorizontalAlignment(JLabel.CENTER);
 
         this.add(label);
@@ -31,12 +35,12 @@ public class UMLClass extends BaseUMLObject {
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         graphics2D.setColor(Color.BLACK);
-        graphics2D.fillRect(5, 5, 120, 140);
+        graphics2D.fillRect(this.offset, this.offset, 120, 140);
 
         graphics2D.setColor(Color.WHITE);
-        graphics2D.fillRect(10, 10, 110, 40);
-        graphics2D.fillRect(10, 55, 110, 40);
-        graphics2D.fillRect(10, 100, 110, 40);
+        graphics2D.fillRect(this.offset + 5, this.offset + 5, 110, 40);
+        graphics2D.fillRect(this.offset + 5, this.offset + 50, 110, 40);
+        graphics2D.fillRect(this.offset + 5, this.offset + 95, 110, 40);
 
         // Render the text.
         super.paintComponent(graphics);

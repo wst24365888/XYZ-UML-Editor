@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 import editor.Editor;
 import buttons.*;
-import canvas_behavior.AddUMLCompositionLine;
 
 public class FunctionButtonPanel {
     private static FunctionButtonPanel instance = null;

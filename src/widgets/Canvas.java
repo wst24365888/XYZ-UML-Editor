@@ -60,9 +60,9 @@ public class Canvas {
         this.canvasBehavior = canvasBehavior;
     }
 
-    public static void addUMLObject(Component component, int zAxisDepth) {
+    public static void addUMLObject(Component component, int zAxisHeight) {
         layeredPane.add(component);
-        layeredPane.setLayer(component, zAxisDepth);
+        layeredPane.setLayer(component, zAxisHeight);
     }
 
     public static void setDraggableToAll(boolean isDraggable) {
@@ -73,5 +73,24 @@ public class Canvas {
                 ((BaseUMLObject) component).setDraggable(isDraggable);
             }
         }
+    }
+
+    public static BaseUMLObject withinComponent(int x, int y) {
+        Component[] components = layeredPane.getComponents();
+        BaseUMLObject result =  null;
+
+        for (Component component : components) {
+            if (component instanceof BaseUMLObject) {
+                BaseUMLObject tmp = (BaseUMLObject) component;
+                if ((tmp.getLocation().getX() < x && x < tmp.getLocation().getX() + tmp.getWidth()) &&
+                    (tmp.getLocation().getX() < x && x < tmp.getLocation().getX() + tmp.getWidth())) {
+                        if (result == null || tmp.getZAxisHeight() > result.getZAxisHeight()) {
+                            result = tmp;
+                        }
+                }
+            }
+        }
+
+        return result;
     }
 }

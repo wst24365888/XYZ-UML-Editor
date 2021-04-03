@@ -11,9 +11,13 @@ public class UMLUseCase extends BaseUMLObject {
     public UMLUseCase() {
         super();
 
+        this.width = 130;
+        this.height = 90;
+        this.offset = 5;
+
         JLabel label = new JLabel("New Use Case");
 
-        label.setBounds(5, 5, 120, 80);
+        label.setBounds(this.offset, this.offset, this.width - 2*this.offset, this.height - 2*this.offset);
         label.setHorizontalAlignment(JLabel.CENTER);
 
         this.add(label);
@@ -32,10 +36,10 @@ public class UMLUseCase extends BaseUMLObject {
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         graphics2D.setColor(Color.BLACK);
-        graphics2D.fill(new Ellipse2D.Double(5, 5, 120, 80));
+        graphics2D.fill(new Ellipse2D.Double(this.offset, this.offset, 120, 80));
 
         graphics2D.setColor(Color.WHITE);
-        graphics2D.fill(new Ellipse2D.Double(10, 10, 110, 70));
+        graphics2D.fill(new Ellipse2D.Double(this.offset + 5, this.offset + 5, 110, 70));
 
         // Render the text.
         super.paintComponent(graphics);
