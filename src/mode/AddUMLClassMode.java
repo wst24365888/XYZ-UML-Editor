@@ -3,19 +3,20 @@ package mode;
 import java.awt.*;
 import javax.swing.JLabel;
 
+import components.UMLObjects.BaseUMLObject;
 import components.UMLObjects.UMLClass;
 
 import javax.swing.BorderFactory;
 
 import widgets.Canvas;
 
-public class AddUMLObjectMode implements ICanvasBehavior {
+public class AddUMLClassMode implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
         System.out.println("AddUMLObjectMode onPressed");
 
-        UMLClass classObj = new UMLClass();
+        BaseUMLObject classObj = new UMLClass();
         JLabel label = classObj.getLabel();
 
         label.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));

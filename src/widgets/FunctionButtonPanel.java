@@ -6,7 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import editor.Editor;
-import mode.AddUMLObjectMode;
+import mode.AddUMLClassMode;
+import mode.AddUMLUseCaseMode;
 import mode.SelectMode;
 
 public class FunctionButtonPanel {
@@ -40,7 +41,8 @@ public class FunctionButtonPanel {
 
     private void loadButtons() {
         this.functionButtons.add((new ModeButton(new SelectMode())).getButton());
-        this.functionButtons.add((new ModeButton(new AddUMLObjectMode())).getButton());
+        this.functionButtons.add((new ModeButton(new AddUMLClassMode())).getButton());
+        this.functionButtons.add((new ModeButton(new AddUMLUseCaseMode())).getButton());
     }
 
     public void setBounds(int x, int y, int width, int height) {
