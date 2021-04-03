@@ -10,15 +10,15 @@ import mode.*;
 public class Canvas {
     private static Canvas instance = null;
 
-    private JLayeredPane layeredPane = new JLayeredPane();
+    private static JLayeredPane layeredPane = new JLayeredPane();
     private ICanvasBehavior canvasBehavior;
 
     private Canvas() {
-        this.layeredPane.setLayout(null);
-        this.layeredPane.setOpaque(true);
+        layeredPane.setLayout(null);
+        layeredPane.setOpaque(true);
         
-        this.layeredPane.setBackground(Color.WHITE);
-        this.layeredPane.addMouseListener(new MouseAdapter() {
+        layeredPane.setBackground(Color.WHITE);
+        layeredPane.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
                 if (canvasBehavior == null) {
@@ -48,14 +48,19 @@ public class Canvas {
     }
 
     public void setBounds(int x, int y, int width, int height) {
-        this.layeredPane.setBounds(x, y, width, height);
+        layeredPane.setBounds(x, y, width, height);
     }
 
     public JLayeredPane getCanvas() {
-        return this.layeredPane;
+        return layeredPane;
     }
 
     public void setCanvasBehavior(ICanvasBehavior canvasBehavior) {
         this.canvasBehavior = canvasBehavior;
+    }
+
+    public static void addUMLObject(Component component, int zAxisDepth) {
+        layeredPane.add(component);
+        layeredPane.setLayer(component, zAxisDepth);
     }
 }

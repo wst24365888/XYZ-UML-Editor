@@ -10,8 +10,8 @@ public class Editor {
     public static final int BUTTON_SIDE_LENGTH = 100;
 
     private static final int APP_BAR_HEIGHT = 40;
-    private static final int VISIBLE_BUTTON_AMOUNT = 5;
-    private static final int WINDOW_WIDTH = 800;
+    private static final int VISIBLE_BUTTON_AMOUNT = 6;
+    private static final int WINDOW_WIDTH = 1280;
     private static final int WINDOW_HEIGHT = APP_BAR_HEIGHT + BUTTON_PADDING + (BUTTON_SIDE_LENGTH + BUTTON_PADDING) * VISIBLE_BUTTON_AMOUNT;
     private static final int BUTTON_PANEL_WIDTH = BUTTON_SIDE_LENGTH + BUTTON_PADDING * 2;
 

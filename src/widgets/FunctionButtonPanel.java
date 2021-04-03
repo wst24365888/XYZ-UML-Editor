@@ -6,7 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import editor.Editor;
-import buttons.*;
+import mode.AddUMLObjectMode;
+import mode.SelectMode;
 
 public class FunctionButtonPanel {
     private static FunctionButtonPanel instance = null;
@@ -38,8 +39,8 @@ public class FunctionButtonPanel {
     }
 
     private void loadButtons() {
-        this.functionButtons.add((new SelectButton()).getButton());
-        this.functionButtons.add((new AddClassButton()).getButton());
+        this.functionButtons.add((new ModeButton(new SelectMode())).getButton());
+        this.functionButtons.add((new ModeButton(new AddUMLObjectMode())).getButton());
     }
 
     public void setBounds(int x, int y, int width, int height) {

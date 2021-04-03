@@ -1,6 +1,6 @@
 package mode;
 
 public interface ICanvasBehavior {
-    void onPressed(int mousePosX, int mousePosY);
-    void onReleased(int mousePosX, int mousePosY);    
+    public void onPressed(int mousePosX, int mousePosY);
+    public void onReleased(int mousePosX, int mousePosY);    
 }

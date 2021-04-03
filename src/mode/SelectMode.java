@@ -9,7 +9,7 @@ public class SelectMode implements ICanvasBehavior {
 
     @Override
     public void onReleased(int mousePosX, int mousePosY) {
-        System.out.println("SelectMode onReleased");        
+        System.out.println("SelectMode onReleased");
     }
-    
+
 }

@@ -1,19 +1,21 @@
-package buttons;
+package widgets;
 
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-import widgets.Canvas;
 import mode.*;
 
-public abstract class BaseButton {
+public class ModeButton {
     protected JButton button = new JButton();
     protected ICanvasBehavior canvasBehavior;
         
-    public BaseButton() {
+    public ModeButton(ICanvasBehavior canvasBehavior) {        
+        this.canvasBehavior = canvasBehavior;
+
         this.button.setBackground(Color.WHITE);
         this.button.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onClick();
             }
