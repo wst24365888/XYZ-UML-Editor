@@ -9,7 +9,7 @@ public class AddUMLUseCase implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLObjectMode onPressed");
+        System.out.println("AddUMLUseCase onPressed");
 
         BaseUMLObject label = new UMLUseCase();
         label.setBounds(mousePosX - 65, mousePosY - 45, 130, 90);
@@ -19,7 +19,7 @@ public class AddUMLUseCase implements ICanvasBehavior {
 
     @Override
     public void onReleased(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLObjectMode onReleased");
+        System.out.println("AddUMLUseCase onReleased");
     }
     
 }

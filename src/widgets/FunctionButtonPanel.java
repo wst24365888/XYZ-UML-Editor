@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import editor.Editor;
 import buttons.*;
+import canvas_behavior.AddUMLCompositionLine;
 
 public class FunctionButtonPanel {
     private static FunctionButtonPanel instance = null;
@@ -39,6 +40,9 @@ public class FunctionButtonPanel {
 
     private static void loadButtons() {
         functionButtons.add((new SelectButton()).getButton());
+        functionButtons.add((new AddUMLAssociationLineButton()).getButton());
+        functionButtons.add((new AddUMLGenerationLineButton()).getButton());
+        functionButtons.add((new AddUMLCompositionLineButton()).getButton());
         functionButtons.add((new AddUMLClassButton()).getButton());
         functionButtons.add((new AddUMLUseCaseButton()).getButton());
     }

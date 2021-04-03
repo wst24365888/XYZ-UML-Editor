@@ -9,7 +9,7 @@ public class AddUMLClass implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLObjectMode onPressed");
+        System.out.println("AddUMLClass onPressed");
 
         BaseUMLObject label = new UMLClass();
         label.setBounds(mousePosX - 65, mousePosY - 75, 130, 150);
@@ -19,7 +19,7 @@ public class AddUMLClass implements ICanvasBehavior {
 
     @Override
     public void onReleased(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLObjectMode onReleased");
+        System.out.println("AddUMLClass onReleased");
     }
     
 }

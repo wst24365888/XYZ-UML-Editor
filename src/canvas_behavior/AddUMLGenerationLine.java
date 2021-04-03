@@ -1,15 +1,16 @@
 package canvas_behavior;
 
-public class AddUMLConnectionLine implements ICanvasBehavior {
+public class AddUMLGenerationLine implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
-        System.out.println("AddClassMode onPressed");
+        System.out.println("AddUMLGenerationLine onPressed");
     }
 
     @Override
     public void onReleased(int mousePosX, int mousePosY) {
-        System.out.println("AddClassMode onReleased");
+        System.out.println("AddUMLGenerationLine onReleased");
     }
     
 }
+

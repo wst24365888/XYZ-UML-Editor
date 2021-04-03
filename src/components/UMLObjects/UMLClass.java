@@ -12,7 +12,7 @@ public class UMLClass extends BaseUMLObject {
 
         JLabel label = new JLabel("New Class");
         
-        label.setBounds(5, 5, 120, 140);
+        label.setBounds(5, 5, 120, 50);
         label.setHorizontalAlignment(JLabel.CENTER);
 
         this.add(label);
