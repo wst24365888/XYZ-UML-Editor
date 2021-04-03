@@ -17,7 +17,7 @@ public class AddUMLUseCase implements ICanvasBehavior {
         System.out.println("AddUMLObjectMode onPressed");
 
         BaseUMLObject classObj = new UMLUseCase();
-        JLabel label = classObj.getLabel();
+        JLabel label = classObj;
 
         label.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         label.setOpaque(true);

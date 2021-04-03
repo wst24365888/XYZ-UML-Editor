@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLayeredPane;
 
 import canvas_behavior.*;
+import components.UMLObjects.BaseUMLObject;
 
 public class Canvas {
     private static Canvas instance = null;
@@ -62,5 +63,15 @@ public class Canvas {
     public static void addUMLObject(Component component, int zAxisDepth) {
         layeredPane.add(component);
         layeredPane.setLayer(component, zAxisDepth);
+    }
+
+    public static void setDraggableToAll(boolean isDraggable) {
+        Component[] components = layeredPane.getComponents();
+
+        for (Component component : components) {
+            if (component instanceof BaseUMLObject) {
+                ((BaseUMLObject) component).setDraggable(isDraggable);
+            }
+        }
     }
 }

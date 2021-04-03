@@ -1,23 +1,26 @@
-package widgets;
+package buttons;
 
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
+import widgets.*;
+import widgets.Canvas;
 import canvas_behavior.*;
 
-public class ModeButton {
+public abstract class BaseButton {
     protected static int itemCounter = 0;
     protected int index = 0;
 
     protected JButton button = new JButton();
     protected ICanvasBehavior canvasBehavior;
-        
-    public ModeButton(ICanvasBehavior canvasBehavior) {     
+
+    public BaseButton(ICanvasBehavior canvasBehavior) {
         this.index = itemCounter++;
-        
+
         this.canvasBehavior = canvasBehavior;
 
+        this.button.setFocusable(false);
         this.button.setBackground(Color.WHITE);
         this.button.addActionListener(new ActionListener() {
             @Override
@@ -26,7 +29,7 @@ public class ModeButton {
             }
         });
     }
-    
+
     protected void onClick() {
         FunctionButtonPanel.resetPanel(this.index);
         Canvas.getInstance().setCanvasBehavior(this.canvasBehavior);
@@ -34,5 +37,9 @@ public class ModeButton {
 
     public JButton getButton() {
         return this.button;
+    }
+
+    protected void setImage(ImageIcon icon) {
+        this.button.setIcon(icon);
     }
 }
