@@ -1,6 +1,6 @@
-package mode;
+package canvas_behavior;
 
-public class SelectMode implements ICanvasBehavior {
+public class Select implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {

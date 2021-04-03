@@ -5,7 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLayeredPane;
 
-import mode.*;
+import canvas_behavior.*;
 
 public class Canvas {
     private static Canvas instance = null;

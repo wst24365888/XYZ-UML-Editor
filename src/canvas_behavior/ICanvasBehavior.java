@@ -1,4 +1,4 @@
-package mode;
+package canvas_behavior;
 
 public interface ICanvasBehavior {
     public void onPressed(int mousePosX, int mousePosY);

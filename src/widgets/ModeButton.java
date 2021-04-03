@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-import mode.*;
+import canvas_behavior.*;
 
 public class ModeButton {
     protected static int itemCounter = 0;

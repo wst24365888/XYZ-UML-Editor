@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import canvas_behavior.AddUMLClass;
+import canvas_behavior.AddUMLUseCase;
+import canvas_behavior.Select;
 import editor.Editor;
-import mode.AddUMLClassMode;
-import mode.AddUMLUseCaseMode;
-import mode.SelectMode;
 
 public class FunctionButtonPanel {
     private static FunctionButtonPanel instance = null;
@@ -40,9 +40,9 @@ public class FunctionButtonPanel {
     }
 
     private static void loadButtons() {
-        functionButtons.add((new ModeButton(new SelectMode())).getButton());
-        functionButtons.add((new ModeButton(new AddUMLClassMode())).getButton());
-        functionButtons.add((new ModeButton(new AddUMLUseCaseMode())).getButton());
+        functionButtons.add((new ModeButton(new Select())).getButton());
+        functionButtons.add((new ModeButton(new AddUMLClass())).getButton());
+        functionButtons.add((new ModeButton(new AddUMLUseCase())).getButton());
     }
 
     public static void setBounds(int x, int y, int width, int height) {

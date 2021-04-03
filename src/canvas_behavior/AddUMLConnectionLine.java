@@ -1,6 +1,6 @@
-package mode;
+package canvas_behavior;
 
-public class AddUMLConnectionLineMode implements ICanvasBehavior {
+public class AddUMLConnectionLine implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {

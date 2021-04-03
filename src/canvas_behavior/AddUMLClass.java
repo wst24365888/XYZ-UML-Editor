@@ -1,4 +1,4 @@
-package mode;
+package canvas_behavior;
 
 import java.awt.*;
 import javax.swing.JLabel;
@@ -10,7 +10,7 @@ import javax.swing.BorderFactory;
 
 import widgets.Canvas;
 
-public class AddUMLClassMode implements ICanvasBehavior {
+public class AddUMLClass implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
