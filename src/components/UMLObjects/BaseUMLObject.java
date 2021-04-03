@@ -3,9 +3,9 @@ package components.UMLObjects;
 import java.awt.*;
 import java.awt.event.*;
 
-import javax.swing.JLabel;
+import javax.swing.JComponent;
 
-public abstract class BaseUMLObject extends JLabel {
+public abstract class BaseUMLObject extends JComponent {
     private static final long serialVersionUID = 2259886535991683392L;
 
     protected static int itemCounter = 0;
