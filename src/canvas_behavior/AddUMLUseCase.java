@@ -12,7 +12,7 @@ public class AddUMLUseCase implements ICanvasBehavior {
         System.out.println("AddUMLObjectMode onPressed");
 
         BaseUMLObject label = new UMLUseCase();
-        label.setBounds(mousePosX - 50, mousePosY - 50, 120, 80);
+        label.setBounds(mousePosX - 65, mousePosY - 45, 130, 90);
 
         Canvas.addUMLObject(label, label.getZAxisDepth());
     }

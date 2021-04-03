@@ -2,6 +2,7 @@ package components.UMLObjects;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
@@ -13,6 +14,10 @@ public abstract class BaseUMLObject extends JComponent {
 
     protected int originalX;
     protected int originalY;
+
+    protected boolean isPortVisible = false;
+
+    protected ArrayList<Point> ports = new ArrayList<Point>();
 
     private MouseAdapter mouseListener = new MouseAdapter() {
         @Override
@@ -38,6 +43,21 @@ public abstract class BaseUMLObject extends JComponent {
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
+
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        if(this.isPortVisible) {
+            for (Point point : ports) {
+                graphics2D.setColor(Color.LIGHT_GRAY);
+                graphics2D.fillOval((int) point.getX(), (int) point.getY(), 10, 10);
+            }
+        }
+    }
+
+    protected void setPortVisible(boolean isVisible) {
+        this.isPortVisible = isVisible;
+        repaint();
     }
 
     protected void onPressed(int x, int y) {

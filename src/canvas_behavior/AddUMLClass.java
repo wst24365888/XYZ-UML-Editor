@@ -12,7 +12,7 @@ public class AddUMLClass implements ICanvasBehavior {
         System.out.println("AddUMLObjectMode onPressed");
 
         BaseUMLObject label = new UMLClass();
-        label.setBounds(mousePosX - 50, mousePosY - 50, 120, 140);
+        label.setBounds(mousePosX - 65, mousePosY - 75, 130, 150);
 
         Canvas.addUMLObject(label, label.getZAxisDepth());
     }
