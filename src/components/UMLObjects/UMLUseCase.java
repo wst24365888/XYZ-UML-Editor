@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.JLabel;
 
+import components.port.Port;
+
 public class UMLUseCase extends BaseUMLObject {
     private static final long serialVersionUID = -2442512529591589385L;
 
@@ -17,15 +19,15 @@ public class UMLUseCase extends BaseUMLObject {
 
         JLabel label = new JLabel("New Use Case");
 
-        label.setBounds(this.offset, this.offset, this.width - 2*this.offset, this.height - 2*this.offset);
+        label.setBounds(this.offset, this.offset, this.width - 2 * this.offset, this.height - 2 * this.offset);
         label.setHorizontalAlignment(JLabel.CENTER);
 
         this.add(label);
 
-        this.ports.add(new Point(60, 0));
-        this.ports.add(new Point(0, 40));
-        this.ports.add(new Point(120, 40));
-        this.ports.add(new Point(60, 80));
+        this.ports = new Port(new Point(60 + this.offset, 0 + this.offset),
+                new Point(120 + this.offset, 40 + this.offset),
+                new Point(60 + this.offset, 80 + this.offset),
+                new Point(0 + this.offset, 40 + this.offset));
 
         this.setPortVisible(true);
     }

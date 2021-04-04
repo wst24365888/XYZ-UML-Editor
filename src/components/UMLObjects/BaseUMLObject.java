@@ -2,9 +2,10 @@ package components.UMLObjects;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import javax.swing.JComponent;
+
+import components.port.Port;
 
 public class BaseUMLObject extends JComponent {
     private static final long serialVersionUID = 2259886535991683392L;
@@ -21,7 +22,7 @@ public class BaseUMLObject extends JComponent {
 
     protected boolean isPortVisible = false;
 
-    protected ArrayList<Point> ports = new ArrayList<Point>();
+    protected Port ports;
 
     private MouseAdapter mouseListener = new MouseAdapter() {
         @Override
@@ -52,9 +53,9 @@ public class BaseUMLObject extends JComponent {
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         if(this.isPortVisible) {
-            for (Point point : ports) {
+            for (Point point : this.ports.getPorts()) {
                 graphics2D.setColor(Color.LIGHT_GRAY);
-                graphics2D.fillOval((int) point.getX(), (int) point.getY(), 10, 10);
+                graphics2D.fillOval((int) point.getX() - this.offset, (int) point.getY() - this.offset, 10, 10);
             }
         }
     }

@@ -4,6 +4,8 @@ import java.awt.*;
 
 import javax.swing.JLabel;
 
+import components.port.Port;
+
 public class UMLClass extends BaseUMLObject {
     private static final long serialVersionUID = 8488292894462555825L;
 
@@ -15,16 +17,16 @@ public class UMLClass extends BaseUMLObject {
         this.offset = 5;
 
         JLabel label = new JLabel("New Class");
-        
+
         label.setBounds(this.offset, this.offset, this.width - 2 * this.offset, 50);
         label.setHorizontalAlignment(JLabel.CENTER);
 
         this.add(label);
 
-        this.ports.add(new Point(60, 0));
-        this.ports.add(new Point(0, 70));
-        this.ports.add(new Point(120, 70));
-        this.ports.add(new Point(60, 140));
+        this.ports = new Port(new Point(60 + this.offset, 0 + this.offset),
+                new Point(120 + this.offset, 70 + this.offset), 
+                new Point(60 + this.offset, 140 + this.offset),
+                new Point(0 + this.offset, 70 + this.offset));
 
         this.setPortVisible(true);
     }
