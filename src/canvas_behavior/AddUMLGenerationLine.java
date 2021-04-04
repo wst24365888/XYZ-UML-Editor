@@ -1,7 +1,10 @@
 package canvas_behavior;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
+import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.UMLConnectionLines.UMLGenerationLine;
 import components.UMLObjects.BaseUMLObject;
 import widgets.Canvas;
@@ -39,7 +42,14 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
         }
 
         if (this.source != null && this.destination != null) {
-            // TODO: connect the line.
+            source.setDrawingUMLConnectionLine(null);
+
+            Map<BaseUMLObject, BaseUMLConnectionLine> connection = new HashMap<BaseUMLObject, BaseUMLConnectionLine>();
+            connection.put(destination, new UMLGenerationLine());
+
+            source.addConntection(connection);
+        } else if (this.source != null && this.destination == null) {
+            source.setDrawingUMLConnectionLine(null);
         }
 
         this.source = null;

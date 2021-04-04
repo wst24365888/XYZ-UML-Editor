@@ -3,6 +3,10 @@ package components.UMLConnectionLines;
 import java.awt.*;
 
 public class UMLGenerationLine extends BaseUMLConnectionLine {
+    public UMLGenerationLine() {
+        super();
+    }
+
     public UMLGenerationLine(Point desPoint) {
         super(desPoint);
     }

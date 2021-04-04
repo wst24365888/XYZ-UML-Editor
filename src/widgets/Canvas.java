@@ -3,9 +3,13 @@ package widgets;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Map;
+
 import javax.swing.JLayeredPane;
 
 import canvas_behavior.*;
+import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.UMLObjects.BaseUMLObject;
 
 public class Canvas extends JLayeredPane {
@@ -51,6 +55,35 @@ public class Canvas extends JLayeredPane {
         this.setBackground(Color.WHITE);
         this.addMouseListener(mouseAdapter);
         this.addMouseMotionListener(mouseAdapter);
+    }
+
+    @Override
+    protected void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+
+        Component[] components = this.getComponents();
+
+        for (Component component : components) {
+            if (component instanceof BaseUMLObject) {
+                BaseUMLObject baseUMLObject = (BaseUMLObject) component;
+                BaseUMLConnectionLine drawing = baseUMLObject.getDrawing();
+                ArrayList<Map<BaseUMLObject, BaseUMLConnectionLine>> connections = baseUMLObject.getConntections();
+                
+                if (drawing != null) {
+                    drawing.drawArrowLine(graphics, baseUMLObject.getPort(drawing.getDesPoint()), drawing.getDesPoint());
+                }
+
+                if (connections.size() != 0) {
+                    for (Map<BaseUMLObject, BaseUMLConnectionLine> connection : connections) {
+                        for (Map.Entry<BaseUMLObject, BaseUMLConnectionLine> connectionEntry : connection.entrySet()) {
+                            System.out.println(baseUMLObject.getPort(connectionEntry.getKey().getLocation()));
+                            System.out.println(connectionEntry.getKey().getPort(baseUMLObject.getLocation()));
+                            connectionEntry.getValue().drawArrowLine(graphics, baseUMLObject.getPort(connectionEntry.getKey().getLocation()), connectionEntry.getKey().getPort(baseUMLObject.getLocation()));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static Canvas getInstance() {

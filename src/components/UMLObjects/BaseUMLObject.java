@@ -2,11 +2,14 @@ package components.UMLObjects;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.JComponent;
 
 import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.port.Port;
+import widgets.Canvas;
 
 public abstract class BaseUMLObject extends JComponent {
     private static final long serialVersionUID = 2259886535991683392L;
@@ -26,6 +29,7 @@ public abstract class BaseUMLObject extends JComponent {
     protected Port ports;
 
     protected BaseUMLConnectionLine drawing;
+    protected ArrayList<Map<BaseUMLObject, BaseUMLConnectionLine>> connections = new ArrayList<Map<BaseUMLObject, BaseUMLConnectionLine>>();
 
     private MouseAdapter mouseListener = new MouseAdapter() {
         @Override
@@ -61,33 +65,6 @@ public abstract class BaseUMLObject extends JComponent {
                 graphics2D.fillOval((int) point.getX() - this.offset, (int) point.getY() - this.offset, 10, 10);
             }
         }
-
-        if (this.drawing != null) {
-            System.out.println(drawing.getDesPoint().getX());
-            System.out.println(drawing.getDesPoint().getY());
-
-            drawing.drawArrowLine(graphics, this.getPort(drawing.getDesPoint()), drawing.getDesPoint());
-        }
-    }
-
-    private Point getPort(Point destination) {
-        double angle = (double) Math.toDegrees(Math.atan2(destination.getX() - (this.getLocation().getX() + this.width / 2), destination.getY() - (this.getLocation().getY() + this.height / 2))) - 90;
-    
-        if (angle < 0) {
-            angle += 360;
-        }
-
-        // System.out.println(angle);
-
-        if (135 > angle && angle >= 45) {
-            return this.ports.getNorthPort();
-        } else if (45 > angle || angle >= 270) {
-            return this.ports.getEastPort();
-        } else if (315 > angle && angle >= 225) {
-            return this.ports.getSouthPort();
-        } else {
-            return this.ports.getWestPort();
-        }
     }
 
     public int getWidth() {
@@ -116,10 +93,13 @@ public abstract class BaseUMLObject extends JComponent {
         // System.out.printf("(%f, %f)\n", labelLocation.getX(), labelLocation.getY());
 
         this.setLocation(x + (int) labelLocation.getX() - originalX, y + (int) labelLocation.getY() - originalY);
+
+        Canvas.getInstance().repaint();
     }
 
     protected void onReleased() {
-    }
+        
+    };
 
     public int getZAxisHeight() {
         return this.zAxisHeight;
@@ -137,6 +117,43 @@ public abstract class BaseUMLObject extends JComponent {
 
     public void setDrawingUMLConnectionLine(BaseUMLConnectionLine drawing) {
         this.drawing = drawing;
-        repaint();
+        Canvas.getInstance().repaint();
+    }
+
+    public BaseUMLConnectionLine getDrawing() {
+        return this.drawing;
+    }
+
+    public Point getPort(Point destination) {
+        Point result;
+
+        double angle = (double) Math.toDegrees(Math.atan2(destination.getX() - (this.getLocation().getX() + this.width / 2), destination.getY() - (this.getLocation().getY() + this.height / 2))) - 90;
+    
+        if (angle < 0) {
+            angle += 360;
+        }
+
+        // System.out.println(angle);
+
+        if (135 > angle && angle >= 45) {
+            result = this.ports.getNorthPort();
+        } else if (45 > angle || angle >= 270) {
+            result = this.ports.getEastPort();
+        } else if (315 > angle && angle >= 225) {
+            result = this.ports.getSouthPort();
+        } else {
+            result = this.ports.getWestPort();
+        }
+
+        return new Point((int) (this.getLocation().getX() + result.getX()), (int) (this.getLocation().getY() + result.getY()));
+    }
+
+    public void addConntection(Map<BaseUMLObject, BaseUMLConnectionLine> connection) {
+        this.connections.add(connection);
+        Canvas.getInstance().repaint();
+    }
+
+    public ArrayList<Map<BaseUMLObject, BaseUMLConnectionLine>> getConntections() {
+        return this.connections;
     }
 }

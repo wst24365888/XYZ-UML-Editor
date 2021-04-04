@@ -5,6 +5,10 @@ import java.awt.*;
 public abstract class BaseUMLConnectionLine {
     private Point desPoint;
 
+    public BaseUMLConnectionLine() {
+
+    }
+
     public BaseUMLConnectionLine(Point desPoint) {
         this.desPoint = desPoint;
     }
