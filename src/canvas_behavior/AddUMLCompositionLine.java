@@ -8,6 +8,11 @@ public class AddUMLCompositionLine implements ICanvasBehavior {
     }
 
     @Override
+    public void onDragged(int mousePosX, int mousePosY) {
+        System.out.println("AddUMLCompositionLine onDragged");
+    }
+
+    @Override
     public void onReleased(int mousePosX, int mousePosY) {
         System.out.println("AddUMLCompositionLine onReleased");
     }

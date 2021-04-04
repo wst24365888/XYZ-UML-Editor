@@ -1,5 +1,8 @@
 package canvas_behavior;
 
+import java.awt.*;
+
+import components.UMLConnectionLines.UMLGenerationLine;
 import components.UMLObjects.BaseUMLObject;
 import widgets.Canvas;
 
@@ -13,7 +16,16 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
 
         BaseUMLObject within = Canvas.withinComponent(mousePosX, mousePosY);
         if (within != null) {
-            source = within;
+            this.source = within;
+        }
+    }
+
+    @Override
+    public void onDragged(int mousePosX, int mousePosY) {
+        System.out.println("AddUMLGenerationLine onDragged");
+
+        if (this.source != null) {
+            source.setDrawingUMLConnectionLine(new UMLGenerationLine(new Point(mousePosX, mousePosY)));
         }
     }
 
@@ -23,15 +35,15 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
 
         BaseUMLObject within = Canvas.withinComponent(mousePosX, mousePosY);
         if (within != null) {
-            destination = within;
+            this.destination = within;
         }
 
-        if (source != null && destination != null) {
+        if (this.source != null && this.destination != null) {
             // TODO: connect the line.
         }
 
-        source = null;
-        destination = null;
+        this.source = null;
+        this.destination = null;
     }
     
 }

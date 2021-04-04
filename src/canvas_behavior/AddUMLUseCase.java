@@ -18,6 +18,11 @@ public class AddUMLUseCase implements ICanvasBehavior {
     }
 
     @Override
+    public void onDragged(int mousePosX, int mousePosY) {
+        System.out.println("AddUMLUseCase onDragged");
+    }
+
+    @Override
     public void onReleased(int mousePosX, int mousePosY) {
         System.out.println("AddUMLUseCase onReleased");
     }

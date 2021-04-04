@@ -5,9 +5,10 @@ import java.awt.event.*;
 
 import javax.swing.JComponent;
 
+import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.port.Port;
 
-public class BaseUMLObject extends JComponent {
+public abstract class BaseUMLObject extends JComponent {
     private static final long serialVersionUID = 2259886535991683392L;
 
     protected static int itemCounter = 0;
@@ -23,6 +24,8 @@ public class BaseUMLObject extends JComponent {
     protected boolean isPortVisible = false;
 
     protected Port ports;
+
+    protected BaseUMLConnectionLine drawing;
 
     private MouseAdapter mouseListener = new MouseAdapter() {
         @Override
@@ -52,11 +55,38 @@ public class BaseUMLObject extends JComponent {
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        if(this.isPortVisible) {
+        if (this.isPortVisible) {
             for (Point point : this.ports.getPorts()) {
                 graphics2D.setColor(Color.LIGHT_GRAY);
                 graphics2D.fillOval((int) point.getX() - this.offset, (int) point.getY() - this.offset, 10, 10);
             }
+        }
+
+        if (this.drawing != null) {
+            System.out.println(drawing.getDesPoint().getX());
+            System.out.println(drawing.getDesPoint().getY());
+
+            drawing.drawArrowLine(graphics, this.getPort(drawing.getDesPoint()), drawing.getDesPoint());
+        }
+    }
+
+    private Point getPort(Point destination) {
+        double angle = (double) Math.toDegrees(Math.atan2(destination.getX() - (this.getLocation().getX() + this.width / 2), destination.getY() - (this.getLocation().getY() + this.height / 2))) - 90;
+    
+        if (angle < 0) {
+            angle += 360;
+        }
+
+        // System.out.println(angle);
+
+        if (135 > angle && angle >= 45) {
+            return this.ports.getNorthPort();
+        } else if (45 > angle || angle >= 270) {
+            return this.ports.getEastPort();
+        } else if (315 > angle && angle >= 225) {
+            return this.ports.getSouthPort();
+        } else {
+            return this.ports.getWestPort();
         }
     }
 
@@ -103,5 +133,10 @@ public class BaseUMLObject extends JComponent {
             this.removeMouseListener(this.mouseListener);
             this.removeMouseMotionListener(this.mouseListener);
         }
+    }
+
+    public void setDrawingUMLConnectionLine(BaseUMLConnectionLine drawing) {
+        this.drawing = drawing;
+        repaint();
     }
 }

@@ -12,32 +12,44 @@ public class Canvas {
     private static Canvas instance = null;
 
     private static JLayeredPane layeredPane = new JLayeredPane();
-    private ICanvasBehavior canvasBehavior;
+    private static ICanvasBehavior canvasBehavior;
+
+    private static MouseAdapter mouseAdapter = new MouseAdapter() {
+        @Override
+        public void mousePressed(MouseEvent mouseEvent) {
+            if (canvasBehavior == null) {
+                return;
+            }
+
+            canvasBehavior.onPressed(mouseEvent.getX(), mouseEvent.getY());
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent mouseEvent) {
+            if (canvasBehavior == null) {
+                return;
+            }
+
+            canvasBehavior.onDragged(mouseEvent.getX(), mouseEvent.getY());
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent mouseEvent) {
+            if (canvasBehavior == null) {
+                return;
+            }
+
+            canvasBehavior.onReleased(mouseEvent.getX(), mouseEvent.getY());
+        }
+    };
 
     private Canvas() {
         layeredPane.setLayout(null);
         layeredPane.setOpaque(true);
         
         layeredPane.setBackground(Color.WHITE);
-        layeredPane.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-                if (canvasBehavior == null) {
-                    return;
-                }
-
-                canvasBehavior.onPressed(mouseEvent.getX(), mouseEvent.getY());
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-                if (canvasBehavior == null) {
-                    return;
-                }
-
-                canvasBehavior.onReleased(mouseEvent.getX(), mouseEvent.getY());
-            }
-        });
+        layeredPane.addMouseListener(mouseAdapter);
+        layeredPane.addMouseMotionListener(mouseAdapter);
     }
 
     public static Canvas getInstance() {
@@ -56,8 +68,8 @@ public class Canvas {
         return layeredPane;
     }
 
-    public void setCanvasBehavior(ICanvasBehavior canvasBehavior) {
-        this.canvasBehavior = canvasBehavior;
+    public static void setCanvasBehavior(ICanvasBehavior iCanvasBehavior) {
+        canvasBehavior = iCanvasBehavior;
     }
 
     public static void addUMLObject(Component component, int zAxisHeight) {
@@ -83,7 +95,7 @@ public class Canvas {
             if (component instanceof BaseUMLObject) {
                 BaseUMLObject tmp = (BaseUMLObject) component;
                 if ((tmp.getLocation().getX() < x && x < tmp.getLocation().getX() + tmp.getWidth()) &&
-                    (tmp.getLocation().getX() < x && x < tmp.getLocation().getX() + tmp.getWidth())) {
+                    (tmp.getLocation().getY() < y && y < tmp.getLocation().getY() + tmp.getHeight())) {
                         if (result == null || tmp.getZAxisHeight() > result.getZAxisHeight()) {
                             result = tmp;
                         }
