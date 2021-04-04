@@ -14,6 +14,6 @@ public class SelectButton extends BaseButton {
     @Override
     protected void onClick() {
         super.onClick();
-        Canvas.setDraggableToAll(true);
+        Canvas.getInstance().setDraggableToAll(true);
     }
 }

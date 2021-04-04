@@ -14,6 +14,6 @@ public class AddUMLUseCaseButton extends BaseButton {
     @Override
     protected void onClick() {
         super.onClick();
-        Canvas.setDraggableToAll(false);
+        Canvas.getInstance().setDraggableToAll(false);
     }
 }

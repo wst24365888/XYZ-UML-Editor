@@ -14,7 +14,7 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
     public void onPressed(int mousePosX, int mousePosY) {
         System.out.println("AddUMLGenerationLine onPressed");
 
-        BaseUMLObject within = Canvas.withinComponent(mousePosX, mousePosY);
+        BaseUMLObject within = Canvas.getInstance().withinComponent(mousePosX, mousePosY);
         if (within != null) {
             this.source = within;
         }
@@ -33,7 +33,7 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
     public void onReleased(int mousePosX, int mousePosY) {
         System.out.println("AddUMLGenerationLine onReleased");
 
-        BaseUMLObject within = Canvas.withinComponent(mousePosX, mousePosY);
+        BaseUMLObject within = Canvas.getInstance().withinComponent(mousePosX, mousePosY);
         if (within != null) {
             this.destination = within;
         }

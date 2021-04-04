@@ -8,10 +8,11 @@ import javax.swing.JLayeredPane;
 import canvas_behavior.*;
 import components.UMLObjects.BaseUMLObject;
 
-public class Canvas {
+public class Canvas extends JLayeredPane {
+    private static final long serialVersionUID = 1985691147832327662L;
+
     private static Canvas instance = null;
 
-    private static JLayeredPane layeredPane = new JLayeredPane();
     private static ICanvasBehavior canvasBehavior;
 
     private static MouseAdapter mouseAdapter = new MouseAdapter() {
@@ -44,12 +45,12 @@ public class Canvas {
     };
 
     private Canvas() {
-        layeredPane.setLayout(null);
-        layeredPane.setOpaque(true);
+        this.setLayout(null);
+        this.setOpaque(true);
         
-        layeredPane.setBackground(Color.WHITE);
-        layeredPane.addMouseListener(mouseAdapter);
-        layeredPane.addMouseMotionListener(mouseAdapter);
+        this.setBackground(Color.WHITE);
+        this.addMouseListener(mouseAdapter);
+        this.addMouseMotionListener(mouseAdapter);
     }
 
     public static Canvas getInstance() {
@@ -60,25 +61,17 @@ public class Canvas {
         return instance;
     }
 
-    public static void setBounds(int x, int y, int width, int height) {
-        layeredPane.setBounds(x, y, width, height);
-    }
-
-    public static JLayeredPane getCanvas() {
-        return layeredPane;
-    }
-
     public static void setCanvasBehavior(ICanvasBehavior iCanvasBehavior) {
         canvasBehavior = iCanvasBehavior;
     }
 
-    public static void addUMLObject(Component component, int zAxisHeight) {
-        layeredPane.add(component);
-        layeredPane.setLayer(component, zAxisHeight);
+    public void addUMLObject(Component component, int zAxisHeight) {
+        this.add(component);
+        this.setLayer(component, zAxisHeight);
     }
 
-    public static void setDraggableToAll(boolean isDraggable) {
-        Component[] components = layeredPane.getComponents();
+    public void setDraggableToAll(boolean isDraggable) {
+        Component[] components = this.getComponents();
 
         for (Component component : components) {
             if (component instanceof BaseUMLObject) {
@@ -87,8 +80,8 @@ public class Canvas {
         }
     }
 
-    public static BaseUMLObject withinComponent(int x, int y) {
-        Component[] components = layeredPane.getComponents();
+    public BaseUMLObject withinComponent(int x, int y) {
+        Component[] components = this.getComponents();
         BaseUMLObject result =  null;
 
         for (Component component : components) {

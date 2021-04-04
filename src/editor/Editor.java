@@ -19,7 +19,7 @@ public class Editor {
 
     public Editor(String title) {
         FunctionButtonPanel.getInstance();
-        Canvas.getInstance();
+        Canvas canvas = Canvas.getInstance();
 
         frame.setLayout(null);
 
@@ -30,8 +30,8 @@ public class Editor {
         FunctionButtonPanel.setBounds(0, 0, BUTTON_PANEL_WIDTH, WINDOW_HEIGHT);
         frame.add(FunctionButtonPanel.getPanel());
 
-        Canvas.setBounds(BUTTON_PANEL_WIDTH, 0, WINDOW_WIDTH - BUTTON_PANEL_WIDTH, WINDOW_HEIGHT);
-        frame.add(Canvas.getCanvas());
+        canvas.setBounds(BUTTON_PANEL_WIDTH, 0, WINDOW_WIDTH - BUTTON_PANEL_WIDTH, WINDOW_HEIGHT);
+        frame.add(canvas);
 
         frame.addComponentListener(new ComponentAdapter() {
             @Override
@@ -40,7 +40,7 @@ public class Editor {
                 int height = componentEvent.getComponent().getHeight();
 
                 FunctionButtonPanel.setBounds(0, 0, BUTTON_PANEL_WIDTH, height);
-                Canvas.setBounds(BUTTON_PANEL_WIDTH, 0, width - BUTTON_PANEL_WIDTH, height);
+                canvas.setBounds(BUTTON_PANEL_WIDTH, 0, width - BUTTON_PANEL_WIDTH, height);
             }
         });
     }
