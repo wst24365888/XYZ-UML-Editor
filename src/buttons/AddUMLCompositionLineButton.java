@@ -3,7 +3,6 @@ package buttons;
 import javax.swing.ImageIcon;
 
 import canvas_behavior.AddUMLCompositionLine;
-import widgets.Canvas;
 
 public class AddUMLCompositionLineButton extends BaseButton {
     public AddUMLCompositionLineButton() {
@@ -14,6 +13,5 @@ public class AddUMLCompositionLineButton extends BaseButton {
     @Override
     protected void onClick() {
         super.onClick();
-        Canvas.getInstance().setDraggableToAll(false);
     }
 }

@@ -3,7 +3,6 @@ package buttons;
 import javax.swing.ImageIcon;
 
 import canvas_behavior.AddUMLUseCase;
-import widgets.Canvas;
 
 public class AddUMLUseCaseButton extends BaseButton {
     public AddUMLUseCaseButton() {
@@ -14,6 +13,5 @@ public class AddUMLUseCaseButton extends BaseButton {
     @Override
     protected void onClick() {
         super.onClick();
-        Canvas.getInstance().setDraggableToAll(false);
     }
 }

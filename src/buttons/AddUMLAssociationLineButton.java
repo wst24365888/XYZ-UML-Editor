@@ -3,7 +3,6 @@ package buttons;
 import javax.swing.ImageIcon;
 
 import canvas_behavior.AddUMLAssociationLine;
-import widgets.Canvas;
 
 public class AddUMLAssociationLineButton extends BaseButton {
     public AddUMLAssociationLineButton() {
@@ -14,6 +13,5 @@ public class AddUMLAssociationLineButton extends BaseButton {
     @Override
     protected void onClick() {
         super.onClick();
-        Canvas.getInstance().setDraggableToAll(false);
     }
 }

@@ -3,7 +3,6 @@ package buttons;
 import javax.swing.ImageIcon;
 
 import canvas_behavior.Select;
-import widgets.Canvas;
 
 public class SelectButton extends BaseButton {
     public SelectButton() {
@@ -14,6 +13,6 @@ public class SelectButton extends BaseButton {
     @Override
     protected void onClick() {
         super.onClick();
-        Canvas.getInstance().setDraggableToAll(true);
+        ((Select) this.canvasBehavior).setSource(null);
     }
 }

@@ -3,7 +3,6 @@ package buttons;
 import javax.swing.ImageIcon;
 
 import canvas_behavior.AddUMLGenerationLine;
-import widgets.Canvas;
 
 public class AddUMLGenerationLineButton extends BaseButton {
     public AddUMLGenerationLineButton() {
@@ -14,6 +13,5 @@ public class AddUMLGenerationLineButton extends BaseButton {
     @Override
     protected void onClick() {
         super.onClick();
-        Canvas.getInstance().setDraggableToAll(false);
     }
 }

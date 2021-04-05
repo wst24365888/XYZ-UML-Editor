@@ -1,7 +1,6 @@
 package components.UMLObjects;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,32 +20,12 @@ public abstract class BaseUMLObject extends JComponent {
     protected int height;
     protected int offset;
 
-    protected int originalX;
-    protected int originalY;
-
     protected boolean isPortVisible = false;
 
     protected Port ports;
 
     protected BaseUMLConnectionLine drawing;
     protected Map<BaseUMLObject, BaseUMLConnectionLine> connections = new HashMap<BaseUMLObject, BaseUMLConnectionLine>();
-
-    private MouseAdapter mouseListener = new MouseAdapter() {
-        @Override
-        public void mousePressed(MouseEvent mouseEvent) {
-            onPressed(mouseEvent.getX(), mouseEvent.getY());
-        }
-
-        @Override
-        public void mouseDragged(MouseEvent mouseEvent) {
-            onDragged(mouseEvent.getX(), mouseEvent.getY());
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent mouseEvent) {
-            onReleased();
-        }
-    };
 
     public BaseUMLObject() {
         zAxisHeight = itemCounter++;
@@ -80,39 +59,8 @@ public abstract class BaseUMLObject extends JComponent {
         repaint();
     }
 
-    protected void onPressed(int x, int y) {
-        // System.out.printf("(%d, %d)\n", x, y);
-
-        this.originalX = x;
-        this.originalY = y;
-    }
-
-    protected void onDragged(int x, int y) {
-        Point labelLocation = this.getLocation();
-
-        // System.out.printf("(%f, %f)\n", labelLocation.getX(), labelLocation.getY());
-
-        this.setLocation(x + (int) labelLocation.getX() - originalX, y + (int) labelLocation.getY() - originalY);
-
-        Canvas.getInstance().repaint();
-    }
-
-    protected void onReleased() {
-
-    };
-
     public int getZAxisHeight() {
         return this.zAxisHeight;
-    }
-
-    public void setDraggable(boolean isDraggable) {
-        if (isDraggable) {
-            this.addMouseListener(this.mouseListener);
-            this.addMouseMotionListener(this.mouseListener);
-        } else {
-            this.removeMouseListener(this.mouseListener);
-            this.removeMouseMotionListener(this.mouseListener);
-        }
     }
 
     public void setDrawingUMLConnectionLine(BaseUMLConnectionLine drawing) {

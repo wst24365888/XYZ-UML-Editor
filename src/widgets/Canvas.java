@@ -118,16 +118,6 @@ public class Canvas extends JLayeredPane {
         this.setLayer(component, zAxisHeight);
     }
 
-    public void setDraggableToAll(boolean isDraggable) {
-        Component[] components = this.getComponents();
-
-        for (Component component : components) {
-            if (component instanceof BaseUMLObject) {
-                ((BaseUMLObject) component).setDraggable(isDraggable);
-            }
-        }
-    }
-
     public BaseUMLObject withinComponent(int x, int y) {
         Component[] components = this.getComponents();
         BaseUMLObject result =  null;
