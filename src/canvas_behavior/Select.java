@@ -14,9 +14,7 @@ public class Select implements ICanvasBehavior {
         System.out.println("SelectMode onPressed");
 
         BaseUMLObject within = Canvas.getInstance().withinComponent(mousePosX, mousePosY);
-        if (within != null) {
-            this.setSource(within);
-        }
+        this.setSource(within);
     }
 
     @Override
@@ -35,9 +33,15 @@ public class Select implements ICanvasBehavior {
     }
 
     public void setSource(BaseUMLObject source) {
-        if(source != null) {
+        if (source != null) {
             this.originalX = (int) source.getMousePosition().getX();
             this.originalY = (int) source.getMousePosition().getY();
+
+            source.setPortVisible(true);
+        }        
+        
+        if (this.source != null) {
+            this.source.setPortVisible(false);
         }
 
         this.source = source;

@@ -54,9 +54,9 @@ public abstract class BaseUMLObject extends JComponent {
         return this.height;
     }
 
-    protected void setPortVisible(boolean isVisible) {
+    public void setPortVisible(boolean isVisible) {
         this.isPortVisible = isVisible;
-        repaint();
+        this.repaint();
     }
 
     public int getZAxisHeight() {

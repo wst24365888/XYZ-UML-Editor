@@ -27,8 +27,6 @@ public class UMLClass extends BaseUMLObject {
                 new Point(120 + this.offset, 70 + this.offset), 
                 new Point(60 + this.offset, 140 + this.offset),
                 new Point(0 + this.offset, 70 + this.offset));
-
-        this.setPortVisible(true);
     }
 
     @Override

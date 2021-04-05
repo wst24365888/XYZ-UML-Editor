@@ -28,8 +28,6 @@ public class UMLUseCase extends BaseUMLObject {
                 new Point(120 + this.offset, 40 + this.offset),
                 new Point(60 + this.offset, 80 + this.offset),
                 new Point(0 + this.offset, 40 + this.offset));
-
-        this.setPortVisible(true);
     }
 
     @Override
