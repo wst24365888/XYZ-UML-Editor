@@ -2,12 +2,12 @@ package components.UMLConnectionLines;
 
 import java.awt.*;
 
-public class UMLGenerationLine extends BaseUMLConnectionLine {
-    public UMLGenerationLine() {
+public class UMLCompositionLine extends BaseUMLConnectionLine {
+    public UMLCompositionLine() {
         super();
     }
 
-    public UMLGenerationLine(Point desPoint) {
+    public UMLCompositionLine(Point desPoint) {
         super(desPoint);
     }
 
@@ -25,10 +25,10 @@ public class UMLGenerationLine extends BaseUMLConnectionLine {
 
         double D = Math.sqrt(dx * dx + dy * dy);
 
-        double arrowLeftX = D - 16;
+        double arrowLeftX = D - 10;
         double arrowRightX = arrowLeftX;
-        double arrowLeftY = 8;
-        double arrowRightY = -8;
+        double arrowLeftY = 10;
+        double arrowRightY = - 10;
         double x;
 
         double sin = dy / D;
@@ -42,15 +42,18 @@ public class UMLGenerationLine extends BaseUMLConnectionLine {
         arrowRightY = arrowRightX * sin + arrowRightY * cos + sourceY;
         arrowRightX = x;
 
-        int[] xpoints = { destinationX, (int) arrowLeftX, (int) arrowRightX };
-        int[] ypoints = { destinationY, (int) arrowLeftY, (int) arrowRightY };
+        double arrowBackX = arrowLeftX + (arrowRightX - destinationX);
+        double arrowBackY = arrowLeftY + (arrowRightY - destinationY);
+
+        int[] xpoints = { destinationX, (int) arrowLeftX, (int) arrowBackX, (int) arrowRightX };
+        int[] ypoints = { destinationY, (int) arrowLeftY, (int) arrowBackY, (int) arrowRightY };
 
         graphics2D.setStroke(new BasicStroke(6));
 
         graphics2D.setColor(Color.BLACK);
-        graphics2D.drawPolygon(xpoints, ypoints, 3);
+        graphics2D.drawPolygon(xpoints, ypoints, 4);
         
         graphics2D.setColor(Color.WHITE);
-        graphics2D.fillPolygon(xpoints, ypoints, 3);
+        graphics2D.fillPolygon(xpoints, ypoints, 4);
     }
 }

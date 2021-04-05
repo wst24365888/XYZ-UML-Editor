@@ -3,7 +3,6 @@ package widgets;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.JLayeredPane;
@@ -63,23 +62,39 @@ public class Canvas extends JLayeredPane {
 
         Component[] components = this.getComponents();
 
+        // Draw the line.
         for (Component component : components) {
             if (component instanceof BaseUMLObject) {
                 BaseUMLObject baseUMLObject = (BaseUMLObject) component;
                 BaseUMLConnectionLine drawing = baseUMLObject.getDrawing();
-                ArrayList<Map<BaseUMLObject, BaseUMLConnectionLine>> connections = baseUMLObject.getConntections();
+                Map<BaseUMLObject, BaseUMLConnectionLine> connections = baseUMLObject.getConntections();
                 
                 if (drawing != null) {
-                    drawing.drawArrowLine(graphics, baseUMLObject.getPort(drawing.getDesPoint()), drawing.getDesPoint());
+                    drawing.drawArrowLine(graphics, baseUMLObject.getPort(drawing.getMousePoint()), drawing.getMousePoint());
                 }
 
                 if (connections.size() != 0) {
-                    for (Map<BaseUMLObject, BaseUMLConnectionLine> connection : connections) {
-                        for (Map.Entry<BaseUMLObject, BaseUMLConnectionLine> connectionEntry : connection.entrySet()) {
-                            System.out.println(baseUMLObject.getPort(connectionEntry.getKey().getLocation()));
-                            System.out.println(connectionEntry.getKey().getPort(baseUMLObject.getLocation()));
-                            connectionEntry.getValue().drawArrowLine(graphics, baseUMLObject.getPort(connectionEntry.getKey().getLocation()), connectionEntry.getKey().getPort(baseUMLObject.getLocation()));
-                        }
+                    for (Map.Entry<BaseUMLObject, BaseUMLConnectionLine> connectionEntry : connections.entrySet()) {
+                        connectionEntry.getValue().drawArrowLine(graphics, baseUMLObject.getPort(connectionEntry.getKey().getCenterLocation()), connectionEntry.getKey().getPort(baseUMLObject.getCenterLocation()));
+                    }
+                }
+            }
+        }
+
+        // Then cover the arrow on it.
+        for (Component component : components) {
+            if (component instanceof BaseUMLObject) {
+                BaseUMLObject baseUMLObject = (BaseUMLObject) component;
+                BaseUMLConnectionLine drawing = baseUMLObject.getDrawing();
+                Map<BaseUMLObject, BaseUMLConnectionLine> connections = baseUMLObject.getConntections();
+                
+                if (drawing != null) {
+                    drawing.drawArrow(graphics, baseUMLObject.getPort(drawing.getMousePoint()), drawing.getMousePoint());
+                }
+
+                if (connections.size() != 0) {
+                    for (Map.Entry<BaseUMLObject, BaseUMLConnectionLine> connectionEntry : connections.entrySet()) {
+                        connectionEntry.getValue().drawArrow(graphics, baseUMLObject.getPort(connectionEntry.getKey().getCenterLocation()), connectionEntry.getKey().getPort(baseUMLObject.getCenterLocation()));
                     }
                 }
             }

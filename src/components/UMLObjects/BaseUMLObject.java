@@ -2,7 +2,7 @@ package components.UMLObjects;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JComponent;
@@ -29,7 +29,7 @@ public abstract class BaseUMLObject extends JComponent {
     protected Port ports;
 
     protected BaseUMLConnectionLine drawing;
-    protected ArrayList<Map<BaseUMLObject, BaseUMLConnectionLine>> connections = new ArrayList<Map<BaseUMLObject, BaseUMLConnectionLine>>();
+    protected Map<BaseUMLObject, BaseUMLConnectionLine> connections = new HashMap<BaseUMLObject, BaseUMLConnectionLine>();
 
     private MouseAdapter mouseListener = new MouseAdapter() {
         @Override
@@ -98,7 +98,7 @@ public abstract class BaseUMLObject extends JComponent {
     }
 
     protected void onReleased() {
-        
+
     };
 
     public int getZAxisHeight() {
@@ -127,7 +127,7 @@ public abstract class BaseUMLObject extends JComponent {
     public Point getPort(Point destination) {
         Point result;
 
-        double angle = (double) Math.toDegrees(Math.atan2(destination.getX() - (this.getLocation().getX() + this.width / 2), destination.getY() - (this.getLocation().getY() + this.height / 2))) - 90;
+        double angle = (double) Math.toDegrees(Math.atan2(destination.getX() - this.getCenterLocation().getX(), destination.getY() - this.getCenterLocation().getY())) - 90;
     
         if (angle < 0) {
             angle += 360;
@@ -137,7 +137,7 @@ public abstract class BaseUMLObject extends JComponent {
 
         if (135 > angle && angle >= 45) {
             result = this.ports.getNorthPort();
-        } else if (45 > angle || angle >= 270) {
+        } else if (45 > angle || angle >= 315) {
             result = this.ports.getEastPort();
         } else if (315 > angle && angle >= 225) {
             result = this.ports.getSouthPort();
@@ -148,12 +148,19 @@ public abstract class BaseUMLObject extends JComponent {
         return new Point((int) (this.getLocation().getX() + result.getX()), (int) (this.getLocation().getY() + result.getY()));
     }
 
-    public void addConntection(Map<BaseUMLObject, BaseUMLConnectionLine> connection) {
-        this.connections.add(connection);
+    public void addConntection(BaseUMLObject key, BaseUMLConnectionLine value) {
+        if (this.connections.containsKey(key)) {
+            this.connections.remove(key);
+        }
+        this.connections.put(key, value);
         Canvas.getInstance().repaint();
     }
 
-    public ArrayList<Map<BaseUMLObject, BaseUMLConnectionLine>> getConntections() {
+    public Map<BaseUMLObject, BaseUMLConnectionLine> getConntections() {
         return this.connections;
+    }
+
+    public Point getCenterLocation() {
+        return new Point((int) (this.getLocation().getX() + this.width / 2), (int) (this.getLocation().getY() + this.height / 2));
     }
 }

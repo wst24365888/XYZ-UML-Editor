@@ -2,12 +2,12 @@ package components.UMLConnectionLines;
 
 import java.awt.*;
 
-public class UMLGenerationLine extends BaseUMLConnectionLine {
-    public UMLGenerationLine() {
+public class UMLAssociationLine extends BaseUMLConnectionLine {
+    public UMLAssociationLine() {
         super();
     }
 
-    public UMLGenerationLine(Point desPoint) {
+    public UMLAssociationLine(Point desPoint) {
         super(desPoint);
     }
 
@@ -27,8 +27,8 @@ public class UMLGenerationLine extends BaseUMLConnectionLine {
 
         double arrowLeftX = D - 16;
         double arrowRightX = arrowLeftX;
-        double arrowLeftY = 8;
-        double arrowRightY = -8;
+        double arrowLeftY = 12;
+        double arrowRightY = -12;
         double x;
 
         double sin = dy / D;
@@ -42,15 +42,9 @@ public class UMLGenerationLine extends BaseUMLConnectionLine {
         arrowRightY = arrowRightX * sin + arrowRightY * cos + sourceY;
         arrowRightX = x;
 
-        int[] xpoints = { destinationX, (int) arrowLeftX, (int) arrowRightX };
-        int[] ypoints = { destinationY, (int) arrowLeftY, (int) arrowRightY };
-
-        graphics2D.setStroke(new BasicStroke(6));
-
         graphics2D.setColor(Color.BLACK);
-        graphics2D.drawPolygon(xpoints, ypoints, 3);
-        
-        graphics2D.setColor(Color.WHITE);
-        graphics2D.fillPolygon(xpoints, ypoints, 3);
+        graphics2D.setStroke(new BasicStroke(3));
+        graphics2D.drawLine(destinationX, destinationY, (int) arrowLeftX, (int) arrowLeftY);
+        graphics2D.drawLine(destinationX, destinationY, (int) arrowRightX, (int) arrowRightY);
     }
 }

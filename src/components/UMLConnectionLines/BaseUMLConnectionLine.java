@@ -3,29 +3,32 @@ package components.UMLConnectionLines;
 import java.awt.*;
 
 public abstract class BaseUMLConnectionLine {
-    private Point desPoint;
+    private Point mousePoint;
 
     public BaseUMLConnectionLine() {
 
     }
 
-    public BaseUMLConnectionLine(Point desPoint) {
-        this.desPoint = desPoint;
+    public BaseUMLConnectionLine(Point mousePoint) {
+        this.mousePoint = mousePoint;
     }
 
-    public Point getDesPoint() {
-        return this.desPoint;
+    public Point getMousePoint() {
+        return this.mousePoint;
     }
 
     public void drawArrowLine(Graphics graphics, Point source, Point destination) {
+        Graphics2D graphics2D = (Graphics2D) graphics;
+
         int sourceX = (int) source.getX();
         int sourceY = (int) source.getY();
         int destinationX = (int) destination.getX();
         int destinationY = (int) destination.getY();
 
-        graphics.drawLine(sourceX, sourceY, destinationX, destinationY);
-        this.drawArrow(graphics, sourceX, sourceY, destinationX, destinationY);
+        graphics2D.setColor(Color.BLACK);
+        graphics2D.setStroke(new BasicStroke(3));
+        graphics2D.drawLine(sourceX, sourceY, destinationX, destinationY);
     }
 
-    protected abstract void drawArrow(Graphics graphics, int sourceX, int sourceY, int destinationX, int destinationY);
+    public abstract void drawArrow(Graphics graphics, Point source, Point destination);
 }
