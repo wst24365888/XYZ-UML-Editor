@@ -17,7 +17,7 @@ public class AddUMLClassButton extends BaseButton {
         }
 
         return instance;
-    }    
+    }
 
     @Override
     protected void setImage() {

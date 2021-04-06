@@ -17,7 +17,7 @@ public class AddUMLUseCaseButton extends BaseButton {
         }
 
         return instance;
-    }    
+    }
 
     @Override
     protected void setImage() {

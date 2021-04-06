@@ -17,7 +17,7 @@ public class AddUMLCompositionLineButton extends BaseButton {
         }
 
         return instance;
-    }    
+    }
 
     @Override
     protected void setImage() {

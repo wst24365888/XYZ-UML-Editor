@@ -14,8 +14,9 @@ public class Editor {
 
     private static final int VISIBLE_BUTTON_AMOUNT = 6;
     private static final int WINDOW_WIDTH = 1280;
-    private static final int WINDOW_HEIGHT = APP_BAR_HEIGHT + MENU_BAR_HEIGHT + BUTTON_PADDING + (BUTTON_SIDE_LENGTH + BUTTON_PADDING) * VISIBLE_BUTTON_AMOUNT;
-    
+    private static final int WINDOW_HEIGHT = APP_BAR_HEIGHT + MENU_BAR_HEIGHT + BUTTON_PADDING
+            + (BUTTON_SIDE_LENGTH + BUTTON_PADDING) * VISIBLE_BUTTON_AMOUNT;
+
     public static final int BUTTON_PANEL_WIDTH = BUTTON_SIDE_LENGTH + BUTTON_PADDING * 2;
 
     private JFrame frame = new JFrame();
@@ -30,7 +31,7 @@ public class Editor {
         frame.setTitle(title);
         frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
+
         frame.setJMenuBar(MenuBar.getMenuBar());
 
         FunctionButtonPanel.setBounds(0, 0, BUTTON_PANEL_WIDTH, WINDOW_HEIGHT);

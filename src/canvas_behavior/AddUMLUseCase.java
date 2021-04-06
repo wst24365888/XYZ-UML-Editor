@@ -9,7 +9,7 @@ public class AddUMLUseCase implements ICanvasBehavior {
     private static AddUMLUseCase instance = null;
 
     private AddUMLUseCase() {
-        System.out.println("AddUMLUseCase created");
+        // System.out.println("AddUMLUseCase created");
     };
 
     public static AddUMLUseCase getInstance() {
@@ -22,22 +22,24 @@ public class AddUMLUseCase implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLUseCase onPressed");
+        // System.out.println("AddUMLUseCase onPressed");
 
         BaseUMLObject baseUMLObject = new UMLUseCase();
         baseUMLObject.setBounds(mousePosX - 65, mousePosY - 45, 130, 90);
 
         Canvas.getInstance().addUMLClassesAndUseCases(baseUMLObject, baseUMLObject.getZAxisHeight());
+
+        Canvas.getInstance().repaint();
     }
 
     @Override
     public void onDragged(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLUseCase onDragged");
+        // System.out.println("AddUMLUseCase onDragged");
     }
 
     @Override
     public void onReleased(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLUseCase onReleased");
+        // System.out.println("AddUMLUseCase onReleased");
     }
-    
+
 }

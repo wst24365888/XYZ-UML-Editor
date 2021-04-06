@@ -12,7 +12,7 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
     private BaseUMLObject destination = null;
 
     private AddUMLGenerationLine() {
-        System.out.println("AddUMLGenerationLine created");
+        // System.out.println("AddUMLGenerationLine created");
     };
 
     public static AddUMLGenerationLine getInstance() {
@@ -25,26 +25,30 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLGenerationLine onPressed");
+        // System.out.println("AddUMLGenerationLine onPressed");
 
         BaseUMLObject component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
         if (component != null) {
             this.source = component;
         }
+
+        Canvas.getInstance().repaint();
     }
 
     @Override
     public void onDragged(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLGenerationLine onDragged");
+        // System.out.println("AddUMLGenerationLine onDragged");
 
         if (this.source != null) {
             Canvas.getInstance().setDrawingLine(new UMLGenerationLine(this.source, new Point(mousePosX, mousePosY)));
         }
+
+        Canvas.getInstance().repaint();
     }
 
     @Override
     public void onReleased(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLGenerationLine onReleased");
+        // System.out.println("AddUMLGenerationLine onReleased");
 
         BaseUMLObject component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
         if (component != null) {
@@ -54,7 +58,7 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
         if (this.source != null && this.destination != null) {
             Canvas.getInstance().setDrawingLine(null);
 
-            if(this.source != this.destination) {
+            if (this.source != this.destination) {
                 Canvas.getInstance().addUMLConntection(new UMLGenerationLine(this.source, this.destination));
             }
         } else if (this.source != null && this.destination == null) {
@@ -63,7 +67,7 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
 
         this.source = null;
         this.destination = null;
-    }
-    
-}
 
+        Canvas.getInstance().repaint();
+    }
+}

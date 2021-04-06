@@ -21,7 +21,7 @@ public class Select implements ICanvasBehavior {
     private JLabel selectedArea;
 
     private Select() {
-        System.out.println("SelectMode created");
+        // System.out.println("SelectMode created");
     };
 
     public static Select getInstance() {
@@ -34,7 +34,7 @@ public class Select implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
-        System.out.println("SelectMode onPressed");
+        // System.out.println("SelectMode onPressed");
 
         if (this.selectedArea != null) {
             this.clearSelectedArea();
@@ -72,19 +72,19 @@ public class Select implements ICanvasBehavior {
             this.selectedArea.setBounds(this.originalX, this.originalY, 0, 0);
 
             Canvas.getInstance().addSelectedArea(selectedArea);
-            Canvas.getInstance().repaint();
         }
+
+        Canvas.getInstance().repaint();
     }
 
     @Override
     public void onDragged(int mousePosX, int mousePosY) {
-        System.out.println("SelectMode onDragged");
+        // System.out.println("SelectMode onDragged");
 
         if (this.singleSelection) {
             // Single Selection
 
             Canvas.getSelections().iterator().next().moveTo(mousePosX - originalX, mousePosY - originalY);
-            Canvas.getInstance().repaint();
         } else {
             int upperLeftX = Math.min(this.originalX, mousePosX);
             int upperLeftY = Math.min(this.originalY, mousePosY);
@@ -93,18 +93,19 @@ public class Select implements ICanvasBehavior {
 
             this.selectedArea.setBounds(upperLeftX, upperLeftY, width, height);
 
-            ArrayList<BaseUMLObject> selections = Canvas.getInstance().getWithinComponent(new Rectangle(upperLeftX, upperLeftY, width, height));
+            ArrayList<BaseUMLObject> selections = Canvas.getInstance()
+                    .getWithinComponent(new Rectangle(upperLeftX, upperLeftY, width, height));
             for (BaseUMLObject selection : selections) {
                 Canvas.addSelection(selection);
             }
-
-            Canvas.getInstance().repaint();
         }
+
+        Canvas.getInstance().repaint();
     }
 
     @Override
     public void onReleased(int mousePosX, int mousePosY) {
-        System.out.println("SelectMode onReleased");
+        // System.out.println("SelectMode onReleased");
 
         if (this.selectedArea != null) {
             if (Canvas.getSelections().isEmpty()) {
@@ -116,25 +117,25 @@ public class Select implements ICanvasBehavior {
                 int upperLeftY = Integer.MAX_VALUE;
                 int width = 0;
                 int height = 0;
-                
+
                 Iterator<BaseUMLObject> iterator = Canvas.getSelections().iterator();
-                while(iterator.hasNext()) {
+                while (iterator.hasNext()) {
                     BaseUMLObject tmp = iterator.next();
 
                     upperLeftX = Math.min(upperLeftX, tmp.getX());
                     upperLeftY = Math.min(upperLeftY, tmp.getY());
                 }
-                
+
                 iterator = Canvas.getSelections().iterator();
-                while(iterator.hasNext()) {
+                while (iterator.hasNext()) {
                     BaseUMLObject tmp = iterator.next();
-                    
+
                     width = Math.max(width, Math.abs((tmp.getX() + tmp.getWidth()) - upperLeftX));
                     height = Math.max(height, Math.abs((tmp.getY() + tmp.getHeight()) - upperLeftY));
                 }
 
                 this.selectedArea.setBounds(upperLeftX, upperLeftY, width, height);
-                
+
                 Canvas.getInstance().repaint();
             }
         }
@@ -146,7 +147,7 @@ public class Select implements ICanvasBehavior {
         if (this.selectedArea != null) {
             Canvas.getInstance().remove(this.selectedArea);
             Canvas.getInstance().repaint();
-            
+
             this.selectedArea = null;
         }
     }

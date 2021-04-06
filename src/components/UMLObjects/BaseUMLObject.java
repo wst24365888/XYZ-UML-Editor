@@ -63,8 +63,9 @@ public abstract class BaseUMLObject extends JComponent {
     public Point getPort(Point destination) {
         Point result;
 
-        double angle = (double) Math.toDegrees(Math.atan2(destination.getX() - this.getCenterLocation().getX(), destination.getY() - this.getCenterLocation().getY())) - 90;
-    
+        double angle = (double) Math.toDegrees(Math.atan2(destination.getX() - this.getCenterLocation().getX(),
+                destination.getY() - this.getCenterLocation().getY())) - 90;
+
         if (angle < 0) {
             angle += 360;
         }
@@ -81,11 +82,13 @@ public abstract class BaseUMLObject extends JComponent {
             result = this.ports.getWestPort();
         }
 
-        return new Point((int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getX() + result.getX()), (int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getY() + result.getY()));
+        return new Point((int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getX() + result.getX()),
+                (int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getY() + result.getY()));
     }
 
     public Point getCenterLocation() {
-        return new Point((int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getX() + this.width / 2), (int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getY() + this.height / 2));
+        return new Point((int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getX() + this.width / 2),
+                (int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getY() + this.height / 2));
     }
 
     public void moveTo(int x, int y) {

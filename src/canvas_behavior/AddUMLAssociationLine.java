@@ -12,7 +12,7 @@ public class AddUMLAssociationLine implements ICanvasBehavior {
     private BaseUMLObject destination = null;
 
     private AddUMLAssociationLine() {
-        System.out.println("AddUMLAssociationLine created");
+        // System.out.println("AddUMLAssociationLine created");
     };
 
     public static AddUMLAssociationLine getInstance() {
@@ -25,26 +25,30 @@ public class AddUMLAssociationLine implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLAssociationLine onPressed");
+        // System.out.println("AddUMLAssociationLine onPressed");
 
         BaseUMLObject component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
         if (component != null) {
             this.source = component;
         }
+
+        Canvas.getInstance().repaint();
     }
 
     @Override
     public void onDragged(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLAssociationLine onDragged");
+        // System.out.println("AddUMLAssociationLine onDragged");
 
         if (this.source != null) {
             Canvas.getInstance().setDrawingLine(new UMLAssociationLine(this.source, new Point(mousePosX, mousePosY)));
         }
+
+        Canvas.getInstance().repaint();
     }
 
     @Override
     public void onReleased(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLAssociationLine onReleased");
+        // System.out.println("AddUMLAssociationLine onReleased");
 
         BaseUMLObject component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
         if (component != null) {
@@ -54,7 +58,7 @@ public class AddUMLAssociationLine implements ICanvasBehavior {
         if (this.source != null && this.destination != null) {
             Canvas.getInstance().setDrawingLine(null);
 
-            if(this.source != this.destination) {
+            if (this.source != this.destination) {
                 Canvas.getInstance().addUMLConntection(new UMLAssociationLine(this.source, this.destination));
             }
         } else if (this.source != null && this.destination == null) {
@@ -63,8 +67,7 @@ public class AddUMLAssociationLine implements ICanvasBehavior {
 
         this.source = null;
         this.destination = null;
+
+        Canvas.getInstance().repaint();
     }
-    
 }
-
-

@@ -17,7 +17,7 @@ public class AddUMLGenerationLineButton extends BaseButton {
         }
 
         return instance;
-    }    
+    }
 
     @Override
     protected void setImage() {

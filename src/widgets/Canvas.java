@@ -62,7 +62,8 @@ public class Canvas extends JLayeredPane {
     private Canvas() {
         this.setLayout(null);
         this.setOpaque(true);
-        
+        this.setDoubleBuffered(true);
+
         this.setBackground(Color.WHITE);
         this.addMouseListener(mouseAdapter);
         this.addMouseMotionListener(mouseAdapter);
@@ -99,7 +100,8 @@ public class Canvas extends JLayeredPane {
     }
 
     private void setMenuEnable() {
-        MenuBar.setChangeObjectNameEnable(selections.size() == 1 && (selections.iterator().next() instanceof UMLClass || selections.iterator().next() instanceof UMLUseCase));
+        MenuBar.setChangeObjectNameEnable(selections.size() == 1 && (selections.iterator().next() instanceof UMLClass
+                || selections.iterator().next() instanceof UMLUseCase));
         MenuBar.setGroupObjectsEnable(selections.size() > 1);
         MenuBar.setUnGroupObjectsEnable(selections.size() == 1 && selections.iterator().next() instanceof UMLGroup);
     }
@@ -124,7 +126,7 @@ public class Canvas extends JLayeredPane {
 
     public BaseUMLObject getPressedComponent(int x, int y) {
         Component[] components = this.getComponents();
-        BaseUMLObject result =  null;
+        BaseUMLObject result = null;
 
         for (Component component : components) {
             if (component instanceof BaseUMLObject) {
@@ -141,10 +143,11 @@ public class Canvas extends JLayeredPane {
     }
 
     public BaseUMLObject getPressedUMLClassesAndUseCases(int x, int y) {
-        BaseUMLObject result =  null;
+        BaseUMLObject result = null;
 
         for (BaseUMLObject component : this.allCreatedUMLClassesAndUseCases) {
-            if ((new Rectangle(Canvas.getRelativeLocation(component.getLocationOnScreen()), new Dimension(component.getWidth(), component.getHeight()))).contains(x, y)) {
+            if ((new Rectangle(Canvas.getRelativeLocation(component.getLocationOnScreen()),
+                    new Dimension(component.getWidth(), component.getHeight()))).contains(x, y)) {
                 if (result == null || component.getZAxisHeight() > result.getZAxisHeight()) {
                     result = component;
                 }
@@ -161,7 +164,7 @@ public class Canvas extends JLayeredPane {
         for (Component component : components) {
             if (component instanceof BaseUMLObject) {
                 BaseUMLObject tmp = (BaseUMLObject) component;
-                
+
                 if (rectangle.contains(tmp.getBounds())) {
                     results.add(tmp);
                 }
@@ -189,7 +192,8 @@ public class Canvas extends JLayeredPane {
 
     public static Point getRelativeLocation(Point point) {
         // Window offset: (8, -9)
-        return new Point((int) point.getX() - 8 - Editor.BUTTON_PANEL_WIDTH, (int) point.getY() + 9 - Editor.APP_BAR_HEIGHT - Editor.MENU_BAR_HEIGHT);
+        return new Point((int) point.getX() - 8 - Editor.BUTTON_PANEL_WIDTH,
+                (int) point.getY() + 9 - Editor.APP_BAR_HEIGHT - Editor.MENU_BAR_HEIGHT);
     }
 
     public void setDrawingLine(BaseUMLConnectionLine drawing) {
@@ -199,7 +203,7 @@ public class Canvas extends JLayeredPane {
 
     public void addUMLConntection(BaseUMLConnectionLine newConnection) {
         int alreadyHasConnection = -1;
-        
+
         for (BaseUMLConnectionLine connection : connections) {
             if (connection.alreadyHasConnection(newConnection.getSource(), newConnection.getDestination())) {
                 alreadyHasConnection = connections.indexOf(connection);

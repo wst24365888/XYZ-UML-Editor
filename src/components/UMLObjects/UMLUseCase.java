@@ -25,8 +25,7 @@ public class UMLUseCase extends BaseUMLObject {
         this.add(label);
 
         this.ports = new Port(new Point(60 + this.offset, 0 + this.offset),
-                new Point(120 + this.offset, 40 + this.offset),
-                new Point(60 + this.offset, 80 + this.offset),
+                new Point(120 + this.offset, 40 + this.offset), new Point(60 + this.offset, 80 + this.offset),
                 new Point(0 + this.offset, 40 + this.offset));
     }
 

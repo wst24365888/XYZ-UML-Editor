@@ -40,7 +40,7 @@ public class UMLGroup extends BaseUMLObject {
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        
+
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 

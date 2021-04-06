@@ -10,12 +10,12 @@ public abstract class BaseUMLConnectionLine {
     protected BaseUMLObject destination = null;
 
     protected Point mousePoint = null;
-    
+
     public BaseUMLConnectionLine(BaseUMLObject source, BaseUMLObject destination) {
         this.source = source;
         this.destination = destination;
     }
-    
+
     public BaseUMLConnectionLine(BaseUMLObject source, Point mousePoint) {
         this.source = source;
         this.mousePoint = mousePoint;
@@ -33,7 +33,7 @@ public abstract class BaseUMLConnectionLine {
         if (this.source == source && this.destination == destination) {
             return true;
         }
-        
+
         return false;
     }
 

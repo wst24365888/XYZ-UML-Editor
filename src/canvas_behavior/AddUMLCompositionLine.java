@@ -12,7 +12,7 @@ public class AddUMLCompositionLine implements ICanvasBehavior {
     private BaseUMLObject destination = null;
 
     private AddUMLCompositionLine() {
-        System.out.println("AddUMLCompositionLine created");
+        // System.out.println("AddUMLCompositionLine created");
     };
 
     public static AddUMLCompositionLine getInstance() {
@@ -25,26 +25,30 @@ public class AddUMLCompositionLine implements ICanvasBehavior {
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLCompositionLine onPressed");
+        // System.out.println("AddUMLCompositionLine onPressed");
 
         BaseUMLObject component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
         if (component != null) {
             this.source = component;
         }
+
+        Canvas.getInstance().repaint();
     }
 
     @Override
     public void onDragged(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLCompositionLine onDragged");
+        // System.out.println("AddUMLCompositionLine onDragged");
 
         if (this.source != null) {
             Canvas.getInstance().setDrawingLine(new UMLCompositionLine(this.source, new Point(mousePosX, mousePosY)));
         }
+
+        Canvas.getInstance().repaint();
     }
 
     @Override
     public void onReleased(int mousePosX, int mousePosY) {
-        System.out.println("AddUMLCompositionLine onReleased");
+        // System.out.println("AddUMLCompositionLine onReleased");
 
         BaseUMLObject component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
         if (component != null) {
@@ -54,7 +58,7 @@ public class AddUMLCompositionLine implements ICanvasBehavior {
         if (this.source != null && this.destination != null) {
             Canvas.getInstance().setDrawingLine(null);
 
-            if(this.source != this.destination) {
+            if (this.source != this.destination) {
                 Canvas.getInstance().addUMLConntection(new UMLCompositionLine(this.source, this.destination));
             }
         } else if (this.source != null && this.destination == null) {
@@ -63,9 +67,7 @@ public class AddUMLCompositionLine implements ICanvasBehavior {
 
         this.source = null;
         this.destination = null;
+
+        Canvas.getInstance().repaint();
     }
-    
 }
-
-
-

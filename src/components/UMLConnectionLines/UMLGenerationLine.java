@@ -9,7 +9,7 @@ public class UMLGenerationLine extends BaseUMLConnectionLine {
     public UMLGenerationLine(BaseUMLObject source, BaseUMLObject destination) {
         super(source, destination);
     }
-    
+
     public UMLGenerationLine(BaseUMLObject source, Point mousePoint) {
         super(source, mousePoint);
     }
@@ -66,7 +66,7 @@ public class UMLGenerationLine extends BaseUMLConnectionLine {
 
         graphics2D.setColor(Color.GRAY);
         graphics2D.drawPolygon(xpoints, ypoints, 3);
-        
+
         graphics2D.setColor(Color.WHITE);
         graphics2D.fillPolygon(xpoints, ypoints, 3);
     }

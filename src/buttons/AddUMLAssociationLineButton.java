@@ -17,7 +17,7 @@ public class AddUMLAssociationLineButton extends BaseButton {
         }
 
         return instance;
-    }  
+    }
 
     @Override
     protected void setImage() {

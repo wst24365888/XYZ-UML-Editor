@@ -9,7 +9,7 @@ public class UMLCompositionLine extends BaseUMLConnectionLine {
     public UMLCompositionLine(BaseUMLObject source, BaseUMLObject destination) {
         super(source, destination);
     }
-    
+
     public UMLCompositionLine(BaseUMLObject source, Point mousePoint) {
         super(source, mousePoint);
     }
@@ -45,7 +45,7 @@ public class UMLCompositionLine extends BaseUMLConnectionLine {
         double arrowLeftX = D - 10;
         double arrowRightX = arrowLeftX;
         double arrowLeftY = 10;
-        double arrowRightY = - 10;
+        double arrowRightY = -10;
         double x;
 
         double sin = dy / D;
@@ -69,7 +69,7 @@ public class UMLCompositionLine extends BaseUMLConnectionLine {
 
         graphics2D.setColor(Color.GRAY);
         graphics2D.drawPolygon(xpoints, ypoints, 4);
-        
+
         graphics2D.setColor(Color.WHITE);
         graphics2D.fillPolygon(xpoints, ypoints, 4);
     }

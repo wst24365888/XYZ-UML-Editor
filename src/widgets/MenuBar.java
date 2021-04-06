@@ -85,7 +85,10 @@ public class MenuBar {
 
     private void changeName() {
         String name = JOptionPane.showInputDialog("Please enter new object name: ");
-        Canvas.getSelections().iterator().next().getLabel().setText(name);
+        
+        if(name != null) {
+            Canvas.getSelections().iterator().next().getLabel().setText(name);
+        }
     }
 
     private void group() {

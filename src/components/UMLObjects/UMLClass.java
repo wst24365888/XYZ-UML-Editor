@@ -24,8 +24,7 @@ public class UMLClass extends BaseUMLObject {
         this.add(label);
 
         this.ports = new Port(new Point(60 + this.offset, 0 + this.offset),
-                new Point(120 + this.offset, 70 + this.offset), 
-                new Point(60 + this.offset, 140 + this.offset),
+                new Point(120 + this.offset, 70 + this.offset), new Point(60 + this.offset, 140 + this.offset),
                 new Point(0 + this.offset, 70 + this.offset));
     }
 
