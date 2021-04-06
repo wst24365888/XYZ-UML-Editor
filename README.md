@@ -15,22 +15,22 @@ This is the term project of the course **Object-Oriented Analysis and Design** (
 
 This is a simple UML editor with:
 
-  - Objects
-    - Class
-    - use Case
+-   Objects
+  -   Class
+  -   use Case
 
-  - Relation Lines
-    - Association Line
-    - Generation Line
-    - Composition Line
+-   Relation Lines
+  -   Association Line
+  -   Generation Line
+  -   Composition Line
 
-  - Behavior
-    - Create a new object
-    - Rename an object
-    - Drag an object
-    - Connect between objects
-    - Replace the connections between objects
-    - Group objects
-    - UnGroup objects
+-   Behavior
+  -   Create a new object
+  -   Rename an object
+  -   Drag an object
+  -   Connect between objects
+  -   Replace the connections between objects
+  -   Group objects
+  -   UnGroup objects
 
 For detailed spec, [see this file](https://github.com/wst24365888/XYZ-UML-Editor/blob/master/resource/spec/spec.pdf).
