@@ -93,7 +93,7 @@ public abstract class BaseUMLObject extends JComponent {
             result = this.ports.getWestPort();
         }
 
-        return new Point((int) (this.getLocation().getX() + result.getX()), (int) (this.getLocation().getY() + result.getY()));
+        return new Point((int) (this.getX() + result.getX()), (int) (this.getY() + result.getY()));
     }
 
     public void addConntection(BaseUMLObject key, BaseUMLConnectionLine value) {
@@ -109,6 +109,6 @@ public abstract class BaseUMLObject extends JComponent {
     }
 
     public Point getCenterLocation() {
-        return new Point((int) (this.getLocation().getX() + this.width / 2), (int) (this.getLocation().getY() + this.height / 2));
+        return new Point((int) (this.getX() + this.width / 2), (int) (this.getY() + this.height / 2));
     }
 }

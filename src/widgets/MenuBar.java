@@ -55,20 +55,21 @@ public class MenuBar {
     }
 
     private void group() {
-        // JLabel selectedArea = Select.getInstance().getSelectedArea();
+        JLabel selectedArea = Select.getInstance().getSelectedArea();
                 
-        // Iterator<BaseUMLObject> iterator = Canvas.getSelections().iterator();
-        // while(iterator.hasNext()) {
-        //     BaseUMLObject tmp = iterator.next();
+        Iterator<BaseUMLObject> iterator = Canvas.getSelections().iterator();
+        while(iterator.hasNext()) {
+            BaseUMLObject tmp = iterator.next();
             
-        //     tmp.setLocation(tmp.getX() - selectedArea.getX(), tmp.getY() - selectedArea.getY());
-        //     selectedArea.add(tmp);
+            tmp.setLocation(tmp.getX() - selectedArea.getX(), tmp.getY() - selectedArea.getY());
+            selectedArea.add(tmp);
 
-        //     Canvas.getInstance().remove(tmp);
-        // }
-        // Select.getInstance().clearSelectedArea();
-        // Canvas.getInstance().addUMLObject(selectedArea, -1);
+            Canvas.getInstance().remove(tmp);
+            System.out.println(tmp.getLocationOnScreen());
+        }
+        Select.getInstance().clearSelectedArea();
+        Canvas.getInstance().addUMLObject(selectedArea, -1);
 
-        // Canvas.getInstance().repaint();
+        Canvas.getInstance().repaint();
     }
 }

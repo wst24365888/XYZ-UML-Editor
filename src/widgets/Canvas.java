@@ -13,6 +13,7 @@ import javax.swing.JLayeredPane;
 import canvas_behavior.*;
 import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.UMLObjects.BaseUMLObject;
+import editor.Editor;
 
 public class Canvas extends JLayeredPane {
     private static final long serialVersionUID = 1985691147832327662L;
@@ -133,9 +134,9 @@ public class Canvas extends JLayeredPane {
             if (component instanceof BaseUMLObject) {
                 BaseUMLObject tmp = (BaseUMLObject) component;
                 if (tmp.getBounds().contains(x, y)) {
-                        if (result == null || tmp.getZAxisHeight() > result.getZAxisHeight()) {
-                            result = tmp;
-                        }
+                    if (result == null || tmp.getZAxisHeight() > result.getZAxisHeight()) {
+                        result = tmp;
+                    }
                 }
             }
         }
@@ -174,5 +175,9 @@ public class Canvas extends JLayeredPane {
 
     public static Set<BaseUMLObject> getSelections() {
         return selections;
+    }
+
+    public static Point getRelativeLocation(Point point) {
+        return new Point((int) point.getX() + Editor.BUTTON_PANEL_WIDTH, (int) point.getY());
     }
 }
