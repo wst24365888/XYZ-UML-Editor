@@ -25,17 +25,28 @@ public class MenuBar {
     private MenuBar() {
         changeObjectName.setPreferredSize(new Dimension(150, 30));
         changeObjectName.setEnabled(false);
+        changeObjectName.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                changeName();
+            }
+        });
 
         groupObjects.setPreferredSize(new Dimension(150, 30));
         groupObjects.setEnabled(false);
-
-        unGroupObjects.setPreferredSize(new Dimension(150, 30));
-        unGroupObjects.setEnabled(false);
-
         groupObjects.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
                 group();
+            }
+        });
+
+        unGroupObjects.setPreferredSize(new Dimension(150, 30));
+        unGroupObjects.setEnabled(false);
+        unGroupObjects.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                ungroup();
             }
         });
 
@@ -72,6 +83,10 @@ public class MenuBar {
         unGroupObjects.setEnabled(enable);
     }
 
+    private void changeName() {
+
+    }
+
     private void group() {
         UMLGroup selectedArea = new UMLGroup(Select.getInstance().getSelectedArea());
 
@@ -100,6 +115,21 @@ public class MenuBar {
         // selectedArea will be destroy
         Select.getInstance().clearSelectedArea();
 
+        Canvas.getInstance().repaint();
+    }
+
+    private void ungroup() {
+        UMLGroup groupObject = (UMLGroup) Canvas.getSelections().iterator().next();
+
+        for (BaseUMLObject child : groupObject.getUMLComponents()) {
+            child.setLocation(
+                    (int) Canvas.getRelativeLocation(child.getLocationOnScreen()).getX(),
+                    (int) Canvas.getRelativeLocation(child.getLocationOnScreen()).getY());
+
+            Canvas.getInstance().addUMLClassesAndUseCases(child, child.getZAxisHeight());
+        }
+
+        Canvas.getInstance().remove(groupObject);
         Canvas.getInstance().repaint();
     }
 }

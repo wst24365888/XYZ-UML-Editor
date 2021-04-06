@@ -1,15 +1,16 @@
 package components.UMLObjects;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
 import components.port.Port;
 
-import javax.swing.JComponent;
-
 public class UMLGroup extends BaseUMLObject {
     private static final long serialVersionUID = -599667535411632025L;
+
+    private ArrayList<BaseUMLObject> components = new ArrayList<BaseUMLObject>();
 
     public UMLGroup(JLabel component) {
         super();
@@ -27,8 +28,13 @@ public class UMLGroup extends BaseUMLObject {
                 new Point(0 + this.offset, this.height - this.offset));
     }
 
-    public void addComponent(JComponent component) {
+    public void addComponent(BaseUMLObject component) {
         this.add(component);
+        components.add(component);
+    }
+
+    public ArrayList<BaseUMLObject> getUMLComponents() {
+        return this.components;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package buttons;
 
-import java.awt.event.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 import widgets.*;
@@ -22,9 +22,9 @@ public abstract class BaseButton {
 
         this.button.setFocusable(false);
         this.button.setBackground(Color.WHITE);
-        this.button.addActionListener(new ActionListener() {
+        this.button.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent mouseEvent) {
                 onClick();
             }
         });
