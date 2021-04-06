@@ -38,7 +38,7 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
         System.out.println("AddUMLGenerationLine onDragged");
 
         if (this.source != null) {
-            source.setDrawingUMLConnectionLine(new UMLGenerationLine(new Point(mousePosX, mousePosY)));
+            Canvas.getInstance().setDrawingLine(new UMLGenerationLine(this.source, new Point(mousePosX, mousePosY)));
         }
     }
 
@@ -52,13 +52,13 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
         }
 
         if (this.source != null && this.destination != null) {
-            source.setDrawingUMLConnectionLine(null);
+            Canvas.getInstance().setDrawingLine(null);
 
             if(this.source != this.destination) {
-                source.addConntection(destination, new UMLGenerationLine());
+                Canvas.getInstance().addConntection(new UMLGenerationLine(this.source, this.destination));
             }
         } else if (this.source != null && this.destination == null) {
-            source.setDrawingUMLConnectionLine(null);
+            Canvas.getInstance().setDrawingLine(null);
         }
 
         this.source = null;

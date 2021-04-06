@@ -5,7 +5,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JLayeredPane;
@@ -22,6 +21,9 @@ public class Canvas extends JLayeredPane {
 
     private static ICanvasBehavior canvasBehavior;
     private static Set<BaseUMLObject> selections = new HashSet<BaseUMLObject>();
+
+    private BaseUMLConnectionLine drawing = null;
+    private ArrayList<BaseUMLConnectionLine> connections = new ArrayList<BaseUMLConnectionLine>();
 
     private static MouseAdapter mouseAdapter = new MouseAdapter() {
         @Override
@@ -71,46 +73,21 @@ public class Canvas extends JLayeredPane {
 
     @Override
     public void paint(Graphics graphics) {
-        super.paint(graphics);        
+        super.paint(graphics);
 
-        Component[] components = this.getComponents();
+        if (this.drawing != null) {
+            drawing.drawArrowLine(graphics);
+            drawing.drawArrow(graphics);
+        }
 
         // Draw the line.
-        for (Component component : components) {
-            if (component instanceof BaseUMLObject) {
-                BaseUMLObject baseUMLObject = (BaseUMLObject) component;
-                BaseUMLConnectionLine drawing = baseUMLObject.getDrawing();
-                Map<BaseUMLObject, BaseUMLConnectionLine> connections = baseUMLObject.getConntections();
-                
-                if (drawing != null) {
-                    drawing.drawArrowLine(graphics, baseUMLObject.getPort(drawing.getMousePoint()), drawing.getMousePoint());
-                }
-
-                if (connections.size() != 0) {
-                    for (Map.Entry<BaseUMLObject, BaseUMLConnectionLine> connectionEntry : connections.entrySet()) {
-                        connectionEntry.getValue().drawArrowLine(graphics, baseUMLObject.getPort(connectionEntry.getKey().getCenterLocation()), connectionEntry.getKey().getPort(baseUMLObject.getCenterLocation()));
-                    }
-                }
-            }
+        for (BaseUMLConnectionLine connection : connections) {
+            connection.drawArrowLine(graphics);
         }
 
         // Then cover the arrow on it.
-        for (Component component : components) {
-            if (component instanceof BaseUMLObject) {
-                BaseUMLObject baseUMLObject = (BaseUMLObject) component;
-                BaseUMLConnectionLine drawing = baseUMLObject.getDrawing();
-                Map<BaseUMLObject, BaseUMLConnectionLine> connections = baseUMLObject.getConntections();
-                
-                if (drawing != null) {
-                    drawing.drawArrow(graphics, baseUMLObject.getPort(drawing.getMousePoint()), drawing.getMousePoint());
-                }
-
-                if (connections.size() != 0) {
-                    for (Map.Entry<BaseUMLObject, BaseUMLConnectionLine> connectionEntry : connections.entrySet()) {
-                        connectionEntry.getValue().drawArrow(graphics, baseUMLObject.getPort(connectionEntry.getKey().getCenterLocation()), connectionEntry.getKey().getPort(baseUMLObject.getCenterLocation()));
-                    }
-                }
-            }
+        for (BaseUMLConnectionLine connection : connections) {
+            connection.drawArrow(graphics);
         }
     }
 
@@ -178,6 +155,29 @@ public class Canvas extends JLayeredPane {
     }
 
     public static Point getRelativeLocation(Point point) {
-        return new Point((int) point.getX() + Editor.BUTTON_PANEL_WIDTH, (int) point.getY());
+        return new Point((int) point.getX() - Editor.BUTTON_PANEL_WIDTH, (int) point.getY() - Editor.APP_BAR_HEIGHT - Editor.MENU_BAR_HEIGHT);
+    }
+
+    public void setDrawingLine(BaseUMLConnectionLine drawing) {
+        this.drawing = drawing;
+        this.repaint();
+    }
+
+    public void addConntection(BaseUMLConnectionLine newConnection) {
+        int alreadyHasConnection = -1;
+        
+        for (BaseUMLConnectionLine connection : connections) {
+            if (connection.alreadyHasConnection(newConnection.getSource(), newConnection.getDestination())) {
+                alreadyHasConnection = connections.indexOf(connection);
+            }
+        }
+
+        if (alreadyHasConnection == -1) {
+            connections.add(newConnection);
+        } else {
+            connections.set(alreadyHasConnection, newConnection);
+        }
+
+        this.repaint();
     }
 }

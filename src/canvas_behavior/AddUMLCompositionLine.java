@@ -38,7 +38,7 @@ public class AddUMLCompositionLine implements ICanvasBehavior {
         System.out.println("AddUMLCompositionLine onDragged");
 
         if (this.source != null) {
-            source.setDrawingUMLConnectionLine(new UMLCompositionLine(new Point(mousePosX, mousePosY)));
+            Canvas.getInstance().setDrawingLine(new UMLCompositionLine(this.source, new Point(mousePosX, mousePosY)));
         }
     }
 
@@ -52,13 +52,13 @@ public class AddUMLCompositionLine implements ICanvasBehavior {
         }
 
         if (this.source != null && this.destination != null) {
-            source.setDrawingUMLConnectionLine(null);
+            Canvas.getInstance().setDrawingLine(null);
 
             if(this.source != this.destination) {
-                source.addConntection(destination, new UMLCompositionLine());
+                Canvas.getInstance().addConntection(new UMLCompositionLine(this.source, this.destination));
             }
         } else if (this.source != null && this.destination == null) {
-            source.setDrawingUMLConnectionLine(null);
+            Canvas.getInstance().setDrawingLine(null);
         }
 
         this.source = null;

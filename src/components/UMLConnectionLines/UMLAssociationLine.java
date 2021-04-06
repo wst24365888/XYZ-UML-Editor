@@ -2,23 +2,40 @@ package components.UMLConnectionLines;
 
 import java.awt.*;
 
-public class UMLAssociationLine extends BaseUMLConnectionLine {
-    public UMLAssociationLine() {
-        super();
-    }
+import components.UMLObjects.BaseUMLObject;
+import widgets.Canvas;
 
-    public UMLAssociationLine(Point desPoint) {
-        super(desPoint);
+public class UMLAssociationLine extends BaseUMLConnectionLine {
+    public UMLAssociationLine(BaseUMLObject source, BaseUMLObject destination) {
+        super(source, destination);
+    }
+    
+    public UMLAssociationLine(BaseUMLObject source, Point mousePoint) {
+        super(source, mousePoint);
     }
 
     @Override
-    public void drawArrow(Graphics graphics, Point source, Point destination) {
+    public void drawArrow(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D) graphics;
 
-        int sourceX = (int) source.getX();
-        int sourceY = (int) source.getY();
-        int destinationX = (int) destination.getX();
-        int destinationY = (int) destination.getY();
+        int sourceX;
+        int sourceY;
+        int destinationX;
+        int destinationY;
+
+        if (destination != null) {
+            sourceX = (int) source.getPort(Canvas.getRelativeLocation(destination.getLocationOnScreen())).getX();
+            sourceY = (int) source.getPort(Canvas.getRelativeLocation(destination.getLocationOnScreen())).getY();
+
+            destinationX = (int) destination.getPort(Canvas.getRelativeLocation(source.getLocationOnScreen())).getX();
+            destinationY = (int) destination.getPort(Canvas.getRelativeLocation(source.getLocationOnScreen())).getY();
+        } else {
+            sourceX = (int) source.getPort(mousePoint).getX();
+            sourceY = (int) source.getPort(mousePoint).getY();
+
+            destinationX = (int) mousePoint.getX();
+            destinationY = (int) mousePoint.getY();
+        }
 
         int dx = destinationX - sourceX;
         int dy = destinationY - sourceY;

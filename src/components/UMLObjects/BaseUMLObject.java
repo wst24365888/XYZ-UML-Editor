@@ -1,12 +1,9 @@
 package components.UMLObjects;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JComponent;
 
-import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.port.Port;
 import widgets.Canvas;
 
@@ -23,9 +20,6 @@ public abstract class BaseUMLObject extends JComponent {
     protected boolean isPortVisible = false;
 
     protected Port ports;
-
-    protected BaseUMLConnectionLine drawing;
-    protected Map<BaseUMLObject, BaseUMLConnectionLine> connections = new HashMap<BaseUMLObject, BaseUMLConnectionLine>();
 
     public BaseUMLObject() {
         zAxisHeight = itemCounter++;
@@ -63,15 +57,6 @@ public abstract class BaseUMLObject extends JComponent {
         return this.zAxisHeight;
     }
 
-    public void setDrawingUMLConnectionLine(BaseUMLConnectionLine drawing) {
-        this.drawing = drawing;
-        Canvas.getInstance().repaint();
-    }
-
-    public BaseUMLConnectionLine getDrawing() {
-        return this.drawing;
-    }
-
     public Point getPort(Point destination) {
         Point result;
 
@@ -93,22 +78,10 @@ public abstract class BaseUMLObject extends JComponent {
             result = this.ports.getWestPort();
         }
 
-        return new Point((int) (this.getX() + result.getX()), (int) (this.getY() + result.getY()));
-    }
-
-    public void addConntection(BaseUMLObject key, BaseUMLConnectionLine value) {
-        if (this.connections.containsKey(key)) {
-            this.connections.remove(key);
-        }
-        this.connections.put(key, value);
-        Canvas.getInstance().repaint();
-    }
-
-    public Map<BaseUMLObject, BaseUMLConnectionLine> getConntections() {
-        return this.connections;
+        return new Point((int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getX() + result.getX() - this.offset * 2), (int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getY() + result.getY() + this.offset * 2));
     }
 
     public Point getCenterLocation() {
-        return new Point((int) (this.getX() + this.width / 2), (int) (this.getY() + this.height / 2));
+        return new Point((int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getX() + this.width / 2), (int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getY() + this.height / 2));
     }
 }
