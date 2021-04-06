@@ -15,11 +15,11 @@ public abstract class BaseUMLObject extends JComponent {
 
     protected int width;
     protected int height;
-    protected int offset;
+    protected int offset = 0;
 
     protected boolean isPortVisible = false;
 
-    protected Port ports;
+    protected Port ports = null;
 
     public BaseUMLObject() {
         zAxisHeight = itemCounter++;
@@ -32,7 +32,7 @@ public abstract class BaseUMLObject extends JComponent {
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        if (this.isPortVisible) {
+        if (this.isPortVisible && this.ports != null) {
             for (Point point : this.ports.getPorts()) {
                 graphics2D.setColor(Color.LIGHT_GRAY);
                 graphics2D.fillOval((int) point.getX() - this.offset, (int) point.getY() - this.offset, 10, 10);
@@ -83,5 +83,9 @@ public abstract class BaseUMLObject extends JComponent {
 
     public Point getCenterLocation() {
         return new Point((int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getX() + this.width / 2), (int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getY() + this.height / 2));
+    }
+
+    public void moveTo(int x, int y) {
+        this.setLocation(x, y);
     }
 }

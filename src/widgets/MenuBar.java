@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import canvas_behavior.Select;
 import components.UMLObjects.BaseUMLObject;
+import components.UMLObjects.UMLGroup;
 
 public class MenuBar {
     private static MenuBar instance = null;
@@ -26,7 +27,7 @@ public class MenuBar {
         groupObjects.setPreferredSize(new Dimension(150, 30));
         unGroupObjects.setPreferredSize(new Dimension(150, 30));
 
-        groupObjects.addMouseListener(new MouseAdapter() {            
+        groupObjects.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
                 group();
@@ -55,20 +56,25 @@ public class MenuBar {
     }
 
     private void group() {
-        JLabel selectedArea = Select.getInstance().getSelectedArea();
-                
+        UMLGroup selectedArea = new UMLGroup(Select.getInstance().getSelectedArea());
+
         Iterator<BaseUMLObject> iterator = Canvas.getSelections().iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             BaseUMLObject tmp = iterator.next();
-            
-            tmp.setLocation(tmp.getX() - selectedArea.getX(), tmp.getY() - selectedArea.getY());
-            selectedArea.add(tmp);
+
+            tmp.setLocation(
+                    (int) (Canvas.getRelativeLocation(tmp.getLocationOnScreen()).getX() - Select.getInstance().getSelectedArea().getX()),
+                    (int) (Canvas.getRelativeLocation(tmp.getLocationOnScreen()).getY() - Select.getInstance().getSelectedArea().getY()));
+
+            System.out.println(tmp.getLocation());
+
+            selectedArea.addComponent(tmp);
 
             Canvas.getInstance().remove(tmp);
-            System.out.println(tmp.getLocationOnScreen());
         }
-        Select.getInstance().clearSelectedArea();
+        selectedArea.setBounds(Select.getInstance().getSelectedArea().getBounds());
         Canvas.getInstance().addSelectedArea(selectedArea);
+        Select.getInstance().clearSelectedArea();
 
         Canvas.getInstance().repaint();
     }

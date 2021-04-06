@@ -63,7 +63,7 @@ public class Select implements ICanvasBehavior {
             float g = random.nextFloat();
             float b = random.nextFloat();
 
-            Color randomColor = new Color(r, g, b);
+            Color randomColor = new Color(r, g, b, 0.25f);
             randomColor.brighter();
 
             this.selectedArea = new JLabel();
@@ -83,7 +83,7 @@ public class Select implements ICanvasBehavior {
         if (this.singleSelection) {
             // Single Selection
 
-            Canvas.getSelections().iterator().next().setLocation(mousePosX - originalX, mousePosY - originalY);
+            Canvas.getSelections().iterator().next().moveTo(mousePosX - originalX, mousePosY - originalY);
             Canvas.getInstance().repaint();
         } else {
             int upperLeftX = Math.min(this.originalX, mousePosX);
