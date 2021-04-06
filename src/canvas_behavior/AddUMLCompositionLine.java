@@ -13,9 +13,9 @@ public class AddUMLCompositionLine implements ICanvasBehavior {
     public void onPressed(int mousePosX, int mousePosY) {
         System.out.println("AddUMLCompositionLine onPressed");
 
-        BaseUMLObject within = Canvas.getInstance().withinComponent(mousePosX, mousePosY);
-        if (within != null) {
-            this.source = within;
+        BaseUMLObject component = Canvas.getInstance().getPressedComponent(mousePosX, mousePosY);
+        if (component != null) {
+            this.source = component;
         }
     }
 
@@ -32,9 +32,9 @@ public class AddUMLCompositionLine implements ICanvasBehavior {
     public void onReleased(int mousePosX, int mousePosY) {
         System.out.println("AddUMLCompositionLine onReleased");
 
-        BaseUMLObject within = Canvas.getInstance().withinComponent(mousePosX, mousePosY);
-        if (within != null) {
-            this.destination = within;
+        BaseUMLObject component = Canvas.getInstance().getPressedComponent(mousePosX, mousePosY);
+        if (component != null) {
+            this.destination = component;
         }
 
         if (this.source != null && this.destination != null) {

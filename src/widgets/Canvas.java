@@ -3,6 +3,7 @@ package widgets;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -122,15 +123,14 @@ public class Canvas extends JLayeredPane {
         this.setLayer(component, zAxisHeight);
     }
 
-    public BaseUMLObject withinComponent(int x, int y) {
+    public BaseUMLObject getPressedComponent(int x, int y) {
         Component[] components = this.getComponents();
         BaseUMLObject result =  null;
 
         for (Component component : components) {
             if (component instanceof BaseUMLObject) {
                 BaseUMLObject tmp = (BaseUMLObject) component;
-                if ((tmp.getLocation().getX() < x && x < tmp.getLocation().getX() + tmp.getWidth()) &&
-                    (tmp.getLocation().getY() < y && y < tmp.getLocation().getY() + tmp.getHeight())) {
+                if (tmp.getBounds().contains(x, y)) {
                         if (result == null || tmp.getZAxisHeight() > result.getZAxisHeight()) {
                             result = tmp;
                         }
@@ -139,6 +139,23 @@ public class Canvas extends JLayeredPane {
         }
 
         return result;
+    }
+
+    public ArrayList<BaseUMLObject> getWithinComponent(Rectangle rectangle) {
+        Component[] components = this.getComponents();
+        ArrayList<BaseUMLObject> results = new ArrayList<BaseUMLObject>();
+
+        for (Component component : components) {
+            if (component instanceof BaseUMLObject) {
+                BaseUMLObject tmp = (BaseUMLObject) component;
+                
+                if (rectangle.contains(tmp.getBounds())) {
+                    results.add(tmp);
+                }
+            }
+        }
+
+        return results;
     }
 
     public static void addSelection(BaseUMLObject selection) {
