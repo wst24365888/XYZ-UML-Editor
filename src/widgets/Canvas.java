@@ -12,6 +12,9 @@ import javax.swing.JLayeredPane;
 import canvas_behavior.*;
 import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.UMLObjects.BaseUMLObject;
+import components.UMLObjects.UMLClass;
+import components.UMLObjects.UMLGroup;
+import components.UMLObjects.UMLUseCase;
 import editor.Editor;
 
 public class Canvas extends JLayeredPane {
@@ -77,6 +80,8 @@ public class Canvas extends JLayeredPane {
     public void paint(Graphics graphics) {
         super.paint(graphics);
 
+        setMenuEnable();
+
         if (this.drawing != null) {
             drawing.drawArrowLine(graphics);
             drawing.drawArrow(graphics);
@@ -91,6 +96,12 @@ public class Canvas extends JLayeredPane {
         for (BaseUMLConnectionLine connection : connections) {
             connection.drawArrow(graphics);
         }
+    }
+
+    private void setMenuEnable() {
+        MenuBar.setChangeObjectNameEnable(selections.size() == 1 && (selections.iterator().next() instanceof UMLClass || selections.iterator().next() instanceof UMLUseCase));
+        MenuBar.setGroupObjectsEnable(selections.size() > 1);
+        MenuBar.setUnGroupObjectsEnable(selections.size() == 1 && selections.iterator().next() instanceof UMLGroup);
     }
 
     public static void setCanvasBehavior(ICanvasBehavior iCanvasBehavior) {

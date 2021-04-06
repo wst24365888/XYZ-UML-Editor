@@ -15,17 +15,22 @@ public class MenuBar {
 
     private static JMenuBar menuBar = new JMenuBar();
 
+    private static JMenu fileMenu = new JMenu("File");
+    private static JMenu editMenu = new JMenu("Edit");
+
+    private static JMenuItem changeObjectName = new JMenuItem("Change Object Name");
+    private static JMenuItem groupObjects = new JMenuItem("Group Objects");
+    private static JMenuItem unGroupObjects = new JMenuItem("UnGroup Objects");
+
     private MenuBar() {
-        JMenu fileMenu = new JMenu("File");
-        JMenu editMenu = new JMenu("Edit");
-
-        JMenuItem changeObjectName = new JMenuItem("Change Object Name");
-        JMenuItem groupObjects = new JMenuItem("Group Objects");
-        JMenuItem unGroupObjects = new JMenuItem("UnGroup Objects");
-
         changeObjectName.setPreferredSize(new Dimension(150, 30));
+        changeObjectName.setEnabled(false);
+
         groupObjects.setPreferredSize(new Dimension(150, 30));
+        groupObjects.setEnabled(false);
+
         unGroupObjects.setPreferredSize(new Dimension(150, 30));
+        unGroupObjects.setEnabled(false);
 
         groupObjects.addMouseListener(new MouseAdapter() {
             @Override
@@ -55,6 +60,18 @@ public class MenuBar {
         return menuBar;
     }
 
+    public static void setChangeObjectNameEnable(boolean enable) {
+        changeObjectName.setEnabled(enable);
+    }
+
+    public static void setGroupObjectsEnable(boolean enable) {
+        groupObjects.setEnabled(enable);
+    }
+
+    public static void setUnGroupObjectsEnable(boolean enable) {
+        unGroupObjects.setEnabled(enable);
+    }
+
     private void group() {
         UMLGroup selectedArea = new UMLGroup(Select.getInstance().getSelectedArea());
 
@@ -63,17 +80,24 @@ public class MenuBar {
             BaseUMLObject tmp = iterator.next();
 
             tmp.setLocation(
-                    (int) (Canvas.getRelativeLocation(tmp.getLocationOnScreen()).getX() - Select.getInstance().getSelectedArea().getX()),
-                    (int) (Canvas.getRelativeLocation(tmp.getLocationOnScreen()).getY() - Select.getInstance().getSelectedArea().getY()));
-
-            System.out.println(tmp.getLocation());
+                    (int) (Canvas.getRelativeLocation(tmp.getLocationOnScreen()).getX()
+                            - Select.getInstance().getSelectedArea().getX()) + 5,
+                    (int) (Canvas.getRelativeLocation(tmp.getLocationOnScreen()).getY()
+                            - Select.getInstance().getSelectedArea().getY()) + 5);
 
             selectedArea.addComponent(tmp);
 
             Canvas.getInstance().remove(tmp);
         }
-        selectedArea.setBounds(Select.getInstance().getSelectedArea().getBounds());
+
+        selectedArea.setBounds((int) Select.getInstance().getSelectedArea().getBounds().getX() - 5,
+                (int) Select.getInstance().getSelectedArea().getBounds().getY() - 5,
+                (int) Select.getInstance().getSelectedArea().getBounds().getWidth() + 10,
+                (int) Select.getInstance().getSelectedArea().getBounds().getHeight() + 10);
+
         Canvas.getInstance().addSelectedArea(selectedArea);
+
+        // selectedArea will be destroy
         Select.getInstance().clearSelectedArea();
 
         Canvas.getInstance().repaint();
