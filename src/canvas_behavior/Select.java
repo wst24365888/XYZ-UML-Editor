@@ -37,7 +37,7 @@ public class Select implements ICanvasBehavior {
         System.out.println("SelectMode onPressed");
 
         if (this.selectedArea != null) {
-            this.clearSelectArea();
+            this.clearSelectedArea();
         }
 
         BaseUMLObject component = Canvas.getInstance().getPressedComponent(mousePosX, mousePosY);
@@ -108,7 +108,7 @@ public class Select implements ICanvasBehavior {
 
         if (this.selectedArea != null) {
             if (Canvas.getSelections().isEmpty()) {
-                this.clearSelectArea();
+                this.clearSelectedArea();
             } else {
                 // Resize Selection Area
 
@@ -142,12 +142,16 @@ public class Select implements ICanvasBehavior {
         this.singleSelection = false;
     }
 
-    public void clearSelectArea() {
+    public void clearSelectedArea() {
         if (this.selectedArea != null) {
             Canvas.getInstance().remove(this.selectedArea);
             Canvas.getInstance().repaint();
             
             this.selectedArea = null;
         }
+    }
+
+    public JLabel getSelectedArea() {
+        return this.selectedArea;
     }
 }

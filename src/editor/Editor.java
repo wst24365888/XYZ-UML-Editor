@@ -10,14 +10,16 @@ public class Editor {
     public static final int BUTTON_SIDE_LENGTH = 100;
 
     private static final int APP_BAR_HEIGHT = 40;
+    private static final int MENU_BAR_HEIGHT = 30;
     private static final int VISIBLE_BUTTON_AMOUNT = 6;
     private static final int WINDOW_WIDTH = 1280;
-    private static final int WINDOW_HEIGHT = APP_BAR_HEIGHT + BUTTON_PADDING + (BUTTON_SIDE_LENGTH + BUTTON_PADDING) * VISIBLE_BUTTON_AMOUNT;
+    private static final int WINDOW_HEIGHT = APP_BAR_HEIGHT + MENU_BAR_HEIGHT + BUTTON_PADDING + (BUTTON_SIDE_LENGTH + BUTTON_PADDING) * VISIBLE_BUTTON_AMOUNT;
     private static final int BUTTON_PANEL_WIDTH = BUTTON_SIDE_LENGTH + BUTTON_PADDING * 2;
 
     private JFrame frame = new JFrame();
 
     public Editor(String title) {
+        MenuBar.getInstance();
         FunctionButtonPanel.getInstance();
         Canvas canvas = Canvas.getInstance();
 
@@ -26,6 +28,8 @@ public class Editor {
         frame.setTitle(title);
         frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        frame.setJMenuBar(MenuBar.getMenuBar());
 
         FunctionButtonPanel.setBounds(0, 0, BUTTON_PANEL_WIDTH, WINDOW_HEIGHT);
         frame.add(FunctionButtonPanel.getPanel());

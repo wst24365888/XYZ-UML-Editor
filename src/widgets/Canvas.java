@@ -115,10 +115,7 @@ public class Canvas extends JLayeredPane {
 
     public static void setCanvasBehavior(ICanvasBehavior iCanvasBehavior) {
         clearSelections();
-
-        if (canvasBehavior instanceof Select) {
-            ((Select) canvasBehavior).clearSelectArea();
-        }
+        Select.getInstance().clearSelectedArea();
 
         canvasBehavior = iCanvasBehavior;
     }
