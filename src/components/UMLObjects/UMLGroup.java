@@ -38,7 +38,7 @@ public class UMLGroup extends BaseUMLObject {
     }
 
     @Override
-    protected void paintComponent(Graphics graphics) {
+    public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
 
         Graphics2D graphics2D = (Graphics2D) graphics;
