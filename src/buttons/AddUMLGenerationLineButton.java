@@ -9,9 +9,4 @@ public class AddUMLGenerationLineButton extends BaseButton {
         super(new AddUMLGenerationLine());
         this.setImage(new ImageIcon("resource/imgs/generation_line.png"));
     }
-
-    @Override
-    protected void onClick() {
-        super.onClick();
-    }
 }

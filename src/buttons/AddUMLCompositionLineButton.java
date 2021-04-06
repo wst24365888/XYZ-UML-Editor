@@ -9,9 +9,4 @@ public class AddUMLCompositionLineButton extends BaseButton {
         super(new AddUMLCompositionLine());
         this.setImage(new ImageIcon("resource/imgs/composition_line.png"));
     }
-
-    @Override
-    protected void onClick() {
-        super.onClick();
-    }
 }

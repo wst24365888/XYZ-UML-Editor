@@ -9,9 +9,4 @@ public class AddUMLClassButton extends BaseButton {
         super(new AddUMLClass());
         this.setImage(new ImageIcon("resource/imgs/classes.png"));
     }
-
-    @Override
-    protected void onClick() {
-        super.onClick();
-    }
 }

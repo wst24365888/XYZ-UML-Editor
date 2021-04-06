@@ -9,9 +9,4 @@ public class AddUMLUseCaseButton extends BaseButton {
         super(new AddUMLUseCase());
         this.setImage(new ImageIcon("resource/imgs/use_case.png"));
     }
-
-    @Override
-    protected void onClick() {
-        super.onClick();
-    }
 }

@@ -3,7 +3,9 @@ package widgets;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JLayeredPane;
 
@@ -17,6 +19,7 @@ public class Canvas extends JLayeredPane {
     private static Canvas instance = null;
 
     private static ICanvasBehavior canvasBehavior;
+    private static Set<BaseUMLObject> selections = new HashSet<BaseUMLObject>();
 
     private static MouseAdapter mouseAdapter = new MouseAdapter() {
         @Override
@@ -110,6 +113,7 @@ public class Canvas extends JLayeredPane {
     }
 
     public static void setCanvasBehavior(ICanvasBehavior iCanvasBehavior) {
+        clearSelections();
         canvasBehavior = iCanvasBehavior;
     }
 
@@ -135,5 +139,21 @@ public class Canvas extends JLayeredPane {
         }
 
         return result;
+    }
+
+    public static void addSelection(BaseUMLObject selection) {
+        selection.setPortVisible(true);
+        selections.add(selection);
+    }
+
+    public static void clearSelections() {
+        for (BaseUMLObject selection : selections) {
+            selection.setPortVisible(false);
+        }
+        selections.clear();
+    }
+
+    public static Set<BaseUMLObject> getSelections() {
+        return selections;
     }
 }

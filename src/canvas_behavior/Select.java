@@ -4,8 +4,6 @@ import components.UMLObjects.BaseUMLObject;
 import widgets.Canvas;
 
 public class Select implements ICanvasBehavior {
-    BaseUMLObject source = null;
-
     protected int originalX;
     protected int originalY;
 
@@ -13,16 +11,26 @@ public class Select implements ICanvasBehavior {
     public void onPressed(int mousePosX, int mousePosY) {
         System.out.println("SelectMode onPressed");
 
+        // Single Selection
         BaseUMLObject within = Canvas.getInstance().withinComponent(mousePosX, mousePosY);
-        this.setSource(within);
+        if (within != null) {
+            this.originalX = (int) within.getMousePosition().getX();
+            this.originalY = (int) within.getMousePosition().getY();
+
+            Canvas.clearSelections();
+            Canvas.addSelection(within);
+        } else {
+            Canvas.clearSelections();
+        }
     }
 
     @Override
     public void onDragged(int mousePosX, int mousePosY) {
         System.out.println("SelectMode onDragged");
 
-        if (this.source != null) {
-            this.source.setLocation(mousePosX - originalX, mousePosY - originalY);
+        // Single Selection
+        if (Canvas.getSelections().size() == 1) {
+            Canvas.getSelections().iterator().next().setLocation(mousePosX - originalX, mousePosY - originalY);
             Canvas.getInstance().repaint();
         }
     }
@@ -31,20 +39,4 @@ public class Select implements ICanvasBehavior {
     public void onReleased(int mousePosX, int mousePosY) {
         System.out.println("SelectMode onReleased");
     }
-
-    public void setSource(BaseUMLObject source) {
-        if (source != null) {
-            this.originalX = (int) source.getMousePosition().getX();
-            this.originalY = (int) source.getMousePosition().getY();
-
-            source.setPortVisible(true);
-        }        
-        
-        if (this.source != null) {
-            this.source.setPortVisible(false);
-        }
-
-        this.source = source;
-    }
-
 }

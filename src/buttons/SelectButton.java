@@ -9,10 +9,4 @@ public class SelectButton extends BaseButton {
         super(new Select());
         this.setImage(new ImageIcon("resource/imgs/select.png"));
     }
-
-    @Override
-    protected void onClick() {
-        super.onClick();
-        ((Select) this.canvasBehavior).setSource(null);
-    }
 }
