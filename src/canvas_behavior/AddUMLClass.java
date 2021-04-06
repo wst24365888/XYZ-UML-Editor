@@ -6,6 +6,19 @@ import components.UMLObjects.UMLClass;
 import widgets.Canvas;
 
 public class AddUMLClass implements ICanvasBehavior {
+    private static AddUMLClass instance = null;
+
+    private AddUMLClass() {
+        System.out.println("AddUMLClass created");
+    };
+
+    public static AddUMLClass getInstance() {
+        if (instance == null) {
+            instance = new AddUMLClass();
+        }
+
+        return instance;
+    }
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {

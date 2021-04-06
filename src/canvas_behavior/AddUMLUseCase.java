@@ -6,6 +6,19 @@ import components.UMLObjects.UMLUseCase;
 import widgets.Canvas;
 
 public class AddUMLUseCase implements ICanvasBehavior {
+    private static AddUMLUseCase instance = null;
+
+    private AddUMLUseCase() {
+        System.out.println("AddUMLUseCase created");
+    };
+
+    public static AddUMLUseCase getInstance() {
+        if (instance == null) {
+            instance = new AddUMLUseCase();
+        }
+
+        return instance;
+    }
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {

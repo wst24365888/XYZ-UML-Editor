@@ -5,8 +5,22 @@ import javax.swing.ImageIcon;
 import canvas_behavior.AddUMLClass;
 
 public class AddUMLClassButton extends BaseButton {
-    public AddUMLClassButton() {
-        super(new AddUMLClass());
-        this.setImage(new ImageIcon("resource/imgs/classes.png"));
+    private static AddUMLClassButton instance = null;
+
+    private AddUMLClassButton() {
+        super(AddUMLClass.getInstance());
+    }
+
+    public static AddUMLClassButton getInstance() {
+        if (instance == null) {
+            instance = new AddUMLClassButton();
+        }
+
+        return instance;
+    }    
+
+    @Override
+    protected void setImage() {
+        this.button.setIcon(new ImageIcon("resource/imgs/classes.png"));
     }
 }

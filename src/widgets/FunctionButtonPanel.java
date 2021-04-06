@@ -38,12 +38,12 @@ public class FunctionButtonPanel {
     }
 
     private static void loadButtons() {
-        functionButtons.add((new SelectButton()).getButton());
-        functionButtons.add((new AddUMLAssociationLineButton()).getButton());
-        functionButtons.add((new AddUMLGenerationLineButton()).getButton());
-        functionButtons.add((new AddUMLCompositionLineButton()).getButton());
-        functionButtons.add((new AddUMLClassButton()).getButton());
-        functionButtons.add((new AddUMLUseCaseButton()).getButton());
+        functionButtons.add(SelectButton.getInstance().getButton());
+        functionButtons.add(AddUMLAssociationLineButton.getInstance().getButton());
+        functionButtons.add(AddUMLGenerationLineButton.getInstance().getButton());
+        functionButtons.add(AddUMLCompositionLineButton.getInstance().getButton());
+        functionButtons.add(AddUMLClassButton.getInstance().getButton());
+        functionButtons.add(AddUMLUseCaseButton.getInstance().getButton());
     }
 
     public static void setBounds(int x, int y, int width, int height) {

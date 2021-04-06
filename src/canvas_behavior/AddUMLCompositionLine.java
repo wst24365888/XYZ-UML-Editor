@@ -6,8 +6,22 @@ import components.UMLObjects.BaseUMLObject;
 import widgets.Canvas;
 
 public class AddUMLCompositionLine implements ICanvasBehavior {
+    private static AddUMLCompositionLine instance = null;
+
     private BaseUMLObject source = null;
     private BaseUMLObject destination = null;
+
+    private AddUMLCompositionLine() {
+        System.out.println("AddUMLCompositionLine created");
+    };
+
+    public static AddUMLCompositionLine getInstance() {
+        if (instance == null) {
+            instance = new AddUMLCompositionLine();
+        }
+
+        return instance;
+    }
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {

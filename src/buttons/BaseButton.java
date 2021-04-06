@@ -28,6 +28,8 @@ public abstract class BaseButton {
                 onClick();
             }
         });
+
+        this.setImage();
     }
 
     protected void onClick() {
@@ -39,7 +41,5 @@ public abstract class BaseButton {
         return this.button;
     }
 
-    protected void setImage(ImageIcon icon) {
-        this.button.setIcon(icon);
-    }
+    protected abstract void setImage();
 }

@@ -60,6 +60,14 @@ public class Canvas extends JLayeredPane {
         this.addMouseMotionListener(mouseAdapter);
     }
 
+    public static Canvas getInstance() {
+        if (instance == null) {
+            instance = new Canvas();
+        }
+
+        return instance;
+    }
+
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);        
@@ -105,16 +113,13 @@ public class Canvas extends JLayeredPane {
         }
     }
 
-    public static Canvas getInstance() {
-        if (instance == null) {
-            instance = new Canvas();
-        }
-
-        return instance;
-    }
-
     public static void setCanvasBehavior(ICanvasBehavior iCanvasBehavior) {
         clearSelections();
+
+        if (canvasBehavior instanceof Select) {
+            ((Select) canvasBehavior).clearSelectArea();
+        }
+
         canvasBehavior = iCanvasBehavior;
     }
 

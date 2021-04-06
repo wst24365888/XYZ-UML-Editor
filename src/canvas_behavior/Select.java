@@ -2,6 +2,7 @@ package canvas_behavior;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import javax.swing.JLabel;
@@ -10,16 +11,34 @@ import components.UMLObjects.BaseUMLObject;
 import widgets.Canvas;
 
 public class Select implements ICanvasBehavior {
-    protected boolean singleSelection = false;
+    private static Select instance = null;
 
-    protected int originalX;
-    protected int originalY;
+    private boolean singleSelection = false;
 
-    protected JLabel selectedArea;
+    private int originalX;
+    private int originalY;
+
+    private JLabel selectedArea;
+
+    private Select() {
+        System.out.println("SelectMode created");
+    };
+
+    public static Select getInstance() {
+        if (instance == null) {
+            instance = new Select();
+        }
+
+        return instance;
+    }
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
         System.out.println("SelectMode onPressed");
+
+        if (this.selectedArea != null) {
+            this.clearSelectArea();
+        }
 
         BaseUMLObject component = Canvas.getInstance().getPressedComponent(mousePosX, mousePosY);
         if (component != null) {
@@ -88,11 +107,47 @@ public class Select implements ICanvasBehavior {
         System.out.println("SelectMode onReleased");
 
         if (this.selectedArea != null) {
-            Canvas.getInstance().remove(this.selectedArea);
-            Canvas.getInstance().repaint();
+            if (Canvas.getSelections().isEmpty()) {
+                this.clearSelectArea();
+            } else {
+                // Resize Selection Area
+
+                int upperLeftX = Integer.MAX_VALUE;
+                int upperLeftY = Integer.MAX_VALUE;
+                int width = 0;
+                int height = 0;
+                
+                Iterator<BaseUMLObject> iterator = Canvas.getSelections().iterator();
+                while(iterator.hasNext()) {
+                    BaseUMLObject tmp = iterator.next();
+
+                    upperLeftX = Math.min(upperLeftX, tmp.getX());
+                    upperLeftY = Math.min(upperLeftY, tmp.getY());
+                }
+                
+                iterator = Canvas.getSelections().iterator();
+                while(iterator.hasNext()) {
+                    BaseUMLObject tmp = iterator.next();
+                    
+                    width = Math.max(width, Math.abs((tmp.getX() + tmp.getWidth()) - upperLeftX));
+                    height = Math.max(height, Math.abs((tmp.getY() + tmp.getHeight()) - upperLeftY));
+                }
+
+                this.selectedArea.setBounds(upperLeftX, upperLeftY, width, height);
+                
+                Canvas.getInstance().repaint();
+            }
         }
 
         this.singleSelection = false;
-        this.selectedArea = null;
+    }
+
+    public void clearSelectArea() {
+        if (this.selectedArea != null) {
+            Canvas.getInstance().remove(this.selectedArea);
+            Canvas.getInstance().repaint();
+            
+            this.selectedArea = null;
+        }
     }
 }

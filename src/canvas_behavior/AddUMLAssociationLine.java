@@ -6,8 +6,22 @@ import components.UMLObjects.BaseUMLObject;
 import widgets.Canvas;
 
 public class AddUMLAssociationLine implements ICanvasBehavior {
+    private static AddUMLAssociationLine instance = null;
+
     private BaseUMLObject source = null;
     private BaseUMLObject destination = null;
+
+    private AddUMLAssociationLine() {
+        System.out.println("AddUMLAssociationLine created");
+    };
+
+    public static AddUMLAssociationLine getInstance() {
+        if (instance == null) {
+            instance = new AddUMLAssociationLine();
+        }
+
+        return instance;
+    }
 
     @Override
     public void onPressed(int mousePosX, int mousePosY) {
