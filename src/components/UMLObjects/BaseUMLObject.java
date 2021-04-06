@@ -3,6 +3,7 @@ package components.UMLObjects;
 import java.awt.*;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 import components.port.Port;
 import widgets.Canvas;
@@ -20,6 +21,8 @@ public abstract class BaseUMLObject extends JComponent {
     protected boolean isPortVisible = false;
 
     protected Port ports = null;
+
+    protected JLabel label = new JLabel();
 
     public BaseUMLObject() {
         zAxisHeight = itemCounter++;
@@ -87,5 +90,9 @@ public abstract class BaseUMLObject extends JComponent {
 
     public void moveTo(int x, int y) {
         this.setLocation(x, y);
+    }
+
+    public JLabel getLabel() {
+        return this.label;
     }
 }

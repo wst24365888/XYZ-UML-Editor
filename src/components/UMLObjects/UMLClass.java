@@ -16,10 +16,10 @@ public class UMLClass extends BaseUMLObject {
         this.height = 150;
         this.offset = 5;
 
-        JLabel label = new JLabel("New Class");
+        this.label = new JLabel("New Class");
 
-        label.setBounds(this.offset, this.offset, this.width - 2 * this.offset, 50);
-        label.setHorizontalAlignment(JLabel.CENTER);
+        this.label.setBounds(2 * this.offset, this.offset, this.width - 4 * this.offset, 50);
+        this.label.setHorizontalAlignment(JLabel.CENTER);
 
         this.add(label);
 

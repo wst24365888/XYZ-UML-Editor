@@ -17,10 +17,10 @@ public class UMLUseCase extends BaseUMLObject {
         this.height = 90;
         this.offset = 5;
 
-        JLabel label = new JLabel("New Use Case");
+        this.label = new JLabel("New Use Case");
 
-        label.setBounds(this.offset, this.offset, this.width - 2 * this.offset, this.height - 2 * this.offset);
-        label.setHorizontalAlignment(JLabel.CENTER);
+        this.label.setBounds(2 * this.offset, this.offset, this.width - 4 * this.offset, this.height - 2 * this.offset);
+        this.label.setHorizontalAlignment(JLabel.CENTER);
 
         this.add(label);
 
