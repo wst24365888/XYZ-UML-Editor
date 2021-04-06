@@ -78,7 +78,7 @@ public abstract class BaseUMLObject extends JComponent {
             result = this.ports.getWestPort();
         }
 
-        return new Point((int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getX() + result.getX() - this.offset * 2), (int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getY() + result.getY() + this.offset * 2));
+        return new Point((int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getX() + result.getX()), (int) (Canvas.getRelativeLocation(this.getLocationOnScreen()).getY() + result.getY()));
     }
 
     public Point getCenterLocation() {

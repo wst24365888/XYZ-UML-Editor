@@ -22,6 +22,8 @@ public class Canvas extends JLayeredPane {
     private static ICanvasBehavior canvasBehavior;
     private static Set<BaseUMLObject> selections = new HashSet<BaseUMLObject>();
 
+    private ArrayList<BaseUMLObject> allCreatedUMLClassesAndUseCases = new ArrayList<BaseUMLObject>();
+
     private BaseUMLConnectionLine drawing = null;
     private ArrayList<BaseUMLConnectionLine> connections = new ArrayList<BaseUMLConnectionLine>();
 
@@ -98,9 +100,15 @@ public class Canvas extends JLayeredPane {
         canvasBehavior = iCanvasBehavior;
     }
 
-    public void addUMLObject(Component component, int zAxisHeight) {
+    public void addSelectedArea(Component component) {
+        this.add(component);
+        this.setLayer(component, -1);
+    }
+
+    public void addUMLClassesAndUseCases(BaseUMLObject component, int zAxisHeight) {
         this.add(component);
         this.setLayer(component, zAxisHeight);
+        this.allCreatedUMLClassesAndUseCases.add(component);
     }
 
     public BaseUMLObject getPressedComponent(int x, int y) {
@@ -114,6 +122,20 @@ public class Canvas extends JLayeredPane {
                     if (result == null || tmp.getZAxisHeight() > result.getZAxisHeight()) {
                         result = tmp;
                     }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public BaseUMLObject getPressedUMLClassesAndUseCases(int x, int y) {
+        BaseUMLObject result =  null;
+
+        for (BaseUMLObject component : this.allCreatedUMLClassesAndUseCases) {
+            if ((new Rectangle(Canvas.getRelativeLocation(component.getLocationOnScreen()), new Dimension(component.getWidth(), component.getHeight()))).contains(x, y)) {
+                if (result == null || component.getZAxisHeight() > result.getZAxisHeight()) {
+                    result = component;
                 }
             }
         }
@@ -155,7 +177,8 @@ public class Canvas extends JLayeredPane {
     }
 
     public static Point getRelativeLocation(Point point) {
-        return new Point((int) point.getX() - Editor.BUTTON_PANEL_WIDTH, (int) point.getY() - Editor.APP_BAR_HEIGHT - Editor.MENU_BAR_HEIGHT);
+        // Window offset: (8, -9)
+        return new Point((int) point.getX() - 8 - Editor.BUTTON_PANEL_WIDTH, (int) point.getY() + 9 - Editor.APP_BAR_HEIGHT - Editor.MENU_BAR_HEIGHT);
     }
 
     public void setDrawingLine(BaseUMLConnectionLine drawing) {
@@ -163,7 +186,7 @@ public class Canvas extends JLayeredPane {
         this.repaint();
     }
 
-    public void addConntection(BaseUMLConnectionLine newConnection) {
+    public void addUMLConntection(BaseUMLConnectionLine newConnection) {
         int alreadyHasConnection = -1;
         
         for (BaseUMLConnectionLine connection : connections) {

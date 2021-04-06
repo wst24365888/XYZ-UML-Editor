@@ -71,7 +71,7 @@ public class Select implements ICanvasBehavior {
             this.selectedArea.setBackground(randomColor);
             this.selectedArea.setBounds(this.originalX, this.originalY, 0, 0);
 
-            Canvas.getInstance().addUMLObject(selectedArea, -1);
+            Canvas.getInstance().addSelectedArea(selectedArea);
             Canvas.getInstance().repaint();
         }
     }

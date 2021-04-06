@@ -68,7 +68,7 @@ public class MenuBar {
             System.out.println(tmp.getLocationOnScreen());
         }
         Select.getInstance().clearSelectedArea();
-        Canvas.getInstance().addUMLObject(selectedArea, -1);
+        Canvas.getInstance().addSelectedArea(selectedArea);
 
         Canvas.getInstance().repaint();
     }
