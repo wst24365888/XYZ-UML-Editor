@@ -25,7 +25,7 @@ public abstract class BaseUMLConnectionLine {
         int destinationX = (int) destination.getX();
         int destinationY = (int) destination.getY();
 
-        graphics2D.setColor(Color.BLACK);
+        graphics2D.setColor(Color.GRAY);
         graphics2D.setStroke(new BasicStroke(3));
         graphics2D.drawLine(sourceX, sourceY, destinationX, destinationY);
     }

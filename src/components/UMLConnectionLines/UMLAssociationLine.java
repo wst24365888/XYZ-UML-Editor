@@ -42,7 +42,7 @@ public class UMLAssociationLine extends BaseUMLConnectionLine {
         arrowRightY = arrowRightX * sin + arrowRightY * cos + sourceY;
         arrowRightX = x;
 
-        graphics2D.setColor(Color.BLACK);
+        graphics2D.setColor(Color.GRAY);
         graphics2D.setStroke(new BasicStroke(3));
         graphics2D.drawLine(destinationX, destinationY, (int) arrowLeftX, (int) arrowLeftY);
         graphics2D.drawLine(destinationX, destinationY, (int) arrowRightX, (int) arrowRightY);

@@ -61,8 +61,8 @@ public class Canvas extends JLayeredPane {
     }
 
     @Override
-    protected void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
+    public void paint(Graphics graphics) {
+        super.paint(graphics);        
 
         Component[] components = this.getComponents();
 

@@ -50,7 +50,7 @@ public class UMLCompositionLine extends BaseUMLConnectionLine {
 
         graphics2D.setStroke(new BasicStroke(6));
 
-        graphics2D.setColor(Color.BLACK);
+        graphics2D.setColor(Color.GRAY);
         graphics2D.drawPolygon(xpoints, ypoints, 4);
         
         graphics2D.setColor(Color.WHITE);
