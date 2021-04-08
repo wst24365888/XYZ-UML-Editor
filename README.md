@@ -7,6 +7,10 @@
 
 ![screenshot-1.PNG](https://github.com/wst24365888/XYZ-UML-Editor/blob/master/resource/screenshots/screenshot-1.PNG)
 
+## UML Diagram of This Project
+
+![uml_diagram.svg](https://github.com/wst24365888/XYZ-UML-Editor/blob/master/resource/uml_diagram/uml_diagram.svg)
+
 ## About
 
 This is the term project of the course **Object-Oriented Analysis and Design** (2021, National Central University).
