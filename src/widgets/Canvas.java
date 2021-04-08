@@ -124,7 +124,7 @@ public class Canvas extends JLayeredPane {
         this.allCreatedUMLClassesAndUseCases.add(component);
     }
 
-    public BaseUMLObject getPressedComponent(int x, int y) {
+    public BaseUMLObject getComponentWithin(int x, int y) {
         Component[] components = this.getComponents();
         BaseUMLObject result = null;
 

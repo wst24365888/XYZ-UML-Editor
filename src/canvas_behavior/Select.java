@@ -40,7 +40,7 @@ public class Select implements ICanvasBehavior {
             this.clearSelectedArea();
         }
 
-        BaseUMLObject component = Canvas.getInstance().getPressedComponent(mousePosX, mousePosY);
+        BaseUMLObject component = Canvas.getInstance().getComponentWithin(mousePosX, mousePosY);
         if (component != null) {
             // Single Selection
 

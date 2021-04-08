@@ -2,9 +2,10 @@ package canvas_behavior;
 
 import java.awt.*;
 
-import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.UMLConnectionLines.UMLGenerationLine;
 import components.UMLObjects.BaseUMLObject;
+import components.UMLObjects.UMLGroup;
+import editor.Editor;
 import widgets.Canvas;
 
 public class AddUMLGenerationLine implements ICanvasBehavior {
@@ -31,7 +32,17 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
     public void onPressed(int mousePosX, int mousePosY) {
         // System.out.println("AddUMLGenerationLine onPressed");
 
-        BaseUMLObject component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
+        BaseUMLObject component;
+
+        if (Editor.CAN_CONNECT_GROUPED_OBJECT) {
+            component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
+        } else {
+            component = Canvas.getInstance().getComponentWithin(mousePosX, mousePosY);
+            if (component instanceof UMLGroup) {
+                component = null;
+            }
+        }
+        
         if (component != null) {
             this.source = component;
             this.originalPoint = new Point(mousePosX, mousePosY);
@@ -55,7 +66,17 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
     public void onReleased(int mousePosX, int mousePosY) {
         // System.out.println("AddUMLGenerationLine onReleased");
 
-        BaseUMLObject component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
+        BaseUMLObject component;
+
+        if (Editor.CAN_CONNECT_GROUPED_OBJECT) {
+            component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
+        } else {
+            component = Canvas.getInstance().getComponentWithin(mousePosX, mousePosY);
+            if (component instanceof UMLGroup) {
+                component = null;
+            }
+        }
+        
         if (component != null) {
             this.destination = component;
         }

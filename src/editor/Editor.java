@@ -6,6 +6,8 @@ import javax.swing.*;
 import widgets.*;
 
 public class Editor {
+    public static final boolean CAN_CONNECT_GROUPED_OBJECT = false;
+
     public static final int BUTTON_PADDING = 10;
     public static final int BUTTON_SIDE_LENGTH = 90;
 
