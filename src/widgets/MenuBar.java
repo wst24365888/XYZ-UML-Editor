@@ -83,7 +83,11 @@ public class MenuBar {
         unGroupObjects.setEnabled(enable);
     }
 
-    private void changeName() {
+    private static void changeName() {
+        if (!changeObjectName.isEnabled()) {
+            return;
+        }
+
         String name = JOptionPane.showInputDialog("Please enter new object name: ");
         
         if(name != null) {
@@ -91,7 +95,11 @@ public class MenuBar {
         }
     }
 
-    private void group() {
+    private static void group() {
+        if (!groupObjects.isEnabled()) {
+            return;
+        }
+
         UMLGroup selectedArea = new UMLGroup(Select.getInstance().getSelectedArea());
 
         Iterator<BaseUMLObject> iterator = Canvas.getInstance().getSelections().iterator();
@@ -122,7 +130,11 @@ public class MenuBar {
         Canvas.getInstance().repaint();
     }
 
-    private void ungroup() {
+    private static void ungroup() {
+        if (!unGroupObjects.isEnabled()) {
+            return;
+        }
+
         UMLGroup groupObject = (UMLGroup) Canvas.getInstance().getSelections().iterator().next();
 
         for (BaseUMLObject child : groupObject.getUMLComponents()) {
