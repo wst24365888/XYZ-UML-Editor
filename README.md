@@ -9,7 +9,7 @@
 
 ## UML Diagram of This Project
 
-![uml_diagram.svg](https://github.com/wst24365888/XYZ-UML-Editor/blob/master/resource/uml_diagram/uml_diagram.svg)
+![uml_diagram.png](https://github.com/wst24365888/XYZ-UML-Editor/blob/master/resource/uml_diagram/uml_diagram.png)
 
 ## About
 
