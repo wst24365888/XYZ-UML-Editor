@@ -34,7 +34,7 @@ public abstract class BaseButton {
 
     protected void onClick() {
         FunctionButtonPanel.resetPanel(this.index);
-        Canvas.setCanvasBehavior(this.canvasBehavior);
+        Canvas.getInstance().setCanvasBehavior(this.canvasBehavior);
     }
 
     public JButton getButton() {

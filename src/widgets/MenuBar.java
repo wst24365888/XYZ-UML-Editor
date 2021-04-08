@@ -87,14 +87,14 @@ public class MenuBar {
         String name = JOptionPane.showInputDialog("Please enter new object name: ");
         
         if(name != null) {
-            Canvas.getSelections().iterator().next().getLabel().setText(name);
+            Canvas.getInstance().getSelections().iterator().next().getLabel().setText(name);
         }
     }
 
     private void group() {
         UMLGroup selectedArea = new UMLGroup(Select.getInstance().getSelectedArea());
 
-        Iterator<BaseUMLObject> iterator = Canvas.getSelections().iterator();
+        Iterator<BaseUMLObject> iterator = Canvas.getInstance().getSelections().iterator();
         while (iterator.hasNext()) {
             BaseUMLObject tmp = iterator.next();
 
@@ -123,7 +123,7 @@ public class MenuBar {
     }
 
     private void ungroup() {
-        UMLGroup groupObject = (UMLGroup) Canvas.getSelections().iterator().next();
+        UMLGroup groupObject = (UMLGroup) Canvas.getInstance().getSelections().iterator().next();
 
         for (BaseUMLObject child : groupObject.getUMLComponents()) {
             child.setLocation(

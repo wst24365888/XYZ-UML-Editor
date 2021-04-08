@@ -47,15 +47,18 @@ public class Select implements ICanvasBehavior {
             this.originalX = (int) component.getMousePosition().getX();
             this.originalY = (int) component.getMousePosition().getY();
 
-            Canvas.clearSelections();
-            Canvas.addSelection(component);
+            ArrayList<BaseUMLObject> selections = new ArrayList<BaseUMLObject>();
+            selections.add(component);
+
+            Canvas.getInstance().clearSelections();
+            Canvas.getInstance().setSelections(selections);
 
             this.singleSelection = true;
         } else {
             this.originalX = mousePosX;
             this.originalY = mousePosY;
 
-            Canvas.clearSelections();
+            Canvas.getInstance().clearSelections();
 
             Random random = new Random();
 
@@ -84,7 +87,7 @@ public class Select implements ICanvasBehavior {
         if (this.singleSelection) {
             // Single Selection
 
-            Canvas.getSelections().iterator().next().moveTo(mousePosX - originalX, mousePosY - originalY);
+            Canvas.getInstance().getSelections().iterator().next().moveTo(mousePosX - originalX, mousePosY - originalY);
         } else {
             int upperLeftX = Math.min(this.originalX, mousePosX);
             int upperLeftY = Math.min(this.originalY, mousePosY);
@@ -95,9 +98,9 @@ public class Select implements ICanvasBehavior {
 
             ArrayList<BaseUMLObject> selections = Canvas.getInstance()
                     .getWithinComponent(new Rectangle(upperLeftX, upperLeftY, width, height));
-            for (BaseUMLObject selection : selections) {
-                Canvas.addSelection(selection);
-            }
+            
+            Canvas.getInstance().clearSelections();
+            Canvas.getInstance().setSelections(selections);
         }
 
         Canvas.getInstance().repaint();
@@ -108,7 +111,7 @@ public class Select implements ICanvasBehavior {
         // System.out.println("SelectMode onReleased");
 
         if (this.selectedArea != null) {
-            if (Canvas.getSelections().isEmpty()) {
+            if (Canvas.getInstance().getSelections().isEmpty()) {
                 this.clearSelectedArea();
             } else {
                 // Resize Selection Area
@@ -118,7 +121,7 @@ public class Select implements ICanvasBehavior {
                 int width = 0;
                 int height = 0;
 
-                Iterator<BaseUMLObject> iterator = Canvas.getSelections().iterator();
+                Iterator<BaseUMLObject> iterator = Canvas.getInstance().getSelections().iterator();
                 while (iterator.hasNext()) {
                     BaseUMLObject tmp = iterator.next();
 
@@ -126,7 +129,7 @@ public class Select implements ICanvasBehavior {
                     upperLeftY = Math.min(upperLeftY, tmp.getY());
                 }
 
-                iterator = Canvas.getSelections().iterator();
+                iterator = Canvas.getInstance().getSelections().iterator();
                 while (iterator.hasNext()) {
                     BaseUMLObject tmp = iterator.next();
 

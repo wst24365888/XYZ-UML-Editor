@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.JLayeredPane;
 
@@ -23,7 +21,7 @@ public class Canvas extends JLayeredPane {
     private static Canvas instance = null;
 
     private static ICanvasBehavior canvasBehavior;
-    private static Set<BaseUMLObject> selections = new HashSet<BaseUMLObject>();
+    private ArrayList<BaseUMLObject> selections = new ArrayList<BaseUMLObject>();
 
     private ArrayList<BaseUMLObject> allCreatedUMLClassesAndUseCases = new ArrayList<BaseUMLObject>();
 
@@ -106,7 +104,7 @@ public class Canvas extends JLayeredPane {
         MenuBar.setUnGroupObjectsEnable(selections.size() == 1 && selections.iterator().next() instanceof UMLGroup);
     }
 
-    public static void setCanvasBehavior(ICanvasBehavior iCanvasBehavior) {
+    public void setCanvasBehavior(ICanvasBehavior iCanvasBehavior) {
         clearSelections();
         Select.getInstance().clearSelectedArea();
 
@@ -174,19 +172,23 @@ public class Canvas extends JLayeredPane {
         return results;
     }
 
-    public static void addSelection(BaseUMLObject selection) {
-        selection.setPortVisible(true);
-        selections.add(selection);
+    public void setSelections(ArrayList<BaseUMLObject> selections) {
+        for (BaseUMLObject selection : selections) {
+            selection.setPortVisible(true);    
+        }
+
+        this.selections = selections;
+        this.repaint();
     }
 
-    public static void clearSelections() {
+    public void clearSelections() {
         for (BaseUMLObject selection : selections) {
             selection.setPortVisible(false);
         }
         selections.clear();
     }
 
-    public static Set<BaseUMLObject> getSelections() {
+    public ArrayList<BaseUMLObject> getSelections() {
         return selections;
     }
 
