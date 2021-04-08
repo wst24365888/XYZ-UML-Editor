@@ -60,8 +60,8 @@ public abstract class BaseUMLObject extends JComponent {
         return this.zAxisHeight;
     }
 
-    public Point getPort(Point destination) {
-        Point result;
+    public String getPortAlias(Point destination) {
+        String alias = null;
 
         double angle = (double) Math.toDegrees(Math.atan2(destination.getX() - this.getCenterLocation().getX(),
                 destination.getY() - this.getCenterLocation().getY())) - 90;
@@ -73,12 +73,28 @@ public abstract class BaseUMLObject extends JComponent {
         // System.out.println(angle);
 
         if (135 > angle && angle >= 45) {
-            result = this.ports.getNorthPort();
+            alias = "north";
         } else if (45 > angle || angle >= 315) {
-            result = this.ports.getEastPort();
+            alias = "east";
         } else if (315 > angle && angle >= 225) {
-            result = this.ports.getSouthPort();
+            alias = "south";
         } else {
+            alias = "west";
+        }
+
+        return alias;
+    }
+
+    public Point getPortByAlias(String alias) {
+        Point result = null;
+
+        if (alias == "north") {
+            result = this.ports.getNorthPort();
+        } else if (alias == "east") {
+            result = this.ports.getEastPort();
+        } else if (alias == "south") {
+            result = this.ports.getSouthPort();
+        } else if (alias == "west") {
             result = this.ports.getWestPort();
         }
 

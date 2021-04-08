@@ -202,20 +202,7 @@ public class Canvas extends JLayeredPane {
     }
 
     public void addUMLConntection(BaseUMLConnectionLine newConnection) {
-        int alreadyHasConnection = -1;
-
-        for (BaseUMLConnectionLine connection : connections) {
-            if (connection.alreadyHasConnection(newConnection.getSource(), newConnection.getDestination())) {
-                alreadyHasConnection = connections.indexOf(connection);
-            }
-        }
-
-        if (alreadyHasConnection == -1) {
-            connections.add(newConnection);
-        } else {
-            connections.set(alreadyHasConnection, newConnection);
-        }
-
+        connections.add(newConnection);
         this.repaint();
     }
 }

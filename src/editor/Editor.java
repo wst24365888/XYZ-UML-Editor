@@ -6,8 +6,8 @@ import javax.swing.*;
 import widgets.*;
 
 public class Editor {
-    public static final int BUTTON_PADDING = 12;
-    public static final int BUTTON_SIDE_LENGTH = 100;
+    public static final int BUTTON_PADDING = 10;
+    public static final int BUTTON_SIDE_LENGTH = 90;
 
     public static final int APP_BAR_HEIGHT = 40;
     public static final int MENU_BAR_HEIGHT = 30;

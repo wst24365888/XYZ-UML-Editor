@@ -3,15 +3,14 @@ package components.UMLConnectionLines;
 import java.awt.*;
 
 import components.UMLObjects.BaseUMLObject;
-import widgets.Canvas;
 
 public class UMLGenerationLine extends BaseUMLConnectionLine {
-    public UMLGenerationLine(BaseUMLObject source, BaseUMLObject destination) {
-        super(source, destination);
+    public UMLGenerationLine(BaseUMLObject source, Point originalPoint, Point currentPoint) {
+        super(source, originalPoint, currentPoint);
     }
-
-    public UMLGenerationLine(BaseUMLObject source, Point mousePoint) {
-        super(source, mousePoint);
+    
+    public UMLGenerationLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination, Point currentPoint) {
+        super(source, originalPoint, destination, currentPoint);
     }
 
     @Override
@@ -24,17 +23,17 @@ public class UMLGenerationLine extends BaseUMLConnectionLine {
         int destinationY;
 
         if (destination != null) {
-            sourceX = (int) source.getPort(Canvas.getRelativeLocation(destination.getLocationOnScreen())).getX();
-            sourceY = (int) source.getPort(Canvas.getRelativeLocation(destination.getLocationOnScreen())).getY();
+            sourceX = (int) this.source.getPortByAlias(this.sourcePortAlias).getX();
+            sourceY = (int) this.source.getPortByAlias(this.sourcePortAlias).getY();
 
-            destinationX = (int) destination.getPort(Canvas.getRelativeLocation(source.getLocationOnScreen())).getX();
-            destinationY = (int) destination.getPort(Canvas.getRelativeLocation(source.getLocationOnScreen())).getY();
+            destinationX = (int) this.destination.getPortByAlias(this.destinationPortAlias).getX();
+            destinationY = (int) this.destination.getPortByAlias(this.destinationPortAlias).getY();
         } else {
-            sourceX = (int) source.getPort(mousePoint).getX();
-            sourceY = (int) source.getPort(mousePoint).getY();
+            sourceX = (int) this.source.getPortByAlias(this.sourcePortAlias).getX();
+            sourceY = (int) this.source.getPortByAlias(this.sourcePortAlias).getY();
 
-            destinationX = (int) mousePoint.getX();
-            destinationY = (int) mousePoint.getY();
+            destinationX = (int) currentPoint.getX();
+            destinationY = (int) currentPoint.getY();
         }
 
         int dx = destinationX - sourceX;

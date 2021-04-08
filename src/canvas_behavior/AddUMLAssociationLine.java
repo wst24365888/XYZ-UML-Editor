@@ -1,6 +1,8 @@
 package canvas_behavior;
 
 import java.awt.*;
+
+import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.UMLConnectionLines.UMLAssociationLine;
 import components.UMLObjects.BaseUMLObject;
 import widgets.Canvas;
@@ -10,6 +12,8 @@ public class AddUMLAssociationLine implements ICanvasBehavior {
 
     private BaseUMLObject source = null;
     private BaseUMLObject destination = null;
+
+    private Point originalPoint = null;
 
     private AddUMLAssociationLine() {
         // System.out.println("AddUMLAssociationLine created");
@@ -30,6 +34,7 @@ public class AddUMLAssociationLine implements ICanvasBehavior {
         BaseUMLObject component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
         if (component != null) {
             this.source = component;
+            this.originalPoint = new Point(mousePosX, mousePosY);
         }
 
         Canvas.getInstance().repaint();
@@ -40,7 +45,7 @@ public class AddUMLAssociationLine implements ICanvasBehavior {
         // System.out.println("AddUMLAssociationLine onDragged");
 
         if (this.source != null) {
-            Canvas.getInstance().setDrawingLine(new UMLAssociationLine(this.source, new Point(mousePosX, mousePosY)));
+            Canvas.getInstance().setDrawingLine(new UMLAssociationLine(this.source, this.originalPoint, new Point(mousePosX, mousePosY)));
         }
 
         Canvas.getInstance().repaint();
@@ -59,7 +64,7 @@ public class AddUMLAssociationLine implements ICanvasBehavior {
             Canvas.getInstance().setDrawingLine(null);
 
             if (this.source != this.destination) {
-                Canvas.getInstance().addUMLConntection(new UMLAssociationLine(this.source, this.destination));
+                Canvas.getInstance().addUMLConntection(new UMLAssociationLine(this.source, this.originalPoint, this.destination, new Point(mousePosX, mousePosY)));
             }
         } else if (this.source != null && this.destination == null) {
             Canvas.getInstance().setDrawingLine(null);

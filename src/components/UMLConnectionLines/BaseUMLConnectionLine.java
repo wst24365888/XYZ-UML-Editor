@@ -3,38 +3,27 @@ package components.UMLConnectionLines;
 import java.awt.*;
 
 import components.UMLObjects.BaseUMLObject;
-import widgets.Canvas;
 
 public abstract class BaseUMLConnectionLine {
     protected BaseUMLObject source = null;
     protected BaseUMLObject destination = null;
 
-    protected Point mousePoint = null;
+    protected String sourcePortAlias = null;
+    protected String destinationPortAlias = null;
 
-    public BaseUMLConnectionLine(BaseUMLObject source, BaseUMLObject destination) {
+    protected Point currentPoint = null;
+
+    public BaseUMLConnectionLine(BaseUMLObject source, Point originalPoint, Point currentPoint) {
+        this.currentPoint = currentPoint;
+        this.source = source;
+        this.sourcePortAlias = source.getPortAlias(originalPoint);
+    }
+
+    public BaseUMLConnectionLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination, Point currentPoint) {
         this.source = source;
         this.destination = destination;
-    }
-
-    public BaseUMLConnectionLine(BaseUMLObject source, Point mousePoint) {
-        this.source = source;
-        this.mousePoint = mousePoint;
-    }
-
-    public BaseUMLObject getSource() {
-        return this.source;
-    }
-
-    public BaseUMLObject getDestination() {
-        return this.destination;
-    }
-
-    public boolean alreadyHasConnection(BaseUMLObject source, BaseUMLObject destination) {
-        if (this.source == source && this.destination == destination) {
-            return true;
-        }
-
-        return false;
+        this.sourcePortAlias = source.getPortAlias(originalPoint);
+        this.destinationPortAlias = destination.getPortAlias(currentPoint);
     }
 
     public void drawArrowLine(Graphics graphics) {
@@ -46,17 +35,17 @@ public abstract class BaseUMLConnectionLine {
         int destinationY;
 
         if (destination != null) {
-            sourceX = (int) source.getPort(Canvas.getRelativeLocation(destination.getLocationOnScreen())).getX();
-            sourceY = (int) source.getPort(Canvas.getRelativeLocation(destination.getLocationOnScreen())).getY();
+            sourceX = (int) this.source.getPortByAlias(this.sourcePortAlias).getX();
+            sourceY = (int) this.source.getPortByAlias(this.sourcePortAlias).getY();
 
-            destinationX = (int) destination.getPort(Canvas.getRelativeLocation(source.getLocationOnScreen())).getX();
-            destinationY = (int) destination.getPort(Canvas.getRelativeLocation(source.getLocationOnScreen())).getY();
+            destinationX = (int) this.destination.getPortByAlias(this.destinationPortAlias).getX();
+            destinationY = (int) this.destination.getPortByAlias(this.destinationPortAlias).getY();
         } else {
-            sourceX = (int) source.getPort(mousePoint).getX();
-            sourceY = (int) source.getPort(mousePoint).getY();
+            sourceX = (int) this.source.getPortByAlias(this.sourcePortAlias).getX();
+            sourceY = (int) this.source.getPortByAlias(this.sourcePortAlias).getY();
 
-            destinationX = (int) mousePoint.getX();
-            destinationY = (int) mousePoint.getY();
+            destinationX = (int) currentPoint.getX();
+            destinationY = (int) currentPoint.getY();
         }
 
         graphics2D.setColor(Color.GRAY);
