@@ -27,7 +27,7 @@ public class AddUMLUseCase implements ICanvasBehavior {
         BaseUMLObject baseUMLObject = new UMLUseCase();
         baseUMLObject.setBounds(mousePosX - 65, mousePosY - 45, 130, 90);
 
-        Canvas.getInstance().addUMLClassesAndUseCases(baseUMLObject, baseUMLObject.getZAxisHeight());
+        Canvas.getInstance().addBaseUMLObject(baseUMLObject, baseUMLObject.getZAxisHeight());
 
         Canvas.getInstance().repaint();
     }

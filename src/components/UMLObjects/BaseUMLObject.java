@@ -19,6 +19,7 @@ public abstract class BaseUMLObject extends JComponent {
     protected int offset = 0;
 
     protected boolean isPortVisible = false;
+    protected boolean connectable = true;
 
     protected Port ports = null;
 
@@ -113,5 +114,9 @@ public abstract class BaseUMLObject extends JComponent {
 
     public JLabel getLabel() {
         return this.label;
+    }
+
+    public boolean isConnectable() {
+        return this.connectable;
     }
 }

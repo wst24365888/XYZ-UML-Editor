@@ -4,8 +4,6 @@ import java.awt.*;
 
 import components.UMLConnectionLines.UMLGenerationLine;
 import components.UMLObjects.BaseUMLObject;
-import components.UMLObjects.UMLGroup;
-import editor.Editor;
 import widgets.Canvas;
 
 public class AddUMLGenerationLine implements ICanvasBehavior {
@@ -34,16 +32,9 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
 
         BaseUMLObject component;
 
-        if (Editor.CAN_CONNECT_GROUPED_OBJECT) {
-            component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
-        } else {
-            component = Canvas.getInstance().getComponentWithin(mousePosX, mousePosY);
-            if (component instanceof UMLGroup) {
-                component = null;
-            }
-        }
-        
-        if (component != null) {
+        component = Canvas.getInstance().getComponentWithin(mousePosX, mousePosY);
+
+        if (component != null && component.isConnectable()) {
             this.source = component;
             this.originalPoint = new Point(mousePosX, mousePosY);
         }
@@ -56,7 +47,8 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
         // System.out.println("AddUMLGenerationLine onDragged");
 
         if (this.source != null) {
-            Canvas.getInstance().setDrawingLine(new UMLGenerationLine(this.source, this.originalPoint, new Point(mousePosX, mousePosY)));
+            Canvas.getInstance().setDrawingLine(
+                    new UMLGenerationLine(this.source, this.originalPoint, new Point(mousePosX, mousePosY)));
         }
 
         Canvas.getInstance().repaint();
@@ -68,16 +60,9 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
 
         BaseUMLObject component;
 
-        if (Editor.CAN_CONNECT_GROUPED_OBJECT) {
-            component = Canvas.getInstance().getPressedUMLClassesAndUseCases(mousePosX, mousePosY);
-        } else {
-            component = Canvas.getInstance().getComponentWithin(mousePosX, mousePosY);
-            if (component instanceof UMLGroup) {
-                component = null;
-            }
-        }
-        
-        if (component != null) {
+        component = Canvas.getInstance().getComponentWithin(mousePosX, mousePosY);
+
+        if (component != null && component.isConnectable()) {
             this.destination = component;
         }
 
@@ -85,7 +70,8 @@ public class AddUMLGenerationLine implements ICanvasBehavior {
             Canvas.getInstance().setDrawingLine(null);
 
             if (this.source != this.destination) {
-                Canvas.getInstance().addUMLConntection(new UMLGenerationLine(this.source, this.originalPoint, this.destination, new Point(mousePosX, mousePosY)));
+                Canvas.getInstance().addUMLConntection(new UMLGenerationLine(this.source, this.originalPoint,
+                        this.destination, new Point(mousePosX, mousePosY)));
             }
         } else if (this.source != null && this.destination == null) {
             Canvas.getInstance().setDrawingLine(null);

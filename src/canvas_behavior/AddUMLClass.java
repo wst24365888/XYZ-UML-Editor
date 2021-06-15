@@ -27,7 +27,7 @@ public class AddUMLClass implements ICanvasBehavior {
         BaseUMLObject baseUMLObject = new UMLClass();
         baseUMLObject.setBounds(mousePosX - 65, mousePosY - 75, 130, 150);
 
-        Canvas.getInstance().addUMLClassesAndUseCases(baseUMLObject, baseUMLObject.getZAxisHeight());
+        Canvas.getInstance().addBaseUMLObject(baseUMLObject, baseUMLObject.getZAxisHeight());
 
         Canvas.getInstance().repaint();
     }

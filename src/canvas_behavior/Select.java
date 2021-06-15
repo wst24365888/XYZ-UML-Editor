@@ -97,7 +97,7 @@ public class Select implements ICanvasBehavior {
             this.selectedArea.setBounds(upperLeftX, upperLeftY, width, height);
 
             ArrayList<BaseUMLObject> selections = Canvas.getInstance()
-                    .getWithinComponent(new Rectangle(upperLeftX, upperLeftY, width, height));
+                    .getAllComponentWithin(new Rectangle(upperLeftX, upperLeftY, width, height));
             
             Canvas.getInstance().clearSelections();
             Canvas.getInstance().setSelections(selections);

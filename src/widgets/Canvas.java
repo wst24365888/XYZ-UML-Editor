@@ -23,7 +23,7 @@ public class Canvas extends JLayeredPane {
     private static ICanvasBehavior canvasBehavior;
     private ArrayList<BaseUMLObject> selections = new ArrayList<BaseUMLObject>();
 
-    private ArrayList<BaseUMLObject> allCreatedUMLClassesAndUseCases = new ArrayList<BaseUMLObject>();
+    private ArrayList<BaseUMLObject> allBaseUMLObject = new ArrayList<BaseUMLObject>();
 
     private BaseUMLConnectionLine drawing = null;
     private ArrayList<BaseUMLConnectionLine> connections = new ArrayList<BaseUMLConnectionLine>();
@@ -116,36 +116,22 @@ public class Canvas extends JLayeredPane {
         this.setLayer(component, -1);
     }
 
-    public void addUMLClassesAndUseCases(BaseUMLObject component, int zAxisHeight) {
+    public void addBaseUMLObject(BaseUMLObject component, int zAxisHeight) {
         this.add(component);
         this.setLayer(component, zAxisHeight);
-        this.allCreatedUMLClassesAndUseCases.add(component);
+        this.allBaseUMLObject.add(component);
+    }
+
+    public void removeBaseUMLObject(BaseUMLObject component) {
+        this.remove(component);
+        this.allBaseUMLObject.remove(component);
     }
 
     public BaseUMLObject getComponentWithin(int x, int y) {
-        Component[] components = this.getComponents();
         BaseUMLObject result = null;
 
-        for (Component component : components) {
-            if (component instanceof BaseUMLObject) {
-                BaseUMLObject tmp = (BaseUMLObject) component;
-                if (tmp.getBounds().contains(x, y)) {
-                    if (result == null || tmp.getZAxisHeight() > result.getZAxisHeight()) {
-                        result = tmp;
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-
-    public BaseUMLObject getPressedUMLClassesAndUseCases(int x, int y) {
-        BaseUMLObject result = null;
-
-        for (BaseUMLObject component : this.allCreatedUMLClassesAndUseCases) {
-            if ((new Rectangle(Canvas.getRelativeLocation(component.getLocationOnScreen()),
-                    new Dimension(component.getWidth(), component.getHeight()))).contains(x, y)) {
+        for (BaseUMLObject component : this.allBaseUMLObject) {
+            if (component.getBounds().contains(x, y)) {
                 if (result == null || component.getZAxisHeight() > result.getZAxisHeight()) {
                     result = component;
                 }
@@ -155,17 +141,12 @@ public class Canvas extends JLayeredPane {
         return result;
     }
 
-    public ArrayList<BaseUMLObject> getWithinComponent(Rectangle rectangle) {
-        Component[] components = this.getComponents();
+    public ArrayList<BaseUMLObject> getAllComponentWithin(Rectangle rectangle) {
         ArrayList<BaseUMLObject> results = new ArrayList<BaseUMLObject>();
 
-        for (Component component : components) {
-            if (component instanceof BaseUMLObject) {
-                BaseUMLObject tmp = (BaseUMLObject) component;
-
-                if (rectangle.contains(tmp.getBounds())) {
-                    results.add(tmp);
-                }
+        for (BaseUMLObject component : this.allBaseUMLObject) {
+            if (rectangle.contains(component.getBounds())) {
+                results.add(component);
             }
         }
 
@@ -182,10 +163,11 @@ public class Canvas extends JLayeredPane {
     }
 
     public void clearSelections() {
-        for (BaseUMLObject selection : selections) {
+        for (BaseUMLObject selection : this.selections) {
             selection.setPortVisible(false);
         }
-        selections.clear();
+
+        this.selections.clear();
     }
 
     public ArrayList<BaseUMLObject> getSelections() {

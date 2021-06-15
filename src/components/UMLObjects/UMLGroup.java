@@ -15,6 +15,8 @@ public class UMLGroup extends BaseUMLObject {
     public UMLGroup(JLabel component) {
         super();
 
+        this.connectable = false;
+
         this.offset = 5;
         this.width = component.getWidth() + this.offset * 2;
         this.height = component.getHeight() + this.offset * 2;

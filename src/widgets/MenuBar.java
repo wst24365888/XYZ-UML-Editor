@@ -89,8 +89,8 @@ public class MenuBar {
         }
 
         String name = JOptionPane.showInputDialog("Please enter new object name: ");
-        
-        if(name != null) {
+
+        if (name != null) {
             Canvas.getInstance().getSelections().iterator().next().getLabel().setText(name);
         }
     }
@@ -100,7 +100,7 @@ public class MenuBar {
             return;
         }
 
-        UMLGroup selectedArea = new UMLGroup(Select.getInstance().getSelectedArea());
+        UMLGroup groupObject = new UMLGroup(Select.getInstance().getSelectedArea());
 
         Iterator<BaseUMLObject> iterator = Canvas.getInstance().getSelections().iterator();
         while (iterator.hasNext()) {
@@ -112,17 +112,17 @@ public class MenuBar {
                     (int) (Canvas.getRelativeLocation(tmp.getLocationOnScreen()).getY()
                             - Select.getInstance().getSelectedArea().getY()) + 5);
 
-            selectedArea.addComponent(tmp);
+            groupObject.addComponent(tmp);
 
-            Canvas.getInstance().remove(tmp);
+            Canvas.getInstance().removeBaseUMLObject(tmp);
         }
 
-        selectedArea.setBounds((int) Select.getInstance().getSelectedArea().getBounds().getX() - 5,
+        groupObject.setBounds((int) Select.getInstance().getSelectedArea().getBounds().getX() - 5,
                 (int) Select.getInstance().getSelectedArea().getBounds().getY() - 5,
                 (int) Select.getInstance().getSelectedArea().getBounds().getWidth() + 10,
                 (int) Select.getInstance().getSelectedArea().getBounds().getHeight() + 10);
 
-        Canvas.getInstance().addSelectedArea(selectedArea);
+        Canvas.getInstance().addBaseUMLObject(groupObject, -1);
 
         // selectedArea will be destroy
         Select.getInstance().clearSelectedArea();
@@ -138,14 +138,13 @@ public class MenuBar {
         UMLGroup groupObject = (UMLGroup) Canvas.getInstance().getSelections().iterator().next();
 
         for (BaseUMLObject child : groupObject.getUMLComponents()) {
-            child.setLocation(
-                    (int) Canvas.getRelativeLocation(child.getLocationOnScreen()).getX(),
+            child.setLocation((int) Canvas.getRelativeLocation(child.getLocationOnScreen()).getX(),
                     (int) Canvas.getRelativeLocation(child.getLocationOnScreen()).getY());
-
-            Canvas.getInstance().addUMLClassesAndUseCases(child, child.getZAxisHeight());
+            
+            Canvas.getInstance().addBaseUMLObject(child, child.getZAxisHeight());
         }
 
-        Canvas.getInstance().remove(groupObject);
+        Canvas.getInstance().removeBaseUMLObject(groupObject);
         Canvas.getInstance().repaint();
     }
 }
