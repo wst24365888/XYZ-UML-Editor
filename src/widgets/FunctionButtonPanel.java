@@ -2,11 +2,16 @@ package widgets;
 
 import java.awt.*;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import editor.Editor;
-import buttons.*;
+import buttons.Button;
+import canvas_behavior.AddUMLConnectionLine;
+import canvas_behavior.AddUMLObject;
+import canvas_behavior.Select;
 
 public class FunctionButtonPanel {
     private static FunctionButtonPanel instance = null;
@@ -38,12 +43,12 @@ public class FunctionButtonPanel {
     }
 
     private static void loadButtons() {
-        functionButtons.add(SelectButton.getInstance().getButton());
-        functionButtons.add(AddUMLAssociationLineButton.getInstance().getButton());
-        functionButtons.add(AddUMLGeneralizationLineButton.getInstance().getButton());
-        functionButtons.add(AddUMLCompositionLineButton.getInstance().getButton());
-        functionButtons.add(AddUMLClassButton.getInstance().getButton());
-        functionButtons.add(AddUMLUseCaseButton.getInstance().getButton());
+        functionButtons.add((new Button(Select.getInstance(), new ImageIcon("resource/imgs/select.png")).getButton()));
+        functionButtons.add((new Button(new AddUMLConnectionLine("Association"), new ImageIcon("resource/imgs/association_line.png")).getButton()));
+        functionButtons.add((new Button(new AddUMLConnectionLine("Composition"), new ImageIcon("resource/imgs/composition_line.png")).getButton()));
+        functionButtons.add((new Button(new AddUMLConnectionLine("Association"), new ImageIcon("resource/imgs/generalization_line.png")).getButton()));
+        functionButtons.add((new Button(new AddUMLObject("Class"), new ImageIcon("resource/imgs/class.png")).getButton()));
+        functionButtons.add((new Button(new AddUMLObject("Use Case"), new ImageIcon("resource/imgs/use_case.png"))).getButton());
     }
 
     public static void setBounds(int x, int y, int width, int height) {

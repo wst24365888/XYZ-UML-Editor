@@ -7,14 +7,14 @@ import javax.swing.*;
 import widgets.*;
 import widgets.Canvas;
 
-public abstract class BaseButton {
+public class Button {
     protected static int itemCounter = 0;
     protected int index = 0;
 
     protected JButton button = new JButton();
     protected MouseAdapter canvasBehavior;
 
-    public BaseButton(MouseAdapter canvasBehavior) {
+    public Button(MouseAdapter canvasBehavior, Icon icon) {
         this.index = itemCounter++;
 
         this.canvasBehavior = canvasBehavior;
@@ -28,7 +28,7 @@ public abstract class BaseButton {
             }
         });
 
-        this.setImage();
+        this.button.setIcon(icon);
     }
 
     protected void onClick() {
@@ -39,6 +39,4 @@ public abstract class BaseButton {
     public JButton getButton() {
         return this.button;
     }
-
-    protected abstract void setImage();
 }
