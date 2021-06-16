@@ -9,6 +9,7 @@ import javax.swing.*;
 import canvas_behavior.Select;
 import components.UMLObjects.BaseUMLObject;
 import components.UMLObjects.UMLGroup;
+import enum_types.MenuFunction;
 
 public class MenuBar {
     private static MenuBar instance = null;
@@ -71,16 +72,20 @@ public class MenuBar {
         return menuBar;
     }
 
-    public static void setChangeObjectNameEnable(boolean enable) {
-        changeObjectName.setEnabled(enable);
-    }
-
-    public static void setGroupObjectsEnable(boolean enable) {
-        groupObjects.setEnabled(enable);
-    }
-
-    public static void setUnGroupObjectsEnable(boolean enable) {
-        unGroupObjects.setEnabled(enable);
+    public static void setFunctionEnabled(MenuFunction functionType, boolean enable) {
+        switch(functionType) {
+            case ChangeName:
+                changeObjectName.setEnabled(enable);
+                break;
+            case Group:
+                groupObjects.setEnabled(enable);
+                break;
+            case Ungroup:
+                unGroupObjects.setEnabled(enable);
+                break;
+            default:
+                return;
+        }
     }
 
     private static void changeName() {

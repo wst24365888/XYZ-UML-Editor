@@ -9,10 +9,8 @@ import javax.swing.JLayeredPane;
 import canvas_behavior.*;
 import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.UMLObjects.BaseUMLObject;
-import components.UMLObjects.UMLClass;
-import components.UMLObjects.UMLGroup;
-import components.UMLObjects.UMLUseCase;
 import editor.Editor;
+import enum_types.MenuFunction;
 
 public class Canvas extends JLayeredPane {
     private static final long serialVersionUID = 1985691147832327662L;
@@ -66,9 +64,9 @@ public class Canvas extends JLayeredPane {
     }
 
     private void setMenuEnable() {
-        MenuBar.setChangeObjectNameEnable(selections.size() == 1 && selections.iterator().next().isNameChangable());
-        MenuBar.setGroupObjectsEnable(selections.size() > 1);
-        MenuBar.setUnGroupObjectsEnable(selections.size() == 1 && selections.iterator().next().getUMLComponents() != null);
+        MenuBar.setFunctionEnabled(MenuFunction.ChangeName, selections.size() == 1 && selections.iterator().next().isNameChangable());
+        MenuBar.setFunctionEnabled(MenuFunction.Group, selections.size() > 1);
+        MenuBar.setFunctionEnabled(MenuFunction.Ungroup, selections.size() == 1 && selections.iterator().next().getUMLComponents() != null);
     }
 
     public void setCanvasBehavior(MouseAdapter canvasBehavior) {

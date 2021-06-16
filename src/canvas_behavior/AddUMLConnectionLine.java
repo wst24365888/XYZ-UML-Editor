@@ -8,27 +8,28 @@ import components.UMLConnectionLines.UMLAssociationLine;
 import components.UMLConnectionLines.UMLCompositionLine;
 import components.UMLConnectionLines.UMLGeneralizationLine;
 import components.UMLObjects.BaseUMLObject;
+import enum_types.UMLConnectionLine;
 import widgets.Canvas;
 
 public class AddUMLConnectionLine extends MouseAdapter {
-    private String type;
+    private UMLConnectionLine type;
 
     private BaseUMLObject source = null;
     private BaseUMLObject destination = null;
 
     private Point originalPoint = null;
 
-    public AddUMLConnectionLine(String type) {
+    public AddUMLConnectionLine(UMLConnectionLine type) {
         this.type = type;
     }
 
     private BaseUMLConnectionLine createCompositionLine(BaseUMLObject source, Point originalPoint, Point currentPoint) {
         switch (this.type) {
-            case "Association":
+            case Association:
                 return new UMLAssociationLine(source, originalPoint, currentPoint);
-            case "Composition":
+            case Composition:
                 return new UMLCompositionLine(source, originalPoint, currentPoint);
-            case "Generalization":
+            case Generalization:
                 return new UMLGeneralizationLine(source, originalPoint, currentPoint);
             default:
                 return null;
@@ -38,11 +39,11 @@ public class AddUMLConnectionLine extends MouseAdapter {
     private BaseUMLConnectionLine createCompositionLine(BaseUMLObject source, Point originalPoint,
             BaseUMLObject destination, Point currentPoint) {
         switch (this.type) {
-            case "Association":
+            case Association:
                 return new UMLAssociationLine(source, originalPoint, destination, currentPoint);
-            case "Composition":
+            case Composition:
                 return new UMLCompositionLine(source, originalPoint, destination, currentPoint);
-            case "Generalization":
+            case Generalization:
                 return new UMLGeneralizationLine(source, originalPoint, destination, currentPoint);
             default:
                 return null;
