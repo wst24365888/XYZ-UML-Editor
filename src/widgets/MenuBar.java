@@ -140,7 +140,7 @@ public class MenuBar {
             return;
         }
 
-        UMLGroup groupObject = (UMLGroup) Canvas.getInstance().getSelections().iterator().next();
+        BaseUMLObject groupObject = Canvas.getInstance().getSelections().iterator().next();
 
         for (BaseUMLObject child : groupObject.getUMLComponents()) {
             child.setLocation((int) Canvas.getRelativeLocation(child.getLocationOnScreen()).getX(),
