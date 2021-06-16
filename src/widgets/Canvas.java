@@ -4,9 +4,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
-import canvas_behavior.*;
 import components.UMLConnectionLines.BaseUMLConnectionLine;
 import components.UMLObjects.BaseUMLObject;
 import editor.Editor;
@@ -18,6 +18,8 @@ public class Canvas extends JLayeredPane {
     private static Canvas instance = null;
 
     private MouseAdapter canvasBehavior;
+
+    private JLabel selectedArea;
     private ArrayList<BaseUMLObject> selections = new ArrayList<BaseUMLObject>();
 
     private ArrayList<BaseUMLObject> allBaseUMLObject = new ArrayList<BaseUMLObject>();
@@ -71,7 +73,7 @@ public class Canvas extends JLayeredPane {
 
     public void setCanvasBehavior(MouseAdapter canvasBehavior) {
         clearSelections();
-        Select.getInstance().clearSelectedArea();
+        this.clearSelectedArea();
 
         this.removeMouseListener(this.canvasBehavior);
         this.removeMouseMotionListener(this.canvasBehavior);
@@ -80,11 +82,6 @@ public class Canvas extends JLayeredPane {
         
         this.addMouseListener(this.canvasBehavior);
         this.addMouseMotionListener(this.canvasBehavior);
-    }
-
-    public void addSelectedArea(Component component) {
-        this.add(component);
-        this.setLayer(component, -1);
     }
 
     public void addBaseUMLObject(BaseUMLObject component, int zAxisHeight) {
@@ -159,5 +156,24 @@ public class Canvas extends JLayeredPane {
     public void addUMLConntectionLine(BaseUMLConnectionLine newConnection) {
         connections.add(newConnection);
         this.repaint();
+    }
+
+    public void setSelectedArea(JLabel selectedArea) {
+        this.selectedArea = selectedArea;
+        this.add(this.selectedArea);
+        this.setLayer(this.selectedArea, -1);
+    }
+
+    public JLabel getSelectedArea() {
+        return this.selectedArea;
+    }
+
+    public void clearSelectedArea() {
+        if (this.selectedArea != null) {
+            this.remove(this.selectedArea);
+            this.repaint();
+
+            this.selectedArea = null;
+        }
     }
 }

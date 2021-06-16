@@ -45,7 +45,7 @@ public class FunctionButtonPanel {
     }
 
     private static void loadButtons() {
-        functionButtons.add((new Button(Select.getInstance(), new ImageIcon("resource/imgs/select.png")).getButton()));
+        functionButtons.add((new Button(new Select(), new ImageIcon("resource/imgs/select.png")).getButton()));
         functionButtons.add((new Button(new AddUMLConnectionLine(UMLConnectionLine.Association), new ImageIcon("resource/imgs/association_line.png")).getButton()));
         functionButtons.add((new Button(new AddUMLConnectionLine(UMLConnectionLine.Composition), new ImageIcon("resource/imgs/composition_line.png")).getButton()));
         functionButtons.add((new Button(new AddUMLConnectionLine(UMLConnectionLine.Generalization), new ImageIcon("resource/imgs/generalization_line.png")).getButton()));

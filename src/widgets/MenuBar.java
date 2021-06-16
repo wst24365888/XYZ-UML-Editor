@@ -6,7 +6,6 @@ import java.util.Iterator;
 
 import javax.swing.*;
 
-import canvas_behavior.Select;
 import components.UMLObjects.BaseUMLObject;
 import components.UMLObjects.UMLGroup;
 import enum_types.MenuFunction;
@@ -105,7 +104,7 @@ public class MenuBar {
             return;
         }
 
-        UMLGroup groupObject = new UMLGroup(Select.getInstance().getSelectedArea());
+        UMLGroup groupObject = new UMLGroup(Canvas.getInstance().getSelectedArea());
 
         Iterator<BaseUMLObject> iterator = Canvas.getInstance().getSelections().iterator();
         while (iterator.hasNext()) {
@@ -113,24 +112,24 @@ public class MenuBar {
 
             tmp.setLocation(
                     (int) (Canvas.getRelativeLocation(tmp.getLocationOnScreen()).getX()
-                            - Select.getInstance().getSelectedArea().getX()) + 5,
+                            - Canvas.getInstance().getSelectedArea().getX()) + 5,
                     (int) (Canvas.getRelativeLocation(tmp.getLocationOnScreen()).getY()
-                            - Select.getInstance().getSelectedArea().getY()) + 5);
+                            - Canvas.getInstance().getSelectedArea().getY()) + 5);
 
             groupObject.addComponent(tmp);
 
             Canvas.getInstance().removeBaseUMLObject(tmp);
         }
 
-        groupObject.setBounds((int) Select.getInstance().getSelectedArea().getBounds().getX() - 5,
-                (int) Select.getInstance().getSelectedArea().getBounds().getY() - 5,
-                (int) Select.getInstance().getSelectedArea().getBounds().getWidth() + 10,
-                (int) Select.getInstance().getSelectedArea().getBounds().getHeight() + 10);
+        groupObject.setBounds((int) Canvas.getInstance().getSelectedArea().getBounds().getX() - 5,
+                (int) Canvas.getInstance().getSelectedArea().getBounds().getY() - 5,
+                (int) Canvas.getInstance().getSelectedArea().getBounds().getWidth() + 10,
+                (int) Canvas.getInstance().getSelectedArea().getBounds().getHeight() + 10);
 
         Canvas.getInstance().addBaseUMLObject(groupObject, -1);
 
         // selectedArea will be destroy
-        Select.getInstance().clearSelectedArea();
+        Canvas.getInstance().clearSelectedArea();
 
         Canvas.getInstance().repaint();
     }

@@ -12,31 +12,15 @@ import components.UMLObjects.BaseUMLObject;
 import widgets.Canvas;
 
 public class Select extends MouseAdapter {
-    private static Select instance = null;
-
     private boolean singleSelection = false;
 
     private int originalX;
     private int originalY;
 
-    private JLabel selectedArea;
-
-    private Select() {
-        // System.out.println("SelectMode created");
-    };
-
-    public static Select getInstance() {
-        if (instance == null) {
-            instance = new Select();
-        }
-
-        return instance;
-    }
-
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        if (this.selectedArea != null) {
-            this.clearSelectedArea();
+        if (Canvas.getInstance().getSelectedArea() != null) {
+            Canvas.getInstance().clearSelectedArea();
         }
 
         BaseUMLObject component = Canvas.getInstance().getComponentWithin(mouseEvent.getX(), mouseEvent.getY());
@@ -68,12 +52,12 @@ public class Select extends MouseAdapter {
             Color randomColor = new Color(r, g, b, 0.25f);
             randomColor.brighter();
 
-            this.selectedArea = new JLabel();
-            this.selectedArea.setOpaque(true);
-            this.selectedArea.setBackground(randomColor);
-            this.selectedArea.setBounds(this.originalX, this.originalY, 0, 0);
+            JLabel selectedArea = new JLabel();
+            selectedArea.setOpaque(true);
+            selectedArea.setBackground(randomColor);
+            selectedArea.setBounds(this.originalX, this.originalY, 0, 0);
 
-            Canvas.getInstance().addSelectedArea(selectedArea);
+            Canvas.getInstance().setSelectedArea(selectedArea);
         }
 
         Canvas.getInstance().repaint();
@@ -91,7 +75,7 @@ public class Select extends MouseAdapter {
             int width = Math.abs(this.originalX - mouseEvent.getX());
             int height = Math.abs(this.originalY - mouseEvent.getY());
 
-            this.selectedArea.setBounds(upperLeftX, upperLeftY, width, height);
+            Canvas.getInstance().getSelectedArea().setBounds(upperLeftX, upperLeftY, width, height);
 
             ArrayList<BaseUMLObject> selections = Canvas.getInstance()
                     .getAllComponentWithin(new Rectangle(upperLeftX, upperLeftY, width, height));
@@ -107,9 +91,9 @@ public class Select extends MouseAdapter {
     public void mouseReleased(MouseEvent mouseEvent) {
         // System.out.println("SelectMode onReleased");
 
-        if (this.selectedArea != null) {
+        if (Canvas.getInstance().getSelectedArea() != null) {
             if (Canvas.getInstance().getSelections().isEmpty()) {
-                this.clearSelectedArea();
+                Canvas.getInstance().clearSelectedArea();
             } else {
                 // Resize Selection Area
 
@@ -134,25 +118,12 @@ public class Select extends MouseAdapter {
                     height = Math.max(height, Math.abs((tmp.getY() + tmp.getHeight()) - upperLeftY));
                 }
 
-                this.selectedArea.setBounds(upperLeftX, upperLeftY, width, height);
+                Canvas.getInstance().getSelectedArea().setBounds(upperLeftX, upperLeftY, width, height);
 
                 Canvas.getInstance().repaint();
             }
         }
 
         this.singleSelection = false;
-    }
-
-    public void clearSelectedArea() {
-        if (this.selectedArea != null) {
-            Canvas.getInstance().remove(this.selectedArea);
-            Canvas.getInstance().repaint();
-
-            this.selectedArea = null;
-        }
-    }
-
-    public JLabel getSelectedArea() {
-        return this.selectedArea;
     }
 }
