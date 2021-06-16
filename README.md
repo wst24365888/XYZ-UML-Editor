@@ -25,8 +25,8 @@ This is a simple UML editor with:
 
 - Relation Lines
   - Association Line
-  - Generation Line
   - Composition Line
+  - Generalization Line
 
 - Behavior
   - Create a new object
