@@ -16,6 +16,7 @@ public class UMLGroup extends BaseUMLObject {
         super();
 
         this.connectable = false;
+        this.nameChangable = false;
 
         this.offset = 5;
         this.width = component.getWidth() + this.offset * 2;
@@ -35,6 +36,7 @@ public class UMLGroup extends BaseUMLObject {
         components.add(component);
     }
 
+    @Override
     public ArrayList<BaseUMLObject> getUMLComponents() {
         return this.components;
     }

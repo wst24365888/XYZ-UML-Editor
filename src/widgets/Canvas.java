@@ -66,10 +66,9 @@ public class Canvas extends JLayeredPane {
     }
 
     private void setMenuEnable() {
-        MenuBar.setChangeObjectNameEnable(selections.size() == 1 && (selections.iterator().next() instanceof UMLClass
-                || selections.iterator().next() instanceof UMLUseCase));
+        MenuBar.setChangeObjectNameEnable(selections.size() == 1 && selections.iterator().next().isNameChangable());
         MenuBar.setGroupObjectsEnable(selections.size() > 1);
-        MenuBar.setUnGroupObjectsEnable(selections.size() == 1 && selections.iterator().next() instanceof UMLGroup);
+        MenuBar.setUnGroupObjectsEnable(selections.size() == 1 && selections.iterator().next().getUMLComponents() != null);
     }
 
     public void setCanvasBehavior(MouseAdapter canvasBehavior) {

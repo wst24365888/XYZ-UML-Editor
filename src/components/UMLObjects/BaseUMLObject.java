@@ -1,6 +1,7 @@
 package components.UMLObjects;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -20,6 +21,7 @@ public abstract class BaseUMLObject extends JComponent {
 
     protected boolean isPortVisible = false;
     protected boolean connectable = true;
+    protected boolean nameChangable = true;
 
     protected Port ports = null;
 
@@ -116,7 +118,16 @@ public abstract class BaseUMLObject extends JComponent {
         return this.label;
     }
 
+    // Percolating up due to Composite Pattern.
+    public ArrayList<BaseUMLObject> getUMLComponents() {
+        return null;
+    }
+
     public boolean isConnectable() {
         return this.connectable;
+    }
+
+    public boolean isNameChangable() {
+        return this.nameChangable;
     }
 }
