@@ -51,4 +51,9 @@ public class UMLGroup extends BaseUMLObject {
         graphics2D.setColor(this.getBackground());
         graphics2D.fillRect(this.offset, this.offset, this.width - this.offset * 2, this.height - this.offset * 2);
     }
+
+    @Override
+    public int getZAxisHeight() {
+        return -1;
+    }
 }
