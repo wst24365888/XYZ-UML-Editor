@@ -2,13 +2,14 @@ package buttons;
 
 import javax.swing.ImageIcon;
 
-import canvas_behavior.AddUMLCompositionLine;
+import canvas_behavior.AddUMLConnectionLine;
+
 
 public class AddUMLCompositionLineButton extends BaseButton {
     private static AddUMLCompositionLineButton instance = null;
 
     private AddUMLCompositionLineButton() {
-        super(AddUMLCompositionLine.getInstance());
+        super(new AddUMLConnectionLine("Composition"));
     }
 
     public static AddUMLCompositionLineButton getInstance() {

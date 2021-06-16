@@ -2,13 +2,13 @@ package buttons;
 
 import javax.swing.ImageIcon;
 
-import canvas_behavior.AddUMLAssociationLine;
+import canvas_behavior.AddUMLConnectionLine;
 
 public class AddUMLAssociationLineButton extends BaseButton {
     private static AddUMLAssociationLineButton instance = null;
 
     private AddUMLAssociationLineButton() {
-        super(AddUMLAssociationLine.getInstance());
+        super(new AddUMLConnectionLine("Association"));
     }
 
     public static AddUMLAssociationLineButton getInstance() {

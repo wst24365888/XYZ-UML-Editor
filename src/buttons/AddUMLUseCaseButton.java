@@ -2,13 +2,13 @@ package buttons;
 
 import javax.swing.ImageIcon;
 
-import canvas_behavior.AddUMLUseCase;
+import canvas_behavior.AddUMLObject;
 
 public class AddUMLUseCaseButton extends BaseButton {
     private static AddUMLUseCaseButton instance = null;
 
     private AddUMLUseCaseButton() {
-        super(AddUMLUseCase.getInstance());
+        super(new AddUMLObject("Use Case"));
     }
 
     public static AddUMLUseCaseButton getInstance() {

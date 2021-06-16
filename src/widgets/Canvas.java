@@ -2,7 +2,6 @@ package widgets;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JLayeredPane;
@@ -20,7 +19,7 @@ public class Canvas extends JLayeredPane {
 
     private static Canvas instance = null;
 
-    private static ICanvasBehavior canvasBehavior;
+    private MouseAdapter canvasBehavior;
     private ArrayList<BaseUMLObject> selections = new ArrayList<BaseUMLObject>();
 
     private ArrayList<BaseUMLObject> allBaseUMLObject = new ArrayList<BaseUMLObject>();
@@ -28,43 +27,12 @@ public class Canvas extends JLayeredPane {
     private BaseUMLConnectionLine drawing = null;
     private ArrayList<BaseUMLConnectionLine> connections = new ArrayList<BaseUMLConnectionLine>();
 
-    private static MouseAdapter mouseAdapter = new MouseAdapter() {
-        @Override
-        public void mousePressed(MouseEvent mouseEvent) {
-            if (canvasBehavior == null) {
-                return;
-            }
-
-            canvasBehavior.onPressed(mouseEvent.getX(), mouseEvent.getY());
-        }
-
-        @Override
-        public void mouseDragged(MouseEvent mouseEvent) {
-            if (canvasBehavior == null) {
-                return;
-            }
-
-            canvasBehavior.onDragged(mouseEvent.getX(), mouseEvent.getY());
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent mouseEvent) {
-            if (canvasBehavior == null) {
-                return;
-            }
-
-            canvasBehavior.onReleased(mouseEvent.getX(), mouseEvent.getY());
-        }
-    };
-
     private Canvas() {
         this.setLayout(null);
         this.setOpaque(true);
         this.setDoubleBuffered(true);
 
         this.setBackground(Color.WHITE);
-        this.addMouseListener(mouseAdapter);
-        this.addMouseMotionListener(mouseAdapter);
     }
 
     public static Canvas getInstance() {
@@ -104,11 +72,17 @@ public class Canvas extends JLayeredPane {
         MenuBar.setUnGroupObjectsEnable(selections.size() == 1 && selections.iterator().next() instanceof UMLGroup);
     }
 
-    public void setCanvasBehavior(ICanvasBehavior iCanvasBehavior) {
+    public void setCanvasBehavior(MouseAdapter canvasBehavior) {
         clearSelections();
         Select.getInstance().clearSelectedArea();
 
-        canvasBehavior = iCanvasBehavior;
+        this.removeMouseListener(this.canvasBehavior);
+        this.removeMouseMotionListener(this.canvasBehavior);
+
+        this.canvasBehavior = canvasBehavior;
+        
+        this.addMouseListener(this.canvasBehavior);
+        this.addMouseMotionListener(this.canvasBehavior);
     }
 
     public void addSelectedArea(Component component) {
@@ -155,7 +129,7 @@ public class Canvas extends JLayeredPane {
 
     public void setSelections(ArrayList<BaseUMLObject> selections) {
         for (BaseUMLObject selection : selections) {
-            selection.setPortVisible(true);    
+            selection.setPortVisible(true);
         }
 
         this.selections = selections;
@@ -185,7 +159,7 @@ public class Canvas extends JLayeredPane {
         this.repaint();
     }
 
-    public void addUMLConntection(BaseUMLConnectionLine newConnection) {
+    public void addUMLConntectionLine(BaseUMLConnectionLine newConnection) {
         connections.add(newConnection);
         this.repaint();
     }

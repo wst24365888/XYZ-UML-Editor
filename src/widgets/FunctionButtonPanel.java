@@ -40,7 +40,7 @@ public class FunctionButtonPanel {
     private static void loadButtons() {
         functionButtons.add(SelectButton.getInstance().getButton());
         functionButtons.add(AddUMLAssociationLineButton.getInstance().getButton());
-        functionButtons.add(AddUMLGenerationLineButton.getInstance().getButton());
+        functionButtons.add(AddUMLGeneralizationLineButton.getInstance().getButton());
         functionButtons.add(AddUMLCompositionLineButton.getInstance().getButton());
         functionButtons.add(AddUMLClassButton.getInstance().getButton());
         functionButtons.add(AddUMLUseCaseButton.getInstance().getButton());

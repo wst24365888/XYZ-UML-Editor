@@ -2,13 +2,13 @@ package buttons;
 
 import javax.swing.ImageIcon;
 
-import canvas_behavior.AddUMLClass;
+import canvas_behavior.AddUMLObject;
 
 public class AddUMLClassButton extends BaseButton {
     private static AddUMLClassButton instance = null;
 
     private AddUMLClassButton() {
-        super(AddUMLClass.getInstance());
+        super(new AddUMLObject("Class"));
     }
 
     public static AddUMLClassButton getInstance() {

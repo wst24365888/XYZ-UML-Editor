@@ -19,7 +19,8 @@ public abstract class BaseUMLConnectionLine {
         this.sourcePortAlias = source.getPortAlias(originalPoint);
     }
 
-    public BaseUMLConnectionLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination, Point currentPoint) {
+    public BaseUMLConnectionLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination,
+            Point currentPoint) {
         this.source = source;
         this.destination = destination;
         this.sourcePortAlias = source.getPortAlias(originalPoint);

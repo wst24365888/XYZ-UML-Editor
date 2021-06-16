@@ -140,7 +140,7 @@ public class MenuBar {
         for (BaseUMLObject child : groupObject.getUMLComponents()) {
             child.setLocation((int) Canvas.getRelativeLocation(child.getLocationOnScreen()).getX(),
                     (int) Canvas.getRelativeLocation(child.getLocationOnScreen()).getY());
-            
+
             Canvas.getInstance().addBaseUMLObject(child, child.getZAxisHeight());
         }
 

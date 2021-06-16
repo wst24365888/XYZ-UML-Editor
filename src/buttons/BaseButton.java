@@ -6,16 +6,15 @@ import javax.swing.*;
 
 import widgets.*;
 import widgets.Canvas;
-import canvas_behavior.*;
 
 public abstract class BaseButton {
     protected static int itemCounter = 0;
     protected int index = 0;
 
     protected JButton button = new JButton();
-    protected ICanvasBehavior canvasBehavior;
+    protected MouseAdapter canvasBehavior;
 
-    public BaseButton(ICanvasBehavior canvasBehavior) {
+    public BaseButton(MouseAdapter canvasBehavior) {
         this.index = itemCounter++;
 
         this.canvasBehavior = canvasBehavior;

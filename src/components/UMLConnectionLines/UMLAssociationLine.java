@@ -8,8 +8,9 @@ public class UMLAssociationLine extends BaseUMLConnectionLine {
     public UMLAssociationLine(BaseUMLObject source, Point originalPoint, Point currentPoint) {
         super(source, originalPoint, currentPoint);
     }
-    
-    public UMLAssociationLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination, Point currentPoint) {
+
+    public UMLAssociationLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination,
+            Point currentPoint) {
         super(source, originalPoint, destination, currentPoint);
     }
 

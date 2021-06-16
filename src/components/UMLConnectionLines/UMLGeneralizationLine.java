@@ -4,12 +4,13 @@ import java.awt.*;
 
 import components.UMLObjects.BaseUMLObject;
 
-public class UMLGenerationLine extends BaseUMLConnectionLine {
-    public UMLGenerationLine(BaseUMLObject source, Point originalPoint, Point currentPoint) {
+public class UMLGeneralizationLine extends BaseUMLConnectionLine {
+    public UMLGeneralizationLine(BaseUMLObject source, Point originalPoint, Point currentPoint) {
         super(source, originalPoint, currentPoint);
     }
-    
-    public UMLGenerationLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination, Point currentPoint) {
+
+    public UMLGeneralizationLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination,
+            Point currentPoint) {
         super(source, originalPoint, destination, currentPoint);
     }
 

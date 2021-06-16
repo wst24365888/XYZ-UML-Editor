@@ -8,8 +8,9 @@ public class UMLCompositionLine extends BaseUMLConnectionLine {
     public UMLCompositionLine(BaseUMLObject source, Point originalPoint, Point currentPoint) {
         super(source, originalPoint, currentPoint);
     }
-    
-    public UMLCompositionLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination, Point currentPoint) {
+
+    public UMLCompositionLine(BaseUMLObject source, Point originalPoint, BaseUMLObject destination,
+            Point currentPoint) {
         super(source, originalPoint, destination, currentPoint);
     }
 
