@@ -13,7 +13,9 @@ This is the term project of the course **Object-Oriented Analysis and Design** (
 
 ## What's new in v2?
 
-Nothing changed, but more OO.
+- Nothing changed, but more OO.
+
+- In canvas_behavior, each one of the behaviors (such as AddUMLCompositionLine, AddUMLClass) should have its own class. But I use factory pattern there, just for practicing some design patterns. DON'T DO THAT IN PRODUCTION. For good example, [checkout uccuz's UML-Editor](https://github.com/uccuz/UML-Editor/tree/master/src/modes).
 
 ## Feature
 
